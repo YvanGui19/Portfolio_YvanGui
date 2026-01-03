@@ -19,18 +19,18 @@ app.use(helmet());
 
 // Rate limiting (100 requêtes par 15 minutes par IP)
 const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 100,
-  message: { message: 'Trop de requêtes, réessayez plus tard.' },
+windowMs: 15 * 60 * 1000,
+max: 100,
+message: { message: 'Trop de requêtes, réessayez plus tard.' },
 });
 app.use('/api', limiter);
 
 // CORS
 app.use(
-  cors({
-    origin: process.env.CLIENT_URL || 'http://localhost:5173',
-    credentials: true,
-  })
+cors({
+origin: process.env.CLIENT_URL || 'http://localhost:5173',
+credentials: true,
+})
 );
 
 // Parsers
@@ -43,7 +43,7 @@ app.use('/uploads', express.static('uploads'));
 
 // Route de test
 app.get('/', (req, res) => {
-  res.json({ message: 'API Portfolio fonctionne !' });
+res.json({ message: 'API Portfolio fonctionne !' });
 });
 
 // Routes API
@@ -52,10 +52,15 @@ app.use('/api/projects', require('./routes/projects'));
 app.use('/api/skills', require('./routes/skills'));
 app.use('/api/experiences', require('./routes/experiences'));
 app.use('/api/contact', require('./routes/contact'));
+app.use('/api/upload', require('./routes/upload'));
+
+// Middleware de gestion des erreurs (toujours en dernier)
+const errorHandler = require('./middlewares/errorHandler');
+app.use(errorHandler);
 
 // Démarrer le serveur
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(`Serveur démarré sur le port ${PORT}`);
-  console.log(`URL: http://localhost:${PORT}`);
+console.log(`Serveur démarré sur le port ${PORT}`);
+console.log(`URL: http://localhost:${PORT}`);
 });
