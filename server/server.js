@@ -46,10 +46,12 @@ app.get('/', (req, res) => {
   res.json({ message: 'API Portfolio fonctionne !' });
 });
 
-// TODO: Ajouter les routes API ici
-// app.use('/api/auth', require('./routes/auth'));
-// app.use('/api/projects', require('./routes/projects'));
-// etc.
+// Routes API
+app.use('/api/auth', require('./routes/auth'));
+app.use('/api/projects', require('./routes/projects'));
+app.use('/api/skills', require('./routes/skills'));
+app.use('/api/experiences', require('./routes/experiences'));
+app.use('/api/contact', require('./routes/contact'));
 
 // Démarrer le serveur
 const PORT = process.env.PORT || 5000;

@@ -34,19 +34,25 @@ timestamps: true,
 );
 
 // Hash du mot de passe avant sauvegarde
-userSchema.pre('save', async function (next) {
+userSchema.pre('save', async function () {
 if (!this.isModified('password')) {
-return next();
+return;
 }
 
 const salt = await bcrypt.genSalt(10);
 this.password = await bcrypt.hash(this.password, salt);
-next();
 });
 
 // Méthode pour comparer les mots de passe
 userSchema.methods.comparePassword = async function (candidatePassword) {
 return await bcrypt.compare(candidatePassword, this.password);
-};
+userSchema.pre('save', async function () {
+if (!this.isModified('password')) {
+return;
+}
+
+const salt = await bcrypt.genSalt(10);
+this.password = await bcrypt.hash(this.password, salt);
+});};
 
 module.exports = mongoose.model('User', userSchema);
