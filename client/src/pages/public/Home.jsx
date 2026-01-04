@@ -1,9 +1,17 @@
-function Home() {
+import Hero from '../../components/home/Hero'
+  import Skills from '../../components/home/Skills'
+  import FeaturedProjects from '../../components/home/FeaturedProjects'
+  import CallToAction from '../../components/home/CallToAction'
+
+  function Home() {
     return (
-      <div className="pt-24 px-4">
-        <h1 className="text-4xl font-bold text-primary">Accueil</h1>
-        <p className="text-text-muted mt-4">Page d'accueil - À développer</p>
-      </div>
+      <>
+        <Hero />
+        <Skills />
+        <FeaturedProjects />
+        <CallToAction />
+      </>
     )
   }
-export default Home
+
+  export default Home
