@@ -75,7 +75,42 @@ const processImage = async (req, res, next) => {
   }
 };
 
+// Extraire le public_id d'une URL Cloudinary
+const getPublicIdFromUrl = (url) => {
+  if (!url || !url.includes('cloudinary.com')) {
+    return null;
+  }
+  // URL format: https://res.cloudinary.com/{cloud}/image/upload/v{version}/{folder}/{public_id}.{ext}
+  const matches = url.match(/\/upload\/(?:v\d+\/)?(.+)\.[^.]+$/);
+  return matches ? matches[1] : null;
+};
+
+// Supprimer une image de Cloudinary
+const deleteFromCloudinary = async (imageUrl) => {
+  const publicId = getPublicIdFromUrl(imageUrl);
+  if (!publicId) {
+    return false;
+  }
+  try {
+    await cloudinary.uploader.destroy(publicId);
+    return true;
+  } catch (error) {
+    console.error('Erreur suppression Cloudinary:', error);
+    return false;
+  }
+};
+
+// Supprimer plusieurs images de Cloudinary
+const deleteMultipleFromCloudinary = async (imageUrls) => {
+  const results = await Promise.all(
+    imageUrls.map((url) => deleteFromCloudinary(url))
+  );
+  return results;
+};
+
 module.exports = {
   upload,
   processImage,
+  deleteFromCloudinary,
+  deleteMultipleFromCloudinary,
 };
