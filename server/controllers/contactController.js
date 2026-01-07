@@ -32,14 +32,18 @@ res.status(500).json({ message: 'Erreur serveur', error: error.message });
 }
 };
 
-// @desc    Mettre à jour le statut d'un message
+// @desc    Mettre à jour le statut d'un message (lu/non lu)
 // @route   PUT /api/contact/messages/:id
 // @access  Private
 exports.updateMessageStatus = async (req, res) => {
 try {
+const updateData = {};
+if (req.body.read !== undefined) updateData.read = req.body.read;
+if (req.body.status !== undefined) updateData.status = req.body.status;
+
 const message = await ContactMessage.findByIdAndUpdate(
 req.params.id,
-{ status: req.body.status },
+updateData,
 { new: true, runValidators: true }
 );
 

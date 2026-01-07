@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { protect } = require('../middlewares/auth');
+const { contactValidation } = require('../middlewares/validator');
 const {
 sendMessage,
 getMessages,
@@ -9,7 +10,7 @@ deleteMessage,
 } = require('../controllers/contactController');
 
 // Route publique
-router.post('/', sendMessage);
+router.post('/', contactValidation, sendMessage);
 
 // Routes protégées
 router.get('/messages', protect, getMessages);

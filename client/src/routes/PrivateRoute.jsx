@@ -1,5 +1,6 @@
 import { Navigate } from 'react-router-dom'
   import { useAuth } from '../context/AuthContext'
+  import { MessagesProvider } from '../context/MessagesContext'
   import AdminLayout from '../components/layout/AdminLayout'
 
   function PrivateRoute({ children }) {
@@ -23,7 +24,11 @@ import { Navigate } from 'react-router-dom'
     }
 
     // Afficher la page avec le layout admin
-    return <AdminLayout>{children}</AdminLayout>
+    return (
+      <MessagesProvider>
+        <AdminLayout>{children}</AdminLayout>
+      </MessagesProvider>
+    )
   }
 
   export default PrivateRoute

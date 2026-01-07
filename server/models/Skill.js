@@ -14,9 +14,9 @@ enum: ['Frontend', 'Backend', 'Tools', 'Other'],
 },
 level: {
 type: Number,
-min: 1,
-max: 5,
-default: 3,
+min: 0,
+max: 100,
+default: 50,
 },
 icon: {
 type: String,

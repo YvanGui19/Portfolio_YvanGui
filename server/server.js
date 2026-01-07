@@ -15,7 +15,9 @@ connectDB();
 const app = express();
 
 // Middlewares de sécurité
-app.use(helmet());
+app.use(helmet({
+  crossOriginResourcePolicy: { policy: "cross-origin" }
+}));
 
 // Rate limiting (100 requêtes par 15 minutes par IP)
 const limiter = rateLimit({

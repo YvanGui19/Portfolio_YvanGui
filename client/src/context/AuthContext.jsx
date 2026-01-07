@@ -17,8 +17,8 @@ checkAuth()
 const checkAuth = async () => {
 try {
 const response = await api.get('/auth/me')
-setUser(response.data.data)
-} catch (error) {
+setUser(response.data.user)
+} catch {
 setUser(null)
 } finally {
 setLoading(false)
@@ -27,7 +27,7 @@ setLoading(false)
 
 const login = async (email, password) => {
 const response = await api.post('/auth/login', { email, password })
-setUser(response.data.data)
+setUser(response.data.user)
 return response.data
 }
 
@@ -44,6 +44,7 @@ return (
 }
 
 // Hook personnalisé pour utiliser le contexte
+// eslint-disable-next-line react-refresh/only-export-components
 export function useAuth() {
 const context = useContext(AuthContext)
 if (!context) {

@@ -27,28 +27,6 @@ role: user.role,
 });
 };
 
-// @desc    Créer un admin
-// @route   POST /api/auth/register
-// @access  Private (pour créer le premier admin, temporairement public)
-exports.register = async (req, res) => {
-try {
-const { email, password, name } = req.body;
-
-// Vérifier si l'utilisateur existe déjà
-const existingUser = await User.findOne({ email });
-if (existingUser) {
-return res.status(400).json({ message: 'Cet email est déjà utilisé' });
-}
-
-// Créer l'utilisateur
-const user = await User.create({ email, password, name });
-
-sendTokenCookie(user, 201, res);
-} catch (error) {
-res.status(500).json({ message: 'Erreur serveur', error: error.message });
-}
-};
-
 // @desc    Connexion
 // @route   POST /api/auth/login
 // @access  Public

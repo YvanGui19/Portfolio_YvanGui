@@ -1,17 +1,16 @@
 const express = require('express');
 const router = express.Router();
 const { protect } = require('../middlewares/auth');
+const { loginValidation } = require('../middlewares/validator');
 const {
-register,
 login,
 logout,
 getMe,
 updateMe,
 } = require('../controllers/authController');
 
-// Routes publiques
-router.post('/register', register);
-router.post('/login', login);
+// Route publique
+router.post('/login', loginValidation, login);
 
 // Routes protégées
 router.post('/logout', protect, logout);

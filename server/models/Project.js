@@ -12,7 +12,24 @@ type: String,
 required: [true, 'La description est requise'],
 minlength: [20, 'La description doit contenir au moins 20 caractères'],
 },
+longDescription: {
+type: String,
+trim: true,
+},
+category: {
+type: String,
+enum: ['Full Stack', 'Frontend', 'Backend'],
+default: 'Full Stack',
+},
 technologies: {
+type: [String],
+default: [],
+},
+challenges: {
+type: [String],
+default: [],
+},
+solutions: {
 type: [String],
 default: [],
 },
