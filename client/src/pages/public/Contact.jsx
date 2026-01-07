@@ -176,7 +176,7 @@ function Contact() {
                 </div>
                 <div>
                   <p className="text-text-muted text-sm">Email</p>
-                  <p className="font-medium">guiheneufyvan@gmail.com</p>
+                  <p className="font-medium">yvan.gui19@gmail.com</p>
                 </div>
               </div>
             </Card>

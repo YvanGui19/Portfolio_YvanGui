@@ -19,10 +19,10 @@ app.use(helmet({
   crossOriginResourcePolicy: { policy: "cross-origin" }
 }));
 
-// Rate limiting (100 requêtes par 15 minutes par IP)
+// Rate limiting (200 requêtes par 15 minutes par IP)
 const limiter = rateLimit({
 windowMs: 15 * 60 * 1000,
-max: 100,
+max: 200,
 message: { message: 'Trop de requêtes, réessayez plus tard.' },
 });
 app.use('/api', limiter);
