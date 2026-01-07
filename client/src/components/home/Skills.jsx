@@ -124,7 +124,7 @@ function Skills() {
           </div>
         ) : (
           <div className="flex flex-wrap justify-center gap-4">
-            {skills.map((skill, index) => (
+            {(skills || []).map((skill, index) => (
               <motion.div
                 key={skill._id || skill.name}
                 initial={{ opacity: 0, y: 20 }}
