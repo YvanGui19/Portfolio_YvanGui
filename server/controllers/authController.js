@@ -12,7 +12,7 @@ process.env.JWT_SECRET,
 res.cookie('token', token, {
 httpOnly: true,
 secure: process.env.NODE_ENV === 'production',
-sameSite: 'strict',
+sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
 maxAge: 24 * 60 * 60 * 1000, // 24 heures
 });
 
@@ -63,6 +63,8 @@ res.status(500).json({ message: 'Erreur serveur', error: error.message });
 exports.logout = async (req, res) => {
 res.cookie('token', '', {
 httpOnly: true,
+secure: process.env.NODE_ENV === 'production',
+sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
 expires: new Date(0),
 });
 
