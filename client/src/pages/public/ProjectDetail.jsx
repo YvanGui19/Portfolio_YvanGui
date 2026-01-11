@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { useParams, Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import projectService from "../../services/projectService";
@@ -41,6 +42,26 @@ function ProjectDetail() {
 
   return (
     <div className="pt-24 pb-20">
+      <Helmet>
+        <title>{`${project.title} | Yvan Gui - Développeur Web`}</title>
+        <meta name="description" content={project.description} />
+        <meta property="og:title" content={`${project.title} | Yvan Gui`} />
+        <meta property="og:description" content={project.description} />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content={`https://portfolio-yvan-gui.vercel.app/projects/${id}`} />
+        <meta property="og:site_name" content="Yvan Gui - Portfolio" />
+        <meta property="og:locale" content="fr_FR" />
+        {project.images?.[0] && (
+          <meta property="og:image" content={getImageUrl(project.images[0])} />
+        )}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={project.title} />
+        <meta name="twitter:description" content={project.description} />
+        {project.images?.[0] && (
+          <meta name="twitter:image" content={getImageUrl(project.images[0])} />
+        )}
+              <link rel="canonical" href={`https://portfolio-yvan-gui.vercel.app/projects/${id}`} />
+      </Helmet>
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Breadcrumb */}
         <motion.div
@@ -174,7 +195,7 @@ function ProjectDetail() {
                   <img
                     src={getImageUrl(image)}
                     alt={`${project.title} - Miniature ${index + 1}`}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover" loading="lazy"
                   />
                 </button>
               ))}

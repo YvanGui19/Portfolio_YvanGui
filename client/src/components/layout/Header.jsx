@@ -8,7 +8,6 @@ function Header() {
   const { toggleMode } = useAppMode();
 
   const navLinks = [
-    { to: "/", label: "Accueil" },
     { to: "/projects", label: "Projets" },
     { to: "/about", label: "À propos" },
     { to: "/contact", label: "Contact" },

@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
+import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import Card from "../../components/common/Card";
 import Input from "../../components/common/Input";
@@ -38,15 +39,15 @@ function Contact() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleChange = (e) => {
+  const handleChange = useCallback((e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: "" }));
     }
-  };
+  }, [errors]);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = useCallback(async (e) => {
     e.preventDefault();
 
     if (!validateForm()) return;
@@ -63,10 +64,25 @@ function Contact() {
     } finally {
       setIsSubmitting(false);
     }
-  };
+  }, [formData, validateForm]);
 
   return (
     <div className="pt-24 pb-20">
+      <Helmet>
+        <title>Contact | Yvan Gui - Développeur Web</title>
+        <meta name="description" content="Contactez Yvan Gui pour vos projets de développement web. Disponible pour des missions freelance à Toulouse et en remote." />
+        <meta property="og:title" content="Contact | Yvan Gui - Développeur Web" />
+        <meta property="og:description" content="Contactez Yvan Gui pour vos projets de développement web." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://portfolio-yvan-gui.vercel.app/contact" />
+        <meta property="og:image" content="https://res.cloudinary.com/dox09mso9/image/upload/v1768128857/portfolio/projects/ve8qft3jnbzz1bonocvv.webp" />
+        <meta property="og:site_name" content="Yvan Gui - Portfolio" />
+        <meta property="og:locale" content="fr_FR" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="Contact | Yvan Gui" />
+        <meta name="twitter:description" content="Contactez Yvan Gui pour vos projets de développement web." />
+        <link rel="canonical" href="https://portfolio-yvan-gui.vercel.app/contact" />
+      </Helmet>
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div

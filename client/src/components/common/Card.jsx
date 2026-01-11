@@ -1,4 +1,6 @@
-function Card({ children, className = "", hover = false, onClick, ...props }) {
+import { memo, useCallback } from "react";
+
+const Card = memo(function Card({ children, className = "", hover = false, onClick, ...props }) {
   const baseStyles =
     "bg-gradient-to-br from-surface-light to-surface border border-border rounded-xl";
 
@@ -10,12 +12,12 @@ function Card({ children, className = "", hover = false, onClick, ...props }) {
     ? "focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background"
     : "";
 
-  const handleKeyDown = (e) => {
+  const handleKeyDown = useCallback((e) => {
     if (onClick && (e.key === "Enter" || e.key === " ")) {
       e.preventDefault();
       onClick(e);
     }
-  };
+  }, [onClick]);
 
   return (
     <div
@@ -29,17 +31,17 @@ function Card({ children, className = "", hover = false, onClick, ...props }) {
       {children}
     </div>
   );
-}
+});
 
-function CardHeader({ children, className = "" }) {
+const CardHeader = memo(function CardHeader({ children, className = "" }) {
   return (
     <div className={`p-6 border-b border-border ${className}`}>{children}</div>
   );
-}
+});
 
-function CardContent({ children, className = "" }) {
+const CardContent = memo(function CardContent({ children, className = "" }) {
   return <div className={`p-6 ${className}`}>{children}</div>;
-}
+});
 
 Card.Header = CardHeader;
 Card.Content = CardContent;

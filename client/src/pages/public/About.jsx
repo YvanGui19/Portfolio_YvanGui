@@ -1,3 +1,5 @@
+import { useMemo } from "react";
+import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import Card from "../../components/common/Card";
 import Button from "../../components/common/Button";
@@ -14,16 +16,31 @@ function About() {
   );
 
   // Grouper les skills par catégorie
-  const skillsByCategory =
+  const skillsByCategory = useMemo(() =>
     skills?.reduce((acc, skill) => {
       const category = skill.category || "Autres";
       if (!acc[category]) acc[category] = [];
       acc[category].push(skill);
       return acc;
-    }, {}) || {};
+    }, {}) || {}, [skills]);
 
   return (
     <div className="pt-24 pb-20">
+      <Helmet>
+        <title>À propos | Yvan Gui - Développeur Web Full Stack</title>
+        <meta name="description" content="Découvrez le parcours de Yvan Gui, développeur web full stack à Toulouse. De l'aéronautique au développement web, une expertise technique et une rigueur éprouvée." />
+        <meta property="og:title" content="À propos | Yvan Gui - Développeur Web" />
+        <meta property="og:description" content="Découvrez le parcours de Yvan Gui, développeur web full stack à Toulouse." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://portfolio-yvan-gui.vercel.app/about" />
+        <meta property="og:image" content="https://res.cloudinary.com/dox09mso9/image/upload/v1768128857/portfolio/projects/ve8qft3jnbzz1bonocvv.webp" />
+        <meta property="og:site_name" content="Yvan Gui - Portfolio" />
+        <meta property="og:locale" content="fr_FR" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="À propos | Yvan Gui" />
+        <meta name="twitter:description" content="Découvrez le parcours de Yvan Gui, développeur web full stack." />
+        <link rel="canonical" href="https://portfolio-yvan-gui.vercel.app/about" />
+      </Helmet>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div

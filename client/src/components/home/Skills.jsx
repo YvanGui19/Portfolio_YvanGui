@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import { motion } from "framer-motion";
 import skillService from "../../services/skillService";
 import useFetch from "../../hooks/useFetch";
@@ -89,7 +90,7 @@ const skillIcons = {
 function Skills() {
   const { data: skills, loading } = useFetch(() => skillService.getAll());
 
-  const getIcon = (skill) => {
+  const getIcon = useCallback((skill) => {
     const IconComponent = skillIcons[skill.name];
     if (IconComponent) {
       return <IconComponent className="w-8 h-8" />;
@@ -97,7 +98,7 @@ function Skills() {
     // Fallback selon la catégorie
     const CategoryIcon = categoryIcons[skill.category] || BiCodeAlt;
     return <CategoryIcon className="w-8 h-8" />;
-  };
+  }, []);
 
   return (
     <section className="py-20 bg-surface">

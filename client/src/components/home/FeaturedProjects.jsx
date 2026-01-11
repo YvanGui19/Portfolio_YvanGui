@@ -1,3 +1,4 @@
+﻿import { useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import Card from "../common/Card";
@@ -11,10 +12,12 @@ function FeaturedProjects() {
   const { data: projects, loading } = useFetch(() => projectService.getAll());
 
   // Prendre les 3 premiers projets "featured"
-  const featuredProjects =
+  const featuredProjects = useMemo(() =>
     projects?.filter((p) => p.featured).slice(0, 3) ||
     projects?.slice(0, 3) ||
-    [];
+    [], [projects]);
+
+  const handleProjectClick = useCallback((id) => navigate(`/projects/${id}`), [navigate]);
 
   return (
     <section className="py-20">
@@ -30,7 +33,7 @@ function FeaturedProjects() {
             Mes principaux <span className="text-primary">projets</span>
           </h2>
           <p className="text-text-muted max-w-2xl mx-auto">
-            Découvrez mes dernières réalisations
+            Decouvrez mes dernieres realisations
           </p>
         </motion.div>
 
@@ -55,18 +58,19 @@ function FeaturedProjects() {
                 <Card
                   hover
                   className="h-full flex flex-col cursor-pointer"
-                  onClick={() => navigate(`/projects/${project._id}`)}
+                  onClick={() => handleProjectClick(project._id)}
                 >
                   {/* Image */}
                   <div className="h-48 bg-surface-light rounded-t-xl flex items-center justify-center border-b border-border overflow-hidden">
                     {project.images?.[0] ? (
                       <img
                         src={getImageUrl(project.images[0])}
-                        alt={project.title}
+                        alt={`Capture d'écran du projet ${project.title}`}
                         className="w-full h-full object-cover"
+                        loading="lazy"
                       />
                     ) : (
-                      <span className="text-4xl">🖼️</span>
+                      <span className="text-4xl">&#128444;</span>
                     )}
                   </div>
 

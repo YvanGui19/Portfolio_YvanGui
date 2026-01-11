@@ -314,7 +314,7 @@ function ProjectForm() {
                       <img
                         src={getImageUrl(img)}
                         alt={`Image ${index + 1}`}
-                        className="w-full h-24 object-cover rounded-lg"
+                        className="w-full h-24 object-cover rounded-lg" loading="lazy"
                       />
                       {/* Contrôles */}
                       <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center gap-1">

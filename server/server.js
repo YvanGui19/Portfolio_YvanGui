@@ -16,7 +16,34 @@ const app = express();
 
 // Middlewares de sécurité
 app.use(helmet({
-  crossOriginResourcePolicy: { policy: "cross-origin" }
+  // Permet le chargement cross-origin des ressources (images Cloudinary, etc.)
+  crossOriginResourcePolicy: { policy: "cross-origin" },
+
+  // Content Security Policy - adapté pour le portfolio
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'"],
+      styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+      fontSrc: ["'self'", "https://fonts.gstatic.com"],
+      imgSrc: ["'self'", "data:", "https://res.cloudinary.com", "https://*.cloudinary.com"],
+      connectSrc: ["'self'", process.env.CLIENT_URL || "http://localhost:5173"],
+      frameSrc: ["'none'"],
+      objectSrc: ["'none'"],
+      upgradeInsecureRequests: [],
+    },
+  },
+
+  // HSTS - Force HTTPS (15552000 = 180 jours)
+  strictTransportSecurity: {
+    maxAge: 15552000,
+    includeSubDomains: true,
+  },
+
+  // Referrer-Policy - moins restrictif pour les analytics
+  referrerPolicy: {
+    policy: "strict-origin-when-cross-origin",
+  },
 }));
 
 // Rate limiting (200 requêtes par 15 minutes par IP)

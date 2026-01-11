@@ -81,8 +81,8 @@ function Projects() {
                       {project.images?.[0] ? (
                         <img
                           src={getImageUrl(project.images[0])}
-                          alt=""
-                          className="w-full h-full object-cover"
+                          alt={`Miniature du projet ${project.title}`}
+                          className="w-full h-full object-cover" loading="lazy"
                         />
                       ) : (
                         <span>📁</span>

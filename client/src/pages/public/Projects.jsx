@@ -1,4 +1,5 @@
 import { useState, useMemo } from "react";
+import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import Card from "../../components/common/Card";
@@ -47,6 +48,21 @@ function Projects() {
 
   return (
     <div className="pt-24 pb-20">
+      <Helmet>
+        <title>Projets | Yvan Gui - Développeur Web</title>
+        <meta name="description" content="Découvrez les projets web réalisés par Yvan Gui : applications React, Node.js, MongoDB. Portfolio de développeur full stack." />
+        <meta property="og:title" content="Projets | Yvan Gui - Développeur Web" />
+        <meta property="og:description" content="Portfolio des projets de développement web de Yvan Gui." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://portfolio-yvan-gui.vercel.app/projects" />
+        <meta property="og:image" content="https://res.cloudinary.com/dox09mso9/image/upload/v1768128857/portfolio/projects/ve8qft3jnbzz1bonocvv.webp" />
+        <meta property="og:site_name" content="Yvan Gui - Portfolio" />
+        <meta property="og:locale" content="fr_FR" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Projets | Yvan Gui" />
+        <meta name="twitter:description" content="Découvrez les projets web réalisés par Yvan Gui." />
+        <link rel="canonical" href="https://portfolio-yvan-gui.vercel.app/projects" />
+      </Helmet>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -75,6 +91,7 @@ function Projects() {
             <button
               key={category}
               onClick={() => setActiveFilter(category)}
+              aria-pressed={activeFilter === category}
               className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
                 activeFilter === category
                   ? "bg-primary text-background shadow-glow"
@@ -109,8 +126,9 @@ function Projects() {
                     {project.images?.[0] ? (
                       <img
                         src={getImageUrl(project.images[0])}
-                        alt={project.title}
+                        alt={`Capture d'écran du projet ${project.title}`}
                         className="w-full h-full object-cover"
+                        loading="lazy"
                       />
                     ) : (
                       <span className="text-5xl">🖼️</span>
