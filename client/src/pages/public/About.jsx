@@ -1,8 +1,9 @@
-import { useMemo } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import Card from "../../components/common/Card";
 import Button from "../../components/common/Button";
+import DitheredAvatar from "../../components/DitheredAvatar";
 import skillService from "../../services/skillService";
 import experienceService from "../../services/experienceService";
 import useFetch from "../../hooks/useFetch";
@@ -14,6 +15,18 @@ function About() {
   const { data: experiences, loading: loadingExp } = useFetch(() =>
     experienceService.getAll()
   );
+
+  // Taille responsive pour avatar
+  const [avatarSize, setAvatarSize] = useState(320);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setAvatarSize(window.innerWidth < 640 ? 256 : 320);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   // Grouper les skills par catégorie
   const skillsByCategory = useMemo(() =>
@@ -94,15 +107,17 @@ function About() {
             </div>
           </div>
 
-          {/* Avatar */}
+          {/* Avatar avec effet dithering */}
           <div className="flex justify-center">
-            <div className="relative">
-              <div className="w-64 h-64 lg:w-80 lg:h-80 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/30 flex items-center justify-center">
-                <span className="text-6xl lg:text-8xl font-bold text-primary">
-                  YG
-                </span>
-              </div>
-            </div>
+            <DitheredAvatar
+              src="/images/profile.png"
+              color="#00ff88"
+              pixelSize={4}
+              flickerIntensity={8}
+              flickerSpeed={60}
+              size={avatarSize}
+              className="rounded-2xl"
+            />
           </div>
         </motion.div>
 
