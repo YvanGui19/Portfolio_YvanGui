@@ -154,7 +154,7 @@ function Skills() {
                 <span className="absolute inset-0 flex items-center justify-center transition-all duration-300 group-hover:-translate-y-3 text-text group-hover:text-primary">
                   {getIcon(skill)}
                 </span>
-                <span aria-hidden="true" className="text-xs text-text-light absolute inset-0 flex items-center justify-center opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-5 truncate px-1">
+                <span aria-hidden="true" className="text-xs text-text-light absolute inset-0 flex items-center justify-center invisible group-hover:visible transition-all duration-300 group-hover:translate-y-5 truncate px-1">
                   {skill.name}
                 </span>
               </motion.div>
