@@ -111,11 +111,12 @@ function Skills() {
           className="text-center mb-12"
         >
           <h2 className="text-3xl lg:text-4xl font-bold mb-4">
-            Technologies que <span className="text-primary">j&apos;utilise</span>
+            Technologies que{" "}
+            <span className="text-primary">j&apos;utilise</span>
           </h2>
           <p className="text-text-muted max-w-2xl mx-auto">
-            Les outils et technologies que j&apos;utilise pour créer des applications
-            web modernes
+            Les outils et technologies que j&apos;utilise pour créer des
+            applications web modernes
           </p>
         </motion.div>
 
@@ -153,7 +154,7 @@ function Skills() {
                 <span className="absolute inset-0 flex items-center justify-center transition-all duration-300 group-hover:-translate-y-3 text-text group-hover:text-primary">
                   {getIcon(skill)}
                 </span>
-                <span className="text-xs text-text-muted absolute inset-0 flex items-center justify-center opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-5 truncate px-1">
+                <span className="text-xs text-text absolute inset-0 flex items-center justify-center opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-5 truncate px-1">
                   {skill.name}
                 </span>
               </motion.div>
