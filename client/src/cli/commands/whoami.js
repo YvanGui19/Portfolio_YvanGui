@@ -3,7 +3,7 @@ const whoamiCommand = {
   description: "Affiche l'utilisateur courant",
   usage: "whoami",
   execute: () => {
-    return [{ type: "text", content: "yvan" }];
+    return [{ type: "text", content: "Yvan Gui " }];
   },
 };
 
