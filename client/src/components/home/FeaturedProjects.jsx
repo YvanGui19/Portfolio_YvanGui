@@ -1,6 +1,7 @@
-﻿import { useMemo, useCallback } from "react";
+import { useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import { HiPhotograph } from "react-icons/hi";
 import Card from "../common/Card";
 import Button from "../common/Button";
 import projectService from "../../services/projectService";
@@ -70,7 +71,7 @@ function FeaturedProjects() {
                         loading="lazy"
                       />
                     ) : (
-                      <span className="text-4xl">&#128444;</span>
+                      <HiPhotograph className="w-12 h-12 text-text-muted" />
                     )}
                   </div>
 

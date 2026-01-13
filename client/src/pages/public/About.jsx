@@ -1,6 +1,7 @@
 import { useMemo, useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
+import { HiBriefcase, HiAcademicCap } from "react-icons/hi";
 import Card from "../../components/common/Card";
 import Button from "../../components/common/Button";
 import DitheredAvatar from "../../components/DitheredAvatar";
@@ -181,7 +182,7 @@ function About() {
               {/* Expériences Professionnelles */}
               <div>
                 <h3 className="text-xl font-semibold mb-6 flex items-center gap-2">
-                  <span className="text-2xl">💼</span>
+                  <HiBriefcase className="w-6 h-6 text-primary" />
                   Expériences <span className="text-primary">Professionnelles</span>
                 </h3>
                 <div className="space-y-4">
@@ -236,7 +237,7 @@ function About() {
               {/* Formations */}
               <div>
                 <h3 className="text-xl font-semibold mb-6 flex items-center gap-2">
-                  <span className="text-2xl">🎓</span>
+                  <HiAcademicCap className="w-6 h-6 text-primary" />
                   <span className="text-primary">Formations</span>
                 </h3>
                 <div className="space-y-4">

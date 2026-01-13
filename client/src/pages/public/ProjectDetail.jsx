@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useParams, Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import { HiPhotograph, HiGlobeAlt } from "react-icons/hi";
+import { FaGithub } from "react-icons/fa";
 import projectService from "../../services/projectService";
 import useFetch from "../../hooks/useFetch";
 import Button from "../../components/common/Button";
@@ -117,7 +119,7 @@ function ProjectDetail() {
                   />
                 </AnimatePresence>
               ) : (
-                <span className="text-6xl">🖼️</span>
+                <HiPhotograph className="w-20 h-20 text-text-muted" />
               )}
 
               {/* Navigation flèches */}
@@ -279,7 +281,7 @@ function ProjectDetail() {
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 text-text-muted hover:text-primary transition-colors"
                   >
-                    <span>📂</span>
+                    <FaGithub className="w-5 h-5" />
                     <span>Code source (GitHub)</span>
                   </a>
                 )}
@@ -290,7 +292,7 @@ function ProjectDetail() {
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 text-text-muted hover:text-primary transition-colors"
                   >
-                    <span>🌐</span>
+                    <HiGlobeAlt className="w-5 h-5" />
                     <span>Voir le site</span>
                   </a>
                 )}

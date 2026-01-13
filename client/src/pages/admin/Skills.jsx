@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { HiPencil, HiTrash } from "react-icons/hi";
 import Card from "../../components/common/Card";
 import Button from "../../components/common/Button";
 import Input from "../../components/common/Input";
@@ -185,14 +186,14 @@ function Skills() {
                       className="p-1 hover:bg-primary/10 rounded text-text-muted hover:text-primary cursor-pointer"
                       title="Modifier"
                     >
-                      ✏️
+                      <HiPencil className="w-4 h-4" />
                     </button>
                     <button
                       onClick={() => handleDelete(skill._id)}
                       className="p-1 hover:bg-danger/10 rounded text-text-muted hover:text-danger cursor-pointer"
                       title="Supprimer"
                     >
-                      🗑️
+                      <HiTrash className="w-4 h-4" />
                     </button>
                   </div>
                 </div>

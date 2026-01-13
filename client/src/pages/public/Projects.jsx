@@ -2,6 +2,7 @@ import { useState, useMemo } from "react";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import { HiPhotograph } from "react-icons/hi";
 import Card from "../../components/common/Card";
 import projectService from "../../services/projectService";
 import useFetch from "../../hooks/useFetch";
@@ -131,7 +132,7 @@ function Projects() {
                         loading="lazy"
                       />
                     ) : (
-                      <span className="text-5xl">🖼️</span>
+                      <HiPhotograph className="w-16 h-16 text-text-muted" />
                     )}
                   </div>
 

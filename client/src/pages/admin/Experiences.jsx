@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { HiBriefcase, HiAcademicCap, HiPencil, HiTrash } from "react-icons/hi";
 import Card from "../../components/common/Card";
 import Button from "../../components/common/Button";
 import Input from "../../components/common/Input";
@@ -208,8 +209,12 @@ function Experiences() {
               <Card className="p-4">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-text">
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center text-xl">
-                      {exp.type === "experience" ? "💼" : "🎓"}
+                    <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
+                      {exp.type === "experience" ? (
+                        <HiBriefcase className="w-6 h-6 text-primary" />
+                      ) : (
+                        <HiAcademicCap className="w-6 h-6 text-primary" />
+                      )}
                     </div>
                     <div>
                       <h3 className="font-semibold">{exp.title}</h3>
@@ -225,14 +230,14 @@ function Experiences() {
                       className="p-2 hover:bg-primary/10 rounded-lg text-text-muted hover:text-primary cursor-pointer"
                       title="Modifier"
                     >
-                      ✏️
+                      <HiPencil className="w-5 h-5" />
                     </button>
                     <button
                       onClick={() => handleDelete(exp._id)}
                       className="p-2 hover:bg-danger/10 rounded-lg text-text-muted hover:text-danger cursor-pointer"
                       title="Supprimer"
                     >
-                      🗑️
+                      <HiTrash className="w-5 h-5" />
                     </button>
                   </div>
                 </div>

@@ -1,6 +1,7 @@
 import { useState, useCallback } from "react";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
+import { HiMail, HiLocationMarker } from "react-icons/hi";
 import Card from "../../components/common/Card";
 import Input from "../../components/common/Input";
 import Button from "../../components/common/Button";
@@ -187,8 +188,8 @@ function Contact() {
 
             <Card className="p-6">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
-                  <span className="text-xl">📧</span>
+                <div className="w-12 h-12 rounded-lg flex items-center justify-center">
+                  <HiMail className="w-6 h-6 text-primary" />
                 </div>
                 <div>
                   <p className="text-text-muted text-sm">Email</p>
@@ -200,7 +201,7 @@ function Contact() {
             <Card className="p-6">
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 rounded-lg flex items-center justify-center outline-style border-primary">
-                  <span className="text-xl">📍</span>
+                  <HiLocationMarker className="w-6 h-6 text-primary" />
                 </div>
                 <div>
                   <p className="text-text-muted text-sm">Localisation</p>

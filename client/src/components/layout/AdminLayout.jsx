@@ -1,14 +1,15 @@
 import { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import { HiHome, HiFolder, HiLightningBolt, HiBriefcase, HiMail } from "react-icons/hi";
 import { useAuth } from "../../context/AuthContext";
 import { useMessages } from "../../context/MessagesContext";
 
 const navItems = [
-  { to: "/admin/dashboard", label: "Dashboard", icon: "🏠" },
-  { to: "/admin/projects", label: "Projets", icon: "📁" },
-  { to: "/admin/skills", label: "Compétences", icon: "⚡" },
-  { to: "/admin/experiences", label: "Expériences", icon: "💼" },
-  { to: "/admin/messages", label: "Messages", icon: "📧", showBadge: true },
+  { to: "/admin/dashboard", label: "Dashboard", icon: HiHome },
+  { to: "/admin/projects", label: "Projets", icon: HiFolder },
+  { to: "/admin/skills", label: "Compétences", icon: HiLightningBolt },
+  { to: "/admin/experiences", label: "Expériences", icon: HiBriefcase },
+  { to: "/admin/messages", label: "Messages", icon: HiMail, showBadge: true },
 ];
 
 function AdminLayout({ children }) {
@@ -72,7 +73,7 @@ function AdminLayout({ children }) {
                 }`
               }
             >
-              <span className="text-lg">{item.icon}</span>
+              <item.icon className="w-5 h-5" />
               <span className="font-medium flex-1">{item.label}</span>
               {item.showBadge && unreadCount > 0 && (
                 <span className="bg-primary text-background text-xs font-bold px-2 py-0.5 rounded-full min-w-[20px] text-center">

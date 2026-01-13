@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { HiFolder, HiPencil, HiTrash } from "react-icons/hi";
 import Card from "../../components/common/Card";
 import Button from "../../components/common/Button";
 import projectService from "../../services/projectService";
@@ -85,7 +86,7 @@ function Projects() {
                           className="w-full h-full object-cover" loading="lazy"
                         />
                       ) : (
-                        <span>📁</span>
+                        <HiFolder className="w-6 h-6 text-text-muted" />
                       )}
                     </div>
                     <div>
@@ -111,14 +112,14 @@ function Projects() {
                       to={`/admin/projects/${project._id}/edit`}
                       className="p-2 hover:bg-primary/10 rounded-lg text-text-muted hover:text-primary"
                     >
-                      ✏️
+                      <HiPencil className="w-5 h-5" />
                     </Link>
                     <button
                       onClick={() => handleDelete(project._id)}
                       disabled={deleting === project._id}
                       className="p-2 hover:bg-danger/10 rounded-lg text-text-muted hover:text-danger disabled:opacity-50 cursor-pointer"
                     >
-                      {deleting === project._id ? "..." : "🗑️"}
+                      {deleting === project._id ? "..." : <HiTrash className="w-5 h-5" />}
                     </button>
                   </div>
                 </div>
