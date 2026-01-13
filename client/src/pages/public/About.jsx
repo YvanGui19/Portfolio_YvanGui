@@ -16,6 +16,10 @@ function About() {
     experienceService.getAll()
   );
 
+  // États pour afficher plus d'expériences/formations
+  const [showAllExperiences, setShowAllExperiences] = useState(false);
+  const [showAllEducation, setShowAllEducation] = useState(false);
+
   // Taille responsive pour avatar
   const [avatarSize, setAvatarSize] = useState(320);
 
@@ -27,6 +31,17 @@ function About() {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  // Séparer les expériences professionnelles des formations
+  const professionalExperiences = useMemo(
+    () => experiences?.filter((exp) => exp.type === "experience") || [],
+    [experiences]
+  );
+
+  const educationExperiences = useMemo(
+    () => experiences?.filter((exp) => exp.type === "education") || [],
+    [experiences]
+  );
 
   // Grouper les skills par catégorie
   const skillsByCategory = useMemo(() =>
@@ -121,7 +136,7 @@ function About() {
           </div>
         </motion.div>
 
-        {/* Expériences */}
+        {/* Mon Parcours */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -138,40 +153,116 @@ function About() {
               <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto" />
             </div>
           ) : (
-            <div className="space-y-6">
-              {experiences?.map((exp, index) => (
-                <motion.div
-                  key={exp._id}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: index * 0.1 }}
-                >
-                  <Card className="p-6">
-                    <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-2">
-                      <div className="flex items-center gap-3">
-                        <span className="text-2xl">
-                          {exp.type === "experience" ? "💼" : "🎓"}
-                        </span>
-                        <h3 className="text-lg font-semibold">{exp.title}</h3>
-                      </div>
-                      <span className="text-primary text-sm">
-                        {exp.startDate && new Date(exp.startDate).getFullYear()}
-                        {" - "}
-                        {exp.endDate
-                          ? new Date(exp.endDate).getFullYear()
-                          : "Présent"}
-                      </span>
-                    </div>
-                    <p className="text-text-muted ml-11">{exp.company}</p>
-                    {exp.description && (
-                      <p className="text-text-light text-sm mt-2 ml-11">
-                        {exp.description}
-                      </p>
-                    )}
-                  </Card>
-                </motion.div>
-              ))}
+            <div className="grid md:grid-cols-2 gap-8">
+              {/* Expériences Professionnelles */}
+              <div>
+                <h3 className="text-xl font-semibold mb-6 flex items-center gap-2">
+                  <span className="text-2xl">💼</span>
+                  Expériences <span className="text-primary">Professionnelles</span>
+                </h3>
+                <div className="space-y-4">
+                  {(showAllExperiences
+                    ? professionalExperiences
+                    : professionalExperiences.slice(0, 4)
+                  ).map((exp, index) => (
+                    <motion.div
+                      key={exp._id}
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.4, delay: index * 0.1 }}
+                    >
+                      <Card className="p-4">
+                        <div className="flex flex-col">
+                          <div className="flex justify-between items-start mb-1">
+                            <h4 className="font-semibold">{exp.title}</h4>
+                            <span className="text-primary text-sm whitespace-nowrap ml-2">
+                              {exp.startDate && new Date(exp.startDate).getFullYear()}
+                              {" - "}
+                              {exp.endDate
+                                ? new Date(exp.endDate).getFullYear()
+                                : "Présent"}
+                            </span>
+                          </div>
+                          <p className="text-text-muted text-sm">{exp.company}</p>
+                          {exp.description && (
+                            <p className="text-text-light text-sm mt-2">
+                              {exp.description}
+                            </p>
+                          )}
+                        </div>
+                      </Card>
+                    </motion.div>
+                  ))}
+                </div>
+                {professionalExperiences.length > 4 && (
+                  <div className="text-center mt-4">
+                    <Button
+                      variant="outline"
+                      onClick={() => setShowAllExperiences(!showAllExperiences)}
+                    >
+                      {showAllExperiences
+                        ? "Voir moins"
+                        : `Voir plus (${professionalExperiences.length - 4})`}
+                    </Button>
+                  </div>
+                )}
+              </div>
+
+              {/* Formations */}
+              <div>
+                <h3 className="text-xl font-semibold mb-6 flex items-center gap-2">
+                  <span className="text-2xl">🎓</span>
+                  <span className="text-primary">Formations</span>
+                </h3>
+                <div className="space-y-4">
+                  {(showAllEducation
+                    ? educationExperiences
+                    : educationExperiences.slice(0, 4)
+                  ).map((exp, index) => (
+                    <motion.div
+                      key={exp._id}
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.4, delay: index * 0.1 }}
+                    >
+                      <Card className="p-4">
+                        <div className="flex flex-col">
+                          <div className="flex justify-between items-start mb-1">
+                            <h4 className="font-semibold">{exp.title}</h4>
+                            <span className="text-primary text-sm whitespace-nowrap ml-2">
+                              {exp.startDate && new Date(exp.startDate).getFullYear()}
+                              {" - "}
+                              {exp.endDate
+                                ? new Date(exp.endDate).getFullYear()
+                                : "Présent"}
+                            </span>
+                          </div>
+                          <p className="text-text-muted text-sm">{exp.company}</p>
+                          {exp.description && (
+                            <p className="text-text-light text-sm mt-2">
+                              {exp.description}
+                            </p>
+                          )}
+                        </div>
+                      </Card>
+                    </motion.div>
+                  ))}
+                </div>
+                {educationExperiences.length > 4 && (
+                  <div className="text-center mt-4">
+                    <Button
+                      variant="outline"
+                      onClick={() => setShowAllEducation(!showAllEducation)}
+                    >
+                      {showAllEducation
+                        ? "Voir moins"
+                        : `Voir plus (${educationExperiences.length - 4})`}
+                    </Button>
+                  </div>
+                )}
+              </div>
             </div>
           )}
         </motion.div>
