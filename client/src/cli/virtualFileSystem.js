@@ -34,7 +34,7 @@ class VirtualFileSystem {
                   type: FILE_TYPE.FILE,
                   name: "contact.txt",
                   content:
-                    "Email: contact@yvan-gui.dev\nLinkedIn: linkedin.com/in/yvan-gui",
+                    "Email: yvan.gui19@gmail.com\nLinkedIn: www.linkedin.com/in/guiheneufyvan",
                 },
                 projects: {
                   type: FILE_TYPE.DIRECTORY,
@@ -248,11 +248,11 @@ class VirtualFileSystem {
 
 ${about.description || "Développeur Web Full-Stack"}
 
-Ancien expert technique dans l'aéronautique, j'ai choisi de mettre
-mes compétences d'analyse, de rigueur et de résolution de problèmes
-au service du développement web.
+Passionné par la technologie depuis toujours, j'ai d'abord construit ma carrière dans l'aéronautique. Pendant plus de dix ans, j'ai travaillé sur des hélicoptères et des avions, avant d'évoluer vers le support et l'expertise technique.
 
-Contact: contact@yvan-gui.dev
+Ces expériences m'ont appris la précision, la rigueur et la fiabilité opérationnelle dans des environnements exigeants.
+
+Aujourd'hui, je conçois des solutions web fiables et orientées utilisateur, avec la même rigueur et le même sens du service qui m'ont guidé dans l'aéronautique.
 `;
   }
 
