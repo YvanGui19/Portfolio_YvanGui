@@ -65,20 +65,6 @@ function ProjectDetail() {
               <link rel="canonical" href={`https://portfolio-yvan-gui.vercel.app/projects/${id}`} />
       </Helmet>
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Breadcrumb */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="mb-8"
-        >
-          <Link
-            to="/projects"
-            className="text-text-muted hover:text-primary transition-colors"
-          >
-            ← Retour aux projets
-          </Link>
-        </motion.div>
-
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -305,6 +291,21 @@ function ProjectDetail() {
             </Card>
           </motion.div>
         </div>
+
+        {/* Retour aux projets */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="flex justify-end mt-8"
+        >
+          <Link
+            to="/projects"
+            className="text-text-muted hover:text-primary transition-colors"
+          >
+            Retour aux projets →
+          </Link>
+        </motion.div>
       </div>
     </div>
   );
