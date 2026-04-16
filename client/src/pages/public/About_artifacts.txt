@@ -1,0 +1,39 @@
+      {/* Artefacts - Violet theme - Intégrés harmonieusement */}
+      <div className="section-artifacts">
+        {/* Mobile - subtil */}
+        <div className="marathon-artifact marathon-artifact-violet 2xl:hidden" style={{ top: '8%', left: '6%' }}>⁜</div>
+        <div className="marathon-artifact marathon-artifact-violet 2xl:hidden" style={{ bottom: '20%', right: '8%' }}>⊹</div>
+
+        {/* Desktop - Flux organique */}
+        {/* Autour du header */}
+        <div className="marathon-artifact marathon-artifact-xl marathon-artifact-violet hidden 2xl:block" style={{ top: '6%', left: '12%' }}>⁜</div>
+        <div className="marathon-artifact marathon-artifact-violet hidden 2xl:block" style={{ top: '10%', left: '25%' }}>⊹</div>
+        <div className="marathon-artifact marathon-artifact-violet hidden 2xl:block" style={{ top: '4%', right: '18%' }}>⁛</div>
+        <div className="marathon-vline marathon-vline-violet hidden 2xl:block" style={{ top: '8%', right: '8%' }}>
+          <span>▒</span><span>░</span><span>▒</span>
+        </div>
+
+        {/* Section Mon Histoire - accompagne l'avatar */}
+        <div className="marathon-data-strip marathon-data-strip-violet hidden 2xl:block" style={{ top: '22%', left: '8%' }}>
+          <span>|⊹─⊹|</span>
+        </div>
+        <div className="marathon-artifact marathon-artifact-violet hidden 2xl:block" style={{ top: '28%', right: '12%' }}>⁖</div>
+        <div className="marathon-grid marathon-grid-3x3 marathon-grid-violet hidden 2xl:block" style={{ top: '32%', right: '6%' }}>
+          <span>&lt;</span><span>⊹</span><span>&gt;</span>
+          <span>─</span><span>⁛</span><span>─</span>
+          <span>/</span><span>⊹</span><span>\</span>
+        </div>
+
+        {/* Section Parcours */}
+        <div className="marathon-diagonal-stripes marathon-diagonal-stripes-violet hidden 2xl:block" style={{ top: '48%', left: '10%', width: '20px', height: '80px' }} />
+        <div className="marathon-artifact marathon-artifact-violet hidden 2xl:block" style={{ top: '55%', left: '18%' }}>⁘</div>
+        <div className="marathon-artifact marathon-artifact-violet hidden 2xl:block" style={{ top: '52%', right: '15%' }}>▣</div>
+
+        {/* Section Compétences */}
+        <div className="marathon-artifact marathon-artifact-violet hidden 2xl:block" style={{ bottom: '28%', left: '15%' }}>⋰</div>
+        <div className="marathon-artifact marathon-artifact-xl marathon-artifact-violet hidden 2xl:block" style={{ bottom: '15%', left: '8%' }}>⇲</div>
+        <div className="marathon-data-strip marathon-data-strip-violet hidden 2xl:block" style={{ bottom: '22%', right: '10%' }}>
+          <span>⁖──⁖</span>
+        </div>
+        <div className="marathon-artifact marathon-artifact-violet hidden 2xl:block" style={{ bottom: '10%', right: '20%' }}>⊹</div>
+      </div>

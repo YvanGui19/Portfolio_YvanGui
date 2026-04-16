@@ -9,13 +9,22 @@ function TerminalInput({
   const [input, setInput] = useState("");
   const [historyIndex, setHistoryIndex] = useState(-1);
   const [cursorVisible, setCursorVisible] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
   const inputRef = useRef(null);
+
+  // Detect mobile
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 640);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
     inputRef.current?.focus();
   }, []);
 
-  // Clignotement du curseur
+  // Cursor blink
   useEffect(() => {
     const interval = setInterval(() => {
       setCursorVisible((v) => !v);
@@ -67,27 +76,47 @@ function TerminalInput({
     }
   };
 
-  // Afficher le chemin relatif au home
   const displayPath = currentPath.replace("/home/yvan", "~");
 
-  // Focus sur l'input au clic n'importe où dans la zone
   const handleContainerClick = () => {
     inputRef.current?.focus();
   };
 
   return (
     <div
-      className="flex items-center p-4 font-mono text-sm cursor-text"
+      className="flex items-center px-2 sm:px-4 py-2 sm:py-3 font-mono text-[0.75rem] sm:text-[0.85rem] cursor-text"
       onClick={handleContainerClick}
     >
-      <span className="text-[#269f66] font-bold">yvan@portfolio</span>
-      <span className="text-text">:</span>
-      <span className="text-[#5daaff] font-bold">{displayPath}</span>
-      <span className="text-text">$ </span>
-      <div className="flex-1 flex items-center ml-1 relative">
-        <span className="text-text whitespace-pre">{input}</span>
+      {/* Prompt prefix - compact on mobile */}
+      {isMobile ? (
+        <div className="flex items-center gap-0.5 mr-1.5">
+          <span className="text-lime font-bold">~</span>
+          <span className="text-lime">$</span>
+        </div>
+      ) : (
+        <>
+          <div className="flex items-center gap-0.5 mr-2">
+            <span className="text-lime font-bold">yvan</span>
+            <span className="text-grey/40">@</span>
+            <span className="text-cyan font-bold">portfolio</span>
+          </div>
+
+          {/* Path */}
+          <div className="flex items-center mr-2">
+            <span className="text-grey/40">:</span>
+            <span className="text-violet font-bold">{displayPath}</span>
+          </div>
+
+          {/* Prompt symbol */}
+          <span className="text-lime mr-2">$</span>
+        </>
+      )}
+
+      {/* Input area */}
+      <div className="flex-1 flex items-center relative min-w-0">
+        <span className="text-off-white whitespace-pre overflow-hidden">{input}</span>
         <span
-          className={`w-2.5 h-5 bg-text ${cursorVisible ? "opacity-100" : "opacity-0"}`}
+          className={`w-1.5 sm:w-2 h-4 sm:h-5 bg-lime ml-px flex-shrink-0 ${cursorVisible ? "opacity-100" : "opacity-0"}`}
         />
         <input
           ref={inputRef}

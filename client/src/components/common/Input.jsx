@@ -1,10 +1,14 @@
 import { memo } from "react";
 
+// Marathon input styles
 const baseInputStyles = `
-  w-full bg-surface-light border border-border rounded-lg px-4 py-3
-  text-text text-sm placeholder-text-muted
+  w-full bg-mid-navy border border-slate
+  text-white font-sans text-[0.95rem]
+  px-4 py-3
   transition-all duration-300
-  focus:outline-none focus:border-primary focus:shadow-glow
+  focus:outline-none
+  placeholder:text-grey placeholder:font-mono placeholder:text-[0.8rem] placeholder:tracking-wider
+  hover:border-lime/50
 `;
 
 const dateInputStyles = `
@@ -21,37 +25,70 @@ const Input = memo(function Input({
   label,
   type = "text",
   error,
-  className = "hover:border-primary hover:shadow-glow transition-all duration-300",
+  hint,
+  success,
+  className = "",
   name,
   id,
   ...props
 }) {
   const inputId = id || name;
 
-  const combinedBaseStyles = `${baseInputStyles} ${error ? "border-danger" : ""} ${className}`;
-  const combinedDateStyles = `${combinedBaseStyles} ${dateInputStyles}`;
+  // Build input class based on state
+  const inputStateClass = error
+    ? "!border-red focus:!border-red hover:!border-red"
+    : success
+    ? "border-lime focus:border-lime"
+    : "focus:border-lime";
 
   const isDateType = type === "date" || type === "datetime-local";
+  const isSelect = type === "select";
+  const isTextarea = type === "textarea";
+
+  const combinedStyles = `${baseInputStyles} ${inputStateClass} ${
+    isDateType ? dateInputStyles : ""
+  } ${isSelect ? "form-select-marathon cursor-pointer" : ""} ${className}`;
 
   return (
     <div className="space-y-2">
       {label && (
-        <label htmlFor={inputId} className="block text-sm font-semibold text-text">{label}</label>
+        <label
+          htmlFor={inputId}
+          className={`block font-condensed text-[0.8rem] font-semibold tracking-[0.15em] uppercase transition-colors ${
+            error ? "text-red" : "text-lime"
+          }`}
+        >
+          {label}
+        </label>
       )}
 
-      {type === "textarea" ? (
-        <textarea id={inputId} name={name} className={combinedBaseStyles} rows={4} {...props} />
+      {isTextarea ? (
+        <textarea
+          id={inputId}
+          name={name}
+          className={`${combinedStyles} min-h-[120px] resize-y leading-relaxed`}
+          rows={4}
+          {...props}
+        />
+      ) : isSelect ? (
+        <select id={inputId} name={name} className={combinedStyles} {...props} />
       ) : (
         <input
           id={inputId}
           name={name}
           type={type}
-          className={isDateType ? combinedDateStyles : combinedBaseStyles}
+          className={combinedStyles}
           {...props}
         />
       )}
 
-      {error && <p className="text-danger text-sm">{error}</p>}
+      {hint && !error && (
+        <p className="font-mono text-[0.75rem] text-grey mt-1">// {hint}</p>
+      )}
+
+      {error && (
+        <p className="font-mono text-[0.75rem] text-red mt-1">// {error}</p>
+      )}
     </div>
   );
 });

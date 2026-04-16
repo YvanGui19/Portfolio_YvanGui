@@ -1,11 +1,9 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { HiBriefcase, HiAcademicCap, HiPencil, HiTrash } from "react-icons/hi";
-import Card from "../../components/common/Card";
-import Button from "../../components/common/Button";
-import Input from "../../components/common/Input";
 import experienceService from "../../services/experienceService";
 import useFetch from "../../hooks/useFetch";
+import ConfirmModal from "../../components/common/ConfirmModal";
 
 const emptyForm = {
   title: "",
@@ -26,6 +24,8 @@ function Experiences() {
   const [editingId, setEditingId] = useState(null);
   const [formData, setFormData] = useState(emptyForm);
   const [saving, setSaving] = useState(false);
+  const [deleteModal, setDeleteModal] = useState({ isOpen: false, id: null });
+  const [deleting, setDeleting] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -70,13 +70,24 @@ function Experiences() {
     setShowForm(false);
   };
 
-  const handleDelete = async (id) => {
-    if (!window.confirm("Supprimer cette expérience ?")) return;
+  const openDeleteModal = (id) => {
+    setDeleteModal({ isOpen: true, id });
+  };
+
+  const closeDeleteModal = () => {
+    setDeleteModal({ isOpen: false, id: null });
+  };
+
+  const confirmDelete = async () => {
+    setDeleting(true);
     try {
-      await experienceService.delete(id);
+      await experienceService.delete(deleteModal.id);
       refetch();
+      closeDeleteModal();
     } catch {
       alert("Erreur lors de la suppression");
+    } finally {
+      setDeleting(false);
     }
   };
 
@@ -87,65 +98,100 @@ function Experiences() {
 
   if (loading) {
     return (
-      <div className="flex justify-center py-12">
-        <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin" />
+      <div className="flex flex-col items-center justify-center py-20">
+        <div className="w-8 h-8 border-2 border-orange border-t-transparent rounded-full animate-spin mb-3" />
+        <p className="font-mono text-[0.8rem] text-grey">Chargement...</p>
       </div>
     );
   }
 
   return (
     <div>
+      {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8"
       >
         <div>
-          <h1 className="text-3xl font-bold text-text">Expériences</h1>
-          <p className="text-text-muted">
-            {experiences?.length || 0} expériences
+          {/* Tag */}
+          <div className="font-mono text-[0.7rem] text-orange tracking-[0.25em] uppercase mb-2">
+            // EXPERIENCES
+          </div>
+
+          {/* Title */}
+          <h1 className="font-display text-[clamp(1.5rem,4vw,2rem)] font-bold text-off-white tracking-wide">
+            Expériences
+          </h1>
+
+          {/* Counter */}
+          <p className="font-mono text-[0.8rem] text-grey">
+            &gt; {experiences?.length || 0} expérience{experiences?.length > 1 ? "s" : ""}
           </p>
         </div>
-        <Button
-          variant={showForm ? "outline" : "primary"}
+
+        <button
           onClick={() => (showForm ? handleCancel() : setShowForm(true))}
+          className={`px-5 py-2.5 font-mono text-[0.75rem] tracking-wider uppercase transition-colors cursor-pointer ${
+            showForm
+              ? "border border-white/20 text-grey hover:text-off-white hover:border-white/40"
+              : "bg-orange text-dark-navy font-semibold hover:bg-orange/90"
+          }`}
         >
           {showForm ? "Annuler" : "+ Nouvelle expérience"}
-        </Button>
+        </button>
       </motion.div>
 
+      {/* Form */}
       {showForm && (
         <motion.div
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: "auto" }}
           className="mb-8"
         >
-          <Card className="p-6 cursor-default">
-            <h3 className="text-lg font-semibold mb-4 text-text">
-              {editingId ? "Modifier l'expérience" : "Nouvelle expérience"}
-            </h3>
+          <div className="border border-white/10 bg-black/20 p-6">
+            <div className="font-mono text-[0.7rem] text-orange/60 tracking-[0.2em] mb-4">
+              // {editingId ? "EDIT_EXPERIENCE" : "NEW_EXPERIENCE"}
+            </div>
+
             <form onSubmit={handleSubmit} className="space-y-4">
+              {/* Titre et Entreprise */}
               <div className="grid sm:grid-cols-2 gap-4">
-                <Input
-                  label="Titre"
-                  value={formData.title}
-                  onChange={(e) =>
-                    setFormData({ ...formData, title: e.target.value })
-                  }
-                  placeholder="Développeur Web..."
-                />
-                <Input
-                  label="Entreprise"
-                  value={formData.company}
-                  onChange={(e) =>
-                    setFormData({ ...formData, company: e.target.value })
-                  }
-                  placeholder="Nom de l'entreprise..."
-                />
+                <div className="space-y-2">
+                  <label className="block font-mono text-[0.75rem] text-off-white tracking-wide uppercase">
+                    Titre
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.title}
+                    onChange={(e) =>
+                      setFormData({ ...formData, title: e.target.value })
+                    }
+                    placeholder="Développeur Web..."
+                    className="w-full bg-black/30 border border-white/10 px-4 py-3 font-mono text-[0.85rem] text-off-white placeholder:text-grey/50 focus:border-orange/50 focus:outline-none transition-colors"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <label className="block font-mono text-[0.75rem] text-off-white tracking-wide uppercase">
+                    Entreprise
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.company}
+                    onChange={(e) =>
+                      setFormData({ ...formData, company: e.target.value })
+                    }
+                    placeholder="Nom de l'entreprise..."
+                    className="w-full bg-black/30 border border-white/10 px-4 py-3 font-mono text-[0.85rem] text-off-white placeholder:text-grey/50 focus:border-orange/50 focus:outline-none transition-colors"
+                  />
+                </div>
               </div>
+
+              {/* Type et Dates */}
               <div className="grid sm:grid-cols-3 gap-4">
                 <div className="space-y-2">
-                  <label className="block text-sm font-semibold text-text">
+                  <label className="block font-mono text-[0.75rem] text-off-white tracking-wide uppercase">
                     Type
                   </label>
                   <select
@@ -153,51 +199,86 @@ function Experiences() {
                     onChange={(e) =>
                       setFormData({ ...formData, type: e.target.value })
                     }
-                    className="w-full bg-surface-light border border-border rounded-lg px-4 py-3 text-sm text-text cursor-pointer hover:border-primary hover:shadow-glow"
+                    className="w-full bg-black/30 border border-white/10 px-4 py-3 font-mono text-[0.85rem] text-off-white focus:border-orange/50 focus:outline-none transition-colors cursor-pointer"
                   >
                     <option value="experience">Expérience pro</option>
                     <option value="education">Formation</option>
                   </select>
                 </div>
-                <Input
-                  label="Date début"
-                  type="date"
-                  value={formData.startDate}
+
+                <div className="space-y-2">
+                  <label className="block font-mono text-[0.75rem] text-off-white tracking-wide uppercase">
+                    Date début
+                  </label>
+                  <input
+                    type="date"
+                    value={formData.startDate}
+                    onChange={(e) =>
+                      setFormData({ ...formData, startDate: e.target.value })
+                    }
+                    className="w-full bg-black/30 border border-white/10 px-4 py-3 font-mono text-[0.85rem] text-off-white focus:border-orange/50 focus:outline-none transition-colors cursor-pointer"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <label className="block font-mono text-[0.75rem] text-off-white tracking-wide uppercase">
+                    Date fin <span className="text-grey/50">(vide = présent)</span>
+                  </label>
+                  <input
+                    type="date"
+                    value={formData.endDate}
+                    onChange={(e) =>
+                      setFormData({ ...formData, endDate: e.target.value })
+                    }
+                    className="w-full bg-black/30 border border-white/10 px-4 py-3 font-mono text-[0.85rem] text-off-white focus:border-orange/50 focus:outline-none transition-colors cursor-pointer"
+                  />
+                </div>
+              </div>
+
+              {/* Description */}
+              <div className="space-y-2">
+                <label className="block font-mono text-[0.75rem] text-off-white tracking-wide uppercase">
+                  Description
+                </label>
+                <textarea
+                  value={formData.description}
                   onChange={(e) =>
-                    setFormData({ ...formData, startDate: e.target.value })
+                    setFormData({ ...formData, description: e.target.value })
                   }
-                />
-                <Input
-                  label="Date fin (vide = présent)"
-                  type="date"
-                  value={formData.endDate}
-                  onChange={(e) =>
-                    setFormData({ ...formData, endDate: e.target.value })
-                  }
+                  placeholder="Description du poste..."
+                  rows={3}
+                  className="w-full bg-black/30 border border-white/10 px-4 py-3 font-mono text-[0.85rem] text-off-white placeholder:text-grey/50 focus:border-orange/50 focus:outline-none transition-colors resize-none"
                 />
               </div>
-              <Input
-                label="Description"
-                type="textarea"
-                value={formData.description}
-                onChange={(e) =>
-                  setFormData({ ...formData, description: e.target.value })
-                }
-                placeholder="Description du poste..."
-              />
-              <Button type="submit" disabled={saving}>
+
+              {/* Submit */}
+              <button
+                type="submit"
+                disabled={saving}
+                className="px-5 py-3 font-mono text-[0.75rem] bg-orange text-dark-navy font-semibold tracking-wider uppercase hover:bg-orange/90 disabled:opacity-50 transition-colors cursor-pointer"
+              >
                 {saving ? "Sauvegarde..." : editingId ? "Modifier" : "Ajouter"}
-              </Button>
+              </button>
             </form>
-          </Card>
+          </div>
         </motion.div>
       )}
 
-      <div className="space-y-4">
+      {/* Experiences list */}
+      <div className="space-y-3">
         {experiences?.length === 0 ? (
-          <Card className="p-8 text-center">
-            <p className="text-text-muted">Aucune expérience</p>
-          </Card>
+          <div className="border border-white/10 bg-black/20 p-12 text-center">
+            <HiBriefcase className="w-12 h-12 text-grey/30 mx-auto mb-4" />
+            <p className="font-mono text-[0.9rem] text-grey mb-4">
+              // Aucune expérience pour le moment
+            </p>
+            <button
+              onClick={() => setShowForm(true)}
+              className="px-5 py-2.5 font-mono text-[0.75rem] bg-orange text-dark-navy font-semibold tracking-wider uppercase hover:bg-orange/90 transition-colors cursor-pointer"
+            >
+              Ajouter votre première expérience
+            </button>
+          </div>
         ) : (
           experiences?.map((exp, index) => (
             <motion.div
@@ -206,46 +287,86 @@ function Experiences() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: index * 0.05 }}
             >
-              <Card className="p-4">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-text">
+              <div className="group border border-white/10 bg-black/20 hover:border-orange/30 hover:bg-orange/5 transition-all duration-300">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4">
+                  {/* Info */}
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
+                    {/* Icon */}
+                    <div className={`w-12 h-12 border flex items-center justify-center flex-shrink-0 ${
+                      exp.type === "experience"
+                        ? "border-orange/30 bg-orange/10"
+                        : "border-violet/30 bg-violet/10"
+                    }`}>
                       {exp.type === "experience" ? (
-                        <HiBriefcase className="w-6 h-6 text-primary" />
+                        <HiBriefcase className="w-5 h-5 text-orange" />
                       ) : (
-                        <HiAcademicCap className="w-6 h-6 text-primary" />
+                        <HiAcademicCap className="w-5 h-5 text-violet" />
                       )}
                     </div>
+
+                    {/* Details */}
                     <div>
-                      <h3 className="font-semibold">{exp.title}</h3>
-                      <p className="text-sm text-text-muted">{exp.company}</p>
+                      <h3 className="font-mono text-[0.9rem] text-off-white font-medium mb-1">
+                        {exp.title}
+                      </h3>
+                      <p className="font-mono text-[0.75rem] text-grey">
+                        // {exp.company}
+                      </p>
                     </div>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <span className="text-sm text-primary">
-                      {formatDate(exp.startDate)} - {formatDate(exp.endDate)}
+
+                  {/* Actions */}
+                  <div className="flex items-center gap-3 sm:gap-4">
+                    {/* Date */}
+                    <span className={`font-mono text-[0.75rem] ${exp.type === "education" ? "text-violet" : "text-orange"}`}>
+                      {formatDate(exp.startDate)} → {formatDate(exp.endDate)}
                     </span>
+
+                    {/* Type badge */}
+                    <span className={`px-3 py-1 font-mono text-[0.65rem] tracking-wider uppercase ${
+                      exp.type === "experience"
+                        ? "border border-orange/30 text-orange"
+                        : "border border-violet/30 text-violet"
+                    }`}>
+                      {exp.type === "experience" ? "XP Pro" : "Formation"}
+                    </span>
+
+                    {/* Edit */}
                     <button
                       onClick={() => handleEdit(exp)}
-                      className="p-2 hover:bg-primary/10 rounded-lg text-text-muted hover:text-primary cursor-pointer"
+                      className="p-2 border border-white/10 text-grey hover:text-lime hover:border-lime/30 hover:bg-lime/10 transition-all cursor-pointer"
                       title="Modifier"
                     >
-                      <HiPencil className="w-5 h-5" />
+                      <HiPencil className="w-4 h-4" />
                     </button>
+
+                    {/* Delete */}
                     <button
-                      onClick={() => handleDelete(exp._id)}
-                      className="p-2 hover:bg-danger/10 rounded-lg text-text-muted hover:text-danger cursor-pointer"
+                      onClick={() => openDeleteModal(exp._id)}
+                      className="p-2 border border-white/10 text-grey hover:text-red hover:border-red/30 hover:bg-red/10 transition-all cursor-pointer"
                       title="Supprimer"
                     >
-                      <HiTrash className="w-5 h-5" />
+                      <HiTrash className="w-4 h-4" />
                     </button>
                   </div>
                 </div>
-              </Card>
+              </div>
             </motion.div>
           ))
         )}
       </div>
+
+      {/* Modal de confirmation de suppression */}
+      <ConfirmModal
+        isOpen={deleteModal.isOpen}
+        onClose={closeDeleteModal}
+        onConfirm={confirmDelete}
+        title="Supprimer l'expérience"
+        message="Voulez-vous vraiment supprimer cette expérience ? Cette action est irréversible."
+        confirmText="Supprimer"
+        variant="danger"
+        loading={deleting}
+      />
     </div>
   );
 }

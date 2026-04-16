@@ -1,9 +1,7 @@
 import { useState, useMemo } from "react";
 import { Helmet } from "react-helmet-async";
-import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { HiPhotograph } from "react-icons/hi";
-import Card from "../../components/common/Card";
 import projectService from "../../services/projectService";
 import useFetch from "../../hooks/useFetch";
 import { getImageUrl } from "../../utils/imageUrl";
@@ -13,155 +11,156 @@ const categories = ["Tous", "Full Stack", "Frontend", "Backend"];
 function Projects() {
   const navigate = useNavigate();
   const [activeFilter, setActiveFilter] = useState("Tous");
-  const {
-    data: projects,
-    loading,
-    error,
-  } = useFetch(() => projectService.getAll());
+  const { data: projects, loading, error } = useFetch(() => projectService.getAll());
 
   const filteredProjects = useMemo(() => {
     if (!projects) return [];
     if (activeFilter === "Tous") return projects;
-    return projects.filter((project) => project.category === activeFilter);
+    return projects.filter((p) => p.category === activeFilter);
   }, [projects, activeFilter]);
 
   if (loading) {
     return (
-      <div className="pt-24 pb-20 flex justify-center items-center min-h-screen">
-        <div className="text-center">
-          <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-          <p className="text-text-muted">Chargement des projets...</p>
-        </div>
+      <div className="pt-24 pb-20 flex justify-center items-center min-h-screen bg-[#080906]">
+        <span className="font-mono text-[10px] tracking-[0.2em] text-[#f0f0ec] uppercase">
+          LOADING...
+        </span>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="pt-24 pb-20 flex justify-center items-center min-h-screen">
-        <div className="text-center">
-          <p className="text-danger mb-4">{error}</p>
-          <p className="text-text-muted">Impossible de charger les projets</p>
-        </div>
+      <div className="pt-24 pb-20 flex justify-center items-center min-h-screen bg-[#080906]">
+        <span className="font-mono text-[10px] tracking-[0.2em] text-[#FF3030] uppercase">
+          ERROR
+        </span>
       </div>
     );
   }
 
   return (
-    <div className="pt-24 pb-20">
+    <div className="pt-20 pb-24 min-h-screen relative">
       <Helmet>
-        <title>Projets | Yvan Gui - Développeur Web</title>
-        <meta name="description" content="Découvrez les projets web réalisés par Yvan Gui : applications React, Node.js, MongoDB. Portfolio de développeur full stack." />
-        <meta property="og:title" content="Projets | Yvan Gui - Développeur Web" />
-        <meta property="og:description" content="Portfolio des projets de développement web de Yvan Gui." />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://portfolio-yvan-gui.vercel.app/projects" />
-        <meta property="og:image" content="https://res.cloudinary.com/dox09mso9/image/upload/v1768128857/portfolio/projects/ve8qft3jnbzz1bonocvv.webp" />
-        <meta property="og:site_name" content="Yvan Gui - Portfolio" />
-        <meta property="og:locale" content="fr_FR" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Projets | Yvan Gui" />
-        <meta name="twitter:description" content="Découvrez les projets web réalisés par Yvan Gui." />
-        <link rel="canonical" href="https://portfolio-yvan-gui.vercel.app/projects" />
+        <title>Projets | Yvan Gui</title>
+        <meta name="description" content="Decouvrez les projets web realises par Yvan Gui." />
       </Helmet>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12"
-        >
-          <h1 className="text-4xl lg:text-5xl font-bold mb-4">
-            Mes <span className="text-primary">Projets</span>
-          </h1>
-          <p className="text-text-muted max-w-2xl mx-auto">
-            Découvrez les projets que j&apos;ai réalisés durant ma formation et en
-            freelance
-          </p>
-        </motion.div>
 
-        {/* Filtres */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="flex flex-wrap justify-center gap-3 mb-12"
-        >
+      <div className="max-w-[1400px] mx-auto px-6 sm:px-8">
+        {/* Header */}
+        <div className="mb-12 sm:mb-16 pt-8">
+          <h1
+            style={{ fontFamily: '"Big Shoulders Display", sans-serif' }}
+            className="font-black text-[clamp(50px,10vw,120px)] text-[#f0f0ec] uppercase leading-[0.9] mb-4"
+          >
+            PROJETS
+          </h1>
+        </div>
+
+        {/* Filters */}
+        <div className="flex flex-wrap gap-4 sm:gap-8 mb-12 sm:mb-16">
           {categories.map((category) => (
             <button
               key={category}
               onClick={() => setActiveFilter(category)}
               aria-pressed={activeFilter === category}
-              className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+              className={`font-mono text-[14px] sm:text-[16px] tracking-[0.15em] uppercase transition-colors cursor-pointer ${
                 activeFilter === category
-                  ? "bg-primary text-background shadow-glow"
-                  : "bg-surface-light text-text-muted border border-border hover:border-primary hover:text-primary cursor-pointer"
+                  ? "text-[#c8f000]"
+                  : "text-[#f0f0ec] hover:text-[#f0f0ec]"
               }`}
             >
-              {category}
+              {category.toUpperCase()}
             </button>
           ))}
-        </motion.div>
 
-        {/* Grille de projets */}
+        </div>
+
+        {/* Grid */}
         {filteredProjects.length === 0 ? (
-          <p className="text-center text-text-muted">Aucun projet trouvé</p>
+          <div className="py-16 text-center">
+            <span className="font-mono text-[10px] tracking-[0.2em] text-[#f0f0ec] uppercase">
+              AUCUN PROJET TROUVE
+            </span>
+          </div>
         ) : (
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-2 gap-[3px]">
             {filteredProjects.map((project, index) => (
-              <motion.div
+              <article
                 key={project._id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
-                layout
+                onClick={() => navigate(`/projects/${project._id}`)}
+                onKeyDown={(e) => e.key === "Enter" && navigate(`/projects/${project._id}`)}
+                tabIndex={0}
+                role="link"
+                aria-label={`Voir le projet ${project.title}`}
+                className="group relative cursor-pointer overflow-hidden h-[58vh] border-b-2 border-transparent hover:border-[#c8f000] transition-colors duration-300"
               >
-                <Card
-                  hover
-                  className="h-full cursor-pointer"
-                  onClick={() => navigate(`/projects/${project._id}`)}
-                >
-                  {/* Image */}
-                  <div className="h-56 bg-surface-light rounded-t-xl flex items-center justify-center border-b border-border overflow-hidden">
-                    {project.images?.[0] ? (
-                      <img
-                        src={getImageUrl(project.images[0])}
-                        alt={`Capture d'écran du projet ${project.title}`}
-                        className="w-full h-full object-cover"
-                        loading="lazy"
-                      />
-                    ) : (
-                      <HiPhotograph className="w-16 h-16 text-text-muted" />
-                    )}
+                {/* Fond */}
+                <div className="absolute inset-0 bg-[#080906]" />
+
+                {/* Image si disponible */}
+                {project.images?.[0] && (
+                  <div className="absolute inset-0 z-[1]">
+                    <img
+                      src={getImageUrl(project.images[0])}
+                      alt={project.title}
+                      className="w-full h-full object-cover opacity-40 transition-all duration-500 group-hover:opacity-60 group-hover:scale-[1.02]"
+                      loading="lazy"
+                    />
                   </div>
+                )}
 
-                  <div className="p-6">
-                    <div className="flex items-center justify-between mb-2">
-                      <h2 className="text-xl font-semibold">{project.title}</h2>
-                      <span className="text-xs text-primary bg-primary/10 px-3 py-1 rounded-full select-none">
-                        {project.category}
-                      </span>
-                    </div>
+                {/* Gradient overlay */}
+                <div
+                  className="absolute inset-0 z-[2] pointer-events-none"
+                  style={{
+                    background: `linear-gradient(to top,
+                      rgba(8, 9, 6, 0.97) 0%,
+                      rgba(8, 9, 6, 0.6) 38%,
+                      rgba(8, 9, 6, 0.05) 72%
+                    )`,
+                  }}
+                />
 
-                    <p className="text-text-muted text-sm mb-4 line-clamp-2">
+                {/* Contenu */}
+                <div className="absolute bottom-0 left-0 right-0 z-[3] p-8 sm:p-10 flex justify-between items-end">
+                  <div>
+                    {/* Titre */}
+                    <h2
+                      style={{ fontFamily: '"Big Shoulders Display", sans-serif' }}
+                      className="font-black text-[clamp(28px,3.5vw,58px)] text-[#f0f0ec] uppercase leading-[0.92]"
+                    >
+                      {project.title}
+                    </h2>
+
+                    {/* Description */}
+                    <p className="font-mono text-[12px] text-[#f0f0ec] mt-3 max-w-md line-clamp-2 leading-[1.8]">
                       {project.description}
                     </p>
 
                     {/* Tags */}
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {project.technologies?.slice(0, 4).map((tech) => (
+                    <div className="flex gap-2 mt-4 flex-wrap">
+                      {project.technologies?.slice(0, 3).map((tech, i) => (
                         <span
-                          key={tech}
-                          className="px-3 py-1 text-xs text-primary border border-primary/50 rounded-full select-none"
+                          key={i}
+                          className="font-mono text-[9px] tracking-[0.15em] text-[#f0f0ec] border border-[#1c1d14] px-3 py-1 uppercase transition-all duration-200 group-hover:border-[#6a7f00] group-hover:text-[#f0f0ec]"
                         >
                           {tech}
                         </span>
                       ))}
                     </div>
                   </div>
-                </Card>
-              </motion.div>
+
+                                  </div>
+
+                {/* Numero decoratif */}
+                <span
+                  style={{ fontFamily: '"Big Shoulders Display", sans-serif' }}
+                  className="absolute top-6 right-6 font-black text-[64px] text-[#f0f0ec]/5 leading-none pointer-events-none z-[2]"
+                >
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+              </article>
             ))}
           </div>
         )}

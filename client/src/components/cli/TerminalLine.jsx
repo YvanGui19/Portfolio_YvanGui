@@ -1,32 +1,49 @@
 function TerminalLine({ line }) {
   if (line.type === "prompt") {
     return (
-      <div className="flex flex-wrap">
-        <span className="text-[#269f66] font-bold">{line.user}@{line.host}</span>
-        <span className="text-text">:</span>
-        <span className="text-[#5daaff] font-bold">{line.path}</span>
-        <span className="text-text">$ </span>
-        <span className="text-text">{line.command}</span>
+      <div className="flex flex-wrap items-center text-[0.75rem] sm:text-[0.85rem]">
+        {/* User@host */}
+        <span className="text-lime font-bold">{line.user}</span>
+        <span className="text-grey/40">@</span>
+        <span className="text-cyan font-bold">{line.host}</span>
+        {/* Path */}
+        <span className="text-grey/40">:</span>
+        <span className="text-violet font-bold">{line.path}</span>
+        {/* Prompt symbol */}
+        <span className="text-lime mx-1">$</span>
+        {/* Command */}
+        <span className="text-off-white break-all">{line.command}</span>
       </div>
     );
   }
 
   if (line.type === "error") {
-    return <div className="text-danger">{line.content}</div>;
+    return (
+      <div className="flex items-center gap-2 text-red">
+        <span className="text-red/60">[ERROR]</span>
+        <span>{line.content}</span>
+      </div>
+    );
   }
 
   if (line.type === "success") {
-    return <div className="text-primary">{line.content}</div>;
+    return (
+      <div className="flex items-center gap-2 text-lime">
+        <span className="text-lime/60">[OK]</span>
+        <span>{line.content}</span>
+      </div>
+    );
   }
 
   if (line.type === "ls-grid") {
     return (
-      <div className="flex flex-wrap gap-x-6 gap-y-1">
+      <div className="flex flex-wrap gap-x-6 gap-y-1 pl-2">
         {line.items.map((item, i) => (
           <span
             key={i}
-            className={item.isDirectory ? "text-[#5daaff] font-bold" : "text-text"}
+            className={item.isDirectory ? "text-cyan font-bold" : "text-off-white"}
           >
+            {item.isDirectory && <span className="text-cyan/40 mr-1">📁</span>}
             {item.name}{item.isDirectory ? "/" : ""}
           </span>
         ))}
@@ -34,22 +51,23 @@ function TerminalLine({ line }) {
     );
   }
 
-  // Gérer le format long de ls avec coloration des répertoires
+  // Handle long format ls with directory coloring
   if (line.isDir && line.content) {
-    // Extraire le nom du contenu et le coloriser
     const parts = line.content.split(line.name);
     if (parts.length === 2) {
       return (
-        <div className="text-text whitespace-pre">
-          {parts[0]}<span className="text-[#5daaff] font-bold">{line.name}</span>{parts[1]}
+        <div className="text-grey whitespace-pre">
+          <span className="text-grey/60">{parts[0]}</span>
+          <span className="text-cyan font-bold">{line.name}</span>
+          <span className="text-grey/60">{parts[1]}</span>
         </div>
       );
     }
   }
 
-  // Ligne de texte par défaut
+  // Default text line
   return (
-    <div className={`${line.className || "text-text"} whitespace-pre-wrap`}>
+    <div className={`${line.className || "text-grey"} whitespace-pre-wrap`}>
       {line.content}
     </div>
   );

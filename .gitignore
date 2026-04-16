@@ -26,3 +26,12 @@ logs/
 *.log
 npm-debug.log*
 Charte_Graphique/
+
+# Photos originales (vie privée)
+# Seules les versions dithered doivent être commitées
+client/public/images/profile.png
+**/profile-original.*
+**/photo-originale.*
+**/original-portrait.*
+*.original.png
+*.original.jpg
