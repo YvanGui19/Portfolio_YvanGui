@@ -34,7 +34,7 @@ class VirtualFileSystem {
                   type: FILE_TYPE.FILE,
                   name: "contact.txt",
                   content:
-                    "Email: yvan.gui19@gmail.com\nLinkedIn: www.linkedin.com/in/guiheneufyvan",
+                    "Email: yvan.gui19@gmail.com\nLinkedIn: www.linkedin.com/in/yvangui",
                 },
                 projects: {
                   type: FILE_TYPE.DIRECTORY,
@@ -49,7 +49,18 @@ class VirtualFileSystem {
                 experiences: {
                   type: FILE_TYPE.DIRECTORY,
                   name: "experiences",
-                  children: {},
+                  children: {
+                    pro: {
+                      type: FILE_TYPE.DIRECTORY,
+                      name: "pro",
+                      children: {},
+                    },
+                    formations: {
+                      type: FILE_TYPE.DIRECTORY,
+                      name: "formations",
+                      children: {},
+                    },
+                  },
                 },
               },
             },
@@ -121,14 +132,32 @@ class VirtualFileSystem {
       });
     }
 
-    // Ajouter les expériences
+    // Ajouter les expériences (séparées par type)
     if (experiences && experiences.length > 0) {
-      homeDir.children.experiences.children = {};
-      experiences.forEach((exp, index) => {
-        const filename = `${index + 1}-${this.slugify(
-          exp.company || exp.title
-        )}.txt`;
-        homeDir.children.experiences.children[filename] = {
+      // Reset subdirectories
+      homeDir.children.experiences.children.pro.children = {};
+      homeDir.children.experiences.children.formations.children = {};
+
+      // Séparer par type
+      const proExperiences = experiences.filter((e) => e.type === "experience");
+      const eduExperiences = experiences.filter((e) => e.type === "education");
+
+      // Ajouter les expériences pro
+      proExperiences.forEach((exp, index) => {
+        const year = exp.startDate ? new Date(exp.startDate).getFullYear() : "";
+        const filename = `${year}-${this.slugify(exp.company)}-${this.slugify(exp.title)}.txt`;
+        homeDir.children.experiences.children.pro.children[filename] = {
+          type: FILE_TYPE.FILE,
+          name: filename,
+          content: this.formatExperience(exp),
+        };
+      });
+
+      // Ajouter les formations
+      eduExperiences.forEach((exp, index) => {
+        const year = exp.startDate ? new Date(exp.startDate).getFullYear() : "";
+        const filename = `${year}-${this.slugify(exp.company)}-${this.slugify(exp.title)}.txt`;
+        homeDir.children.experiences.children.formations.children[filename] = {
           type: FILE_TYPE.FILE,
           name: filename,
           content: this.formatExperience(exp),
@@ -295,23 +324,30 @@ Aujourd'hui, je conçois des solutions web fiables et orientées utilisateur, av
 
   formatSkills(skills) {
     return skills
-      .map((s) => {
-        const bar =
-          "█".repeat(Math.floor(s.level / 10)) +
-          "░".repeat(10 - Math.floor(s.level / 10));
-        return `${s.name.padEnd(15)} [${bar}] ${s.level}%`;
-      })
+      .map((s) => `// ${s.name}`)
       .join("\n");
   }
 
+  formatDateFr(dateStr) {
+    if (!dateStr) return null;
+    const date = new Date(dateStr);
+    if (isNaN(date.getTime())) return dateStr;
+    const day = date.getDate().toString().padStart(2, "0");
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  }
+
   formatExperience(exp) {
-    let content = `=== ${exp.title || exp.position} ===\n`;
-    content += `Entreprise: ${exp.company}\n`;
-    if (exp.location) content += `Lieu: ${exp.location}\n`;
+    let content = `Poste : ${exp.title || exp.position}\n`;
+    content += `Entreprise : ${exp.company}\n`;
+    if (exp.location) content += `Lieu : ${exp.location}\n`;
     if (exp.startDate) {
-      content += `Période: ${exp.startDate} - ${exp.endDate || "Présent"}\n`;
+      const startFormatted = this.formatDateFr(exp.startDate);
+      const endFormatted = exp.endDate ? this.formatDateFr(exp.endDate) : "Présent";
+      content += `Période : ${startFormatted} - ${endFormatted}\n`;
     }
-    content += `\n${exp.description || "Pas de description disponible."}\n`;
+    content += `\nDescription : ${exp.description || "Pas de description disponible."}`;
     return content;
   }
 

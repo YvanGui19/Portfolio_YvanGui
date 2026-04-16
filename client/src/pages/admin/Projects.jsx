@@ -2,11 +2,10 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { HiFolder, HiPencil, HiTrash } from "react-icons/hi";
-import Card from "../../components/common/Card";
-import Button from "../../components/common/Button";
 import projectService from "../../services/projectService";
 import useFetch from "../../hooks/useFetch";
 import { getImageUrl } from "../../utils/imageUrl";
+import ConfirmModal from "../../components/common/ConfirmModal";
 
 function Projects() {
   const {
@@ -15,58 +14,94 @@ function Projects() {
     error,
     refetch,
   } = useFetch(() => projectService.getAll());
-  const [deleting, setDeleting] = useState(null);
+  const [deleteModal, setDeleteModal] = useState({ isOpen: false, id: null });
+  const [deleting, setDeleting] = useState(false);
 
-  const handleDelete = async (id) => {
-    if (!window.confirm("Supprimer ce projet ?")) return;
+  const openDeleteModal = (id) => {
+    setDeleteModal({ isOpen: true, id });
+  };
 
-    setDeleting(id);
+  const closeDeleteModal = () => {
+    setDeleteModal({ isOpen: false, id: null });
+  };
+
+  const confirmDelete = async () => {
+    setDeleting(true);
     try {
-      await projectService.delete(id);
+      await projectService.delete(deleteModal.id);
       refetch();
+      closeDeleteModal();
     } catch {
       alert("Erreur lors de la suppression");
     } finally {
-      setDeleting(null);
+      setDeleting(false);
     }
   };
 
   if (loading) {
     return (
-      <div className="flex justify-center py-12">
-        <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin" />
+      <div className="flex flex-col items-center justify-center py-20">
+        <div className="w-8 h-8 border-2 border-lime border-t-transparent rounded-full animate-spin mb-3" />
+        <p className="font-mono text-[0.8rem] text-grey">Chargement...</p>
       </div>
     );
   }
 
   return (
     <div>
+      {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8"
       >
         <div>
-          <h1 className="text-3xl font-bold text-text">Projets</h1>
-          <p className="text-text-muted">
-            Gérez vos projets portfolio ({projects?.length || 0})
+          {/* Tag */}
+          <div className="font-mono text-[0.7rem] text-lime tracking-[0.25em] uppercase mb-2">
+            // PROJECTS
+          </div>
+
+          {/* Title */}
+          <h1 className="font-display text-[clamp(1.5rem,4vw,2rem)] font-bold text-off-white tracking-wide">
+            Projets
+          </h1>
+
+          {/* Counter */}
+          <p className="font-mono text-[0.8rem] text-grey">
+            &gt; {projects?.length || 0} projet{projects?.length > 1 ? "s" : ""} enregistré{projects?.length > 1 ? "s" : ""}
           </p>
         </div>
-        <Button to="/admin/projects/new">+ Nouveau projet</Button>
+
+        <Link
+          to="/admin/projects/new"
+          className="inline-flex items-center px-5 py-2.5 font-mono text-[0.75rem] bg-lime text-dark-navy font-semibold tracking-wider uppercase hover:bg-lime/90 transition-colors"
+        >
+          + Nouveau projet
+        </Link>
       </motion.div>
 
+      {/* Error */}
       {error && (
-        <Card className="p-4 mb-6 border-danger">
-          <p className="text-danger">{error}</p>
-        </Card>
+        <div className="border border-red/30 bg-red/10 px-5 py-4 mb-6">
+          <p className="font-mono text-[0.8rem] text-red">// Erreur: {error}</p>
+        </div>
       )}
 
-      <div className="grid gap-4">
+      {/* Projects list */}
+      <div className="space-y-3">
         {projects?.length === 0 ? (
-          <Card className="p-8 text-center">
-            <p className="text-text-muted mb-4">Aucun projet pour le moment</p>
-            <Button to="/admin/projects/new">Créer votre premier projet</Button>
-          </Card>
+          <div className="border border-white/10 bg-black/20 p-12 text-center">
+            <HiFolder className="w-12 h-12 text-grey/30 mx-auto mb-4" />
+            <p className="font-mono text-[0.9rem] text-grey mb-4">
+              // Aucun projet pour le moment
+            </p>
+            <Link
+              to="/admin/projects/new"
+              className="inline-flex items-center px-5 py-2.5 font-mono text-[0.75rem] bg-lime text-dark-navy font-semibold tracking-wider uppercase hover:bg-lime/90 transition-colors"
+            >
+              Créer votre premier projet
+            </Link>
+          </div>
         ) : (
           projects?.map((project, index) => (
             <motion.div
@@ -75,59 +110,84 @@ function Projects() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.05 }}
             >
-              <Card className="p-4">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div className="group border border-white/10 bg-black/20 hover:border-lime/30 hover:bg-lime/5 transition-all duration-300">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4">
+                  {/* Project info */}
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-surface-light rounded-lg flex items-center justify-center overflow-hidden">
+                    {/* Thumbnail */}
+                    <div className="w-14 h-14 border border-white/10 bg-black/30 flex items-center justify-center overflow-hidden flex-shrink-0">
                       {project.images?.[0] ? (
                         <img
                           src={getImageUrl(project.images[0])}
                           alt={`Miniature du projet ${project.title}`}
-                          className="w-full h-full object-cover" loading="lazy"
+                          className="w-full h-full object-cover"
+                          loading="lazy"
                         />
                       ) : (
-                        <HiFolder className="w-6 h-6 text-text-muted" />
+                        <HiFolder className="w-6 h-6 text-grey/50" />
                       )}
                     </div>
+
+                    {/* Title and category */}
                     <div>
-                      <h3 className="font-semibold text-text">
+                      <h3 className="font-mono text-[0.9rem] text-off-white font-medium mb-1">
                         {project.title}
                       </h3>
-                      <p className="text-sm text-text-muted">
-                        {project.category}
+                      <p className="font-mono text-[0.7rem] text-grey">
+                        // {project.category}
                       </p>
                     </div>
                   </div>
-                  <div className="flex items-center gap-3">
+
+                  {/* Actions */}
+                  <div className="flex items-center gap-3 sm:gap-4">
+                    {/* Featured badge */}
                     <span
-                      className={`px-3 py-1 text-xs rounded-full ${
+                      className={`px-3 py-1 font-mono text-[0.65rem] tracking-wider uppercase ${
                         project.featured
-                          ? "bg-primary/10 text-primary"
-                          : "bg-surface-light text-text-muted"
+                          ? "border border-lime/30 text-lime bg-lime/10"
+                          : "border border-white/10 text-grey"
                       }`}
                     >
                       {project.featured ? "Featured" : "Normal"}
                     </span>
+
+                    {/* Edit button */}
                     <Link
                       to={`/admin/projects/${project._id}/edit`}
-                      className="p-2 hover:bg-primary/10 rounded-lg text-text-muted hover:text-primary"
+                      className="p-2 border border-white/10 text-grey hover:text-lime hover:border-lime/30 hover:bg-lime/10 transition-all"
+                      title="Modifier"
                     >
-                      <HiPencil className="w-5 h-5" />
+                      <HiPencil className="w-4 h-4" />
                     </Link>
+
+                    {/* Delete button */}
                     <button
-                      onClick={() => handleDelete(project._id)}
-                      disabled={deleting === project._id}
-                      className="p-2 hover:bg-danger/10 rounded-lg text-text-muted hover:text-danger disabled:opacity-50 cursor-pointer"
+                      onClick={() => openDeleteModal(project._id)}
+                      className="p-2 border border-white/10 text-grey hover:text-red hover:border-red/30 hover:bg-red/10 transition-all cursor-pointer"
+                      title="Supprimer"
                     >
-                      {deleting === project._id ? "..." : <HiTrash className="w-5 h-5" />}
+                      <HiTrash className="w-4 h-4" />
                     </button>
                   </div>
                 </div>
-              </Card>
+              </div>
             </motion.div>
           ))
         )}
       </div>
+
+      {/* Modal de confirmation de suppression */}
+      <ConfirmModal
+        isOpen={deleteModal.isOpen}
+        onClose={closeDeleteModal}
+        onConfirm={confirmDelete}
+        title="Supprimer le projet"
+        message="Voulez-vous vraiment supprimer ce projet ? Cette action est irréversible."
+        confirmText="Supprimer"
+        variant="danger"
+        loading={deleting}
+      />
     </div>
   );
 }

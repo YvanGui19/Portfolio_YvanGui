@@ -1,15 +1,29 @@
 import { memo, useCallback } from "react";
 
-const Card = memo(function Card({ children, className = "", hover = false, onClick, ...props }) {
+// Couleur de hover unifiée lime
+const hoverColorStyles = {
+  lime: "hover:border-lime/30 hover:shadow-[0_0_20px_rgba(194,254,11,0.1)]",
+  cyan: "hover:border-lime/30 hover:shadow-[0_0_20px_rgba(194,254,11,0.1)]",
+  violet: "hover:border-lime/30 hover:shadow-[0_0_20px_rgba(194,254,11,0.1)]",
+};
+
+const focusColorStyles = {
+  lime: "focus:ring-lime",
+  cyan: "focus:ring-lime",
+  violet: "focus:ring-lime",
+};
+
+const Card = memo(function Card({ children, className = "", hover = false, hoverColor = "lime", onClick, ...props }) {
+  // Marathon style - no rounded corners, subtle border
   const baseStyles =
-    "bg-gradient-to-br from-surface-light to-surface border border-border rounded-xl";
+    "bg-mid-navy border border-white/5";
 
   const hoverStyles = hover
-    ? "transition-all duration-300 hover:border-primary hover:shadow-glow-lg hover:-translate-y-1"
+    ? `transition-all duration-300 ${hoverColorStyles[hoverColor] || hoverColorStyles.lime} hover:-translate-y-1`
     : "";
 
   const focusStyles = onClick
-    ? "focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background"
+    ? `focus:outline-none focus:ring-2 ${focusColorStyles[hoverColor] || focusColorStyles.lime} focus:ring-offset-2 focus:ring-offset-dark-navy`
     : "";
 
   const handleKeyDown = useCallback((e) => {
@@ -35,7 +49,7 @@ const Card = memo(function Card({ children, className = "", hover = false, onCli
 
 const CardHeader = memo(function CardHeader({ children, className = "" }) {
   return (
-    <div className={`p-6 border-b border-border ${className}`}>{children}</div>
+    <div className={`p-6 border-b border-white/5 ${className}`}>{children}</div>
   );
 });
 

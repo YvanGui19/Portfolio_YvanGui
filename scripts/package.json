@@ -1,0 +1,12 @@
+{
+  "name": "portfolio-scripts",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Scripts utilitaires pour le portfolio",
+  "scripts": {
+    "generate-avatar": "node generate-dithered-avatar.js"
+  },
+  "dependencies": {
+    "jimp": "^1.6.0"
+  }
+}

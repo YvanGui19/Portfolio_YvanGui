@@ -1,8 +1,7 @@
 import { Helmet } from 'react-helmet-async'
-import Hero from '../../components/home/Hero'
-import Skills from '../../components/home/Skills'
+import HeroMarathon from '../../components/home/HeroMarathon'
 import FeaturedProjects from '../../components/home/FeaturedProjects'
-import CallToAction from '../../components/home/CallToAction'
+import Skills from '../../components/home/Skills'
 
 function Home() {
   return (
@@ -22,10 +21,12 @@ function Home() {
         <meta name="twitter:description" content="Portfolio de Yvan Gui, développeur web full stack basé à Toulouse." />
         <link rel="canonical" href="https://portfolio-yvan-gui.vercel.app/" />
       </Helmet>
-      <Hero />
+
+      <HeroMarathon />
+
       <Skills />
+
       <FeaturedProjects />
-      <CallToAction />
     </>
   )
 }

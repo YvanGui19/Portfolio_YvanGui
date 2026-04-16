@@ -1,15 +1,16 @@
 import { useState, useEffect } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, Link } from "react-router-dom";
 import { HiHome, HiFolder, HiLightningBolt, HiBriefcase, HiMail } from "react-icons/hi";
+import { BiTerminal } from "react-icons/bi";
 import { useAuth } from "../../context/AuthContext";
 import { useMessages } from "../../context/MessagesContext";
 
 const navItems = [
-  { to: "/admin/dashboard", label: "Dashboard", icon: HiHome },
-  { to: "/admin/projects", label: "Projets", icon: HiFolder },
-  { to: "/admin/skills", label: "Compétences", icon: HiLightningBolt },
-  { to: "/admin/experiences", label: "Expériences", icon: HiBriefcase },
-  { to: "/admin/messages", label: "Messages", icon: HiMail, showBadge: true },
+  { to: "/admin/dashboard", label: "Dashboard", icon: HiHome, code: "DSH" },
+  { to: "/admin/projects", label: "Projets", icon: HiFolder, code: "PRJ" },
+  { to: "/admin/skills", label: "Compétences", icon: HiLightningBolt, code: "SKL" },
+  { to: "/admin/experiences", label: "Expériences", icon: HiBriefcase, code: "EXP" },
+  { to: "/admin/messages", label: "Messages", icon: HiMail, code: "MSG", showBadge: true },
 ];
 
 function AdminLayout({ children }) {
@@ -33,50 +34,70 @@ function AdminLayout({ children }) {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-dark-navy">
       {/* Overlay mobile */}
       {sidebarOpen && (
         <div
-          className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+          className="fixed inset-0 bg-dark-navy/80 backdrop-blur-sm z-40 lg:hidden"
           onClick={() => setSidebarOpen(false)}
         />
       )}
 
       {/* Sidebar */}
       <aside
-        className={`fixed top-0 left-0 z-50 h-full w-64 bg-surface border-r border-border transform transition-transform duration-300 lg:translate-x-0 ${
+        className={`fixed top-0 left-0 z-50 h-full w-64 bg-dark-navy border-r border-cyan/20 transform transition-transform duration-300 lg:translate-x-0 ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
         {/* Logo */}
-        <div className="p-6 border-b border-border">
-          <h1 className="text-xl font-bold">
-            <span className="text-text">Yvan</span>
-            <span className="text-primary">.</span>
-            <span className="text-text">Gui</span>
-          </h1>
-          <p className="text-xs text-text-muted">Admin Portal</p>
+        <div className="p-6 border-b border-cyan/20">
+          <Link to="/" className="block group">
+            <div className="flex items-center gap-3 mb-2">
+              <div
+                className="w-8 h-8 border-2 border-cyan flex items-center justify-center text-cyan font-display text-[0.7rem] font-black"
+                style={{
+                  clipPath: "polygon(15% 0%, 100% 0%, 85% 100%, 0% 100%)",
+                }}
+              >
+                YG
+              </div>
+              <span className="font-display text-[0.9rem] font-extrabold tracking-wider">
+                <span className="text-white">Yvan</span>
+                <span className="text-cyan">.</span>
+                <span className="text-white">Gui</span>
+              </span>
+            </div>
+          </Link>
+          <div className="font-mono text-[0.65rem] text-cyan/60 tracking-[0.2em] uppercase">
+            // ADMIN_PORTAL
+          </div>
         </div>
 
         {/* Navigation */}
-        <nav className="p-4 space-y-2">
+        <nav className="p-4 space-y-1">
+          <div className="font-mono text-[0.6rem] text-grey/50 tracking-[0.15em] uppercase mb-3 px-3">
+            Navigation
+          </div>
           {navItems.map((item) => (
             <NavLink
               key={item.to}
               to={item.to}
               onClick={() => setSidebarOpen(false)}
               className={({ isActive }) =>
-                `flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-300 ${
+                `group flex items-center gap-3 px-3 py-2.5 font-mono text-[0.8rem] transition-all duration-200 border-l-2 ${
                   isActive
-                    ? "bg-primary/10 text-primary shadow-glow"
-                    : "text-text-muted hover:bg-primary/10 hover:text-text"
+                    ? "border-cyan bg-cyan/5 text-cyan"
+                    : "border-transparent text-grey hover:border-cyan/50 hover:bg-cyan/5 hover:text-off-white"
                 }`
               }
             >
-              <item.icon className="w-5 h-5" />
-              <span className="font-medium flex-1">{item.label}</span>
+              <span className="text-[0.65rem] text-grey/40 group-hover:text-cyan/60 transition-colors">
+                [{item.code}]
+              </span>
+              <item.icon className="w-4 h-4" />
+              <span className="flex-1 tracking-wide">{item.label}</span>
               {item.showBadge && unreadCount > 0 && (
-                <span className="bg-primary text-background text-xs font-bold px-2 py-0.5 rounded-full min-w-[20px] text-center">
+                <span className="bg-red text-white text-[0.65rem] font-bold px-1.5 py-0.5 min-w-[18px] text-center">
                   {unreadCount}
                 </span>
               )}
@@ -85,23 +106,25 @@ function AdminLayout({ children }) {
         </nav>
 
         {/* User section */}
-        <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-border">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold">
+        <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-cyan/20">
+          <div className="flex items-center gap-3 mb-3">
+            <div className="w-9 h-9 border border-cyan/30 bg-cyan/10 flex items-center justify-center text-cyan font-mono text-[0.75rem] font-bold">
               {user?.name?.charAt(0) || "A"}
             </div>
             <div>
-              <p className="font-medium text-sm text-text">
+              <p className="font-mono text-[0.75rem] text-off-white">
                 {user?.name || "Admin"}
               </p>
-              <p className="text-xs text-text-muted">{user?.email}</p>
+              <p className="font-mono text-[0.6rem] text-grey/60 truncate max-w-[140px]">
+                {user?.email}
+              </p>
             </div>
           </div>
           <button
             onClick={handleLogout}
-            className="w-full px-4 py-2 text-sm text-text-muted hover:text-danger hover:bg-danger/10 rounded-lg transition-colors cursor-pointer"
+            className="w-full px-3 py-2 font-mono text-[0.7rem] text-red border border-red/30 bg-red/10 hover:bg-red/20 hover:border-red/50 transition-all cursor-pointer tracking-wider uppercase"
           >
-            Déconnexion
+            ⏻ Déconnexion
           </button>
         </div>
       </aside>
@@ -109,13 +132,14 @@ function AdminLayout({ children }) {
       {/* Main content */}
       <div className="lg:ml-64">
         {/* Header mobile */}
-        <header className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-surface border-b border-border flex items-center justify-between px-4 z-30">
+        <header className="lg:hidden fixed top-0 left-0 right-0 h-14 bg-dark-navy/95 backdrop-blur-xl border-b border-cyan/20 flex items-center justify-between px-4 z-30">
           <button
             onClick={() => setSidebarOpen(true)}
-            className="p-2 text-text-muted hover:text-primary"
+            className="p-2 text-grey hover:text-cyan transition-colors cursor-pointer"
+            aria-label="Menu"
           >
             <svg
-              className="w-6 h-6"
+              className="w-5 h-5"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -128,12 +152,15 @@ function AdminLayout({ children }) {
               />
             </svg>
           </button>
-          <span className="text-primary font-bold">Admin</span>
-          <div className="w-10" />
+          <div className="flex items-center gap-2">
+            <BiTerminal className="w-4 h-4 text-cyan" />
+            <span className="font-mono text-[0.8rem] text-cyan tracking-widest uppercase">Admin</span>
+          </div>
+          <div className="w-9" />
         </header>
 
         {/* Page content */}
-        <main className="p-6 pt-20 lg:pt-6 min-h-screen">{children}</main>
+        <main className="p-4 sm:p-6 pt-18 lg:pt-6 min-h-screen">{children}</main>
       </div>
     </div>
   );

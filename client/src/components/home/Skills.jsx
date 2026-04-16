@@ -2,6 +2,7 @@ import { useCallback } from "react";
 import { motion } from "framer-motion";
 import skillService from "../../services/skillService";
 import useFetch from "../../hooks/useFetch";
+import { SkillsReveal } from "../canvas";
 import {
   SiHtml5,
   SiCss3,
@@ -40,6 +41,26 @@ const categoryIcons = {
   Backend: BiServer,
   Tools: BiWrench,
   Other: BiLayer,
+};
+
+// Couleurs par catégorie - Style Marathon
+const categoryColors = {
+  Frontend: {
+    text: "group-hover:text-[#c8f000]",
+    glow: "0 0 20px 3px rgba(200, 240, 0, 0.4)",
+  },
+  Backend: {
+    text: "group-hover:text-[#c8f000]",
+    glow: "0 0 20px 3px rgba(200, 240, 0, 0.4)",
+  },
+  Tools: {
+    text: "group-hover:text-[#c8f000]",
+    glow: "0 0 20px 3px rgba(200, 240, 0, 0.4)",
+  },
+  Other: {
+    text: "group-hover:text-[#c8f000]",
+    glow: "0 0 20px 3px rgba(200, 240, 0, 0.4)",
+  },
 };
 
 // Mapping des noms de skills vers les icônes officielles
@@ -93,72 +114,76 @@ function Skills() {
   const getIcon = useCallback((skill) => {
     const IconComponent = skillIcons[skill.name];
     if (IconComponent) {
-      return <IconComponent className="w-8 h-8" />;
+      return <IconComponent className="w-8 h-8 sm:w-10 sm:h-10" />;
     }
     // Fallback selon la catégorie
     const CategoryIcon = categoryIcons[skill.category] || BiCodeAlt;
-    return <CategoryIcon className="w-8 h-8" />;
+    return <CategoryIcon className="w-8 h-8 sm:w-10 sm:h-10" />;
   }, []);
 
   return (
-    <section className="py-20 bg-surface">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+    <section className="bg-[#080906] relative overflow-hidden">
+      {/* Header de section */}
+      <div className="py-24 sm:py-28 px-8 sm:px-12 lg:px-14">
+        <h2
+          style={{ fontFamily: '"Big Shoulders Display", sans-serif' }}
+          className="font-black text-[clamp(50px,7vw,96px)] uppercase leading-[0.9]"
         >
-          <h2 className="text-3xl lg:text-4xl font-bold mb-4">
-            Technologies que{" "}
-            <span className="text-primary">j&apos;utilise</span>
-          </h2>
-          <p className="text-text-muted max-w-2xl mx-auto">
-            Les outils et technologies que j&apos;utilise pour créer des
-            applications web modernes
-          </p>
-        </motion.div>
+          <span className="text-[#f0f0ec]">TECH </span>
+          <span
+            style={{
+              color: 'transparent',
+              WebkitTextStroke: '2px #f0f0ec',
+            }}
+          >
+            STACK
+          </span>
+        </h2>
+      </div>
 
+      <div className="px-8 sm:px-12 lg:px-14 pb-24 sm:pb-28">
         {loading ? (
-          <div className="flex justify-center">
-            <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin" />
+          <div className="flex justify-center items-center py-20">
+            <span className="font-mono text-[12px] tracking-[0.2em] text-[#f0f0ec] uppercase">
+              Chargement...
+            </span>
           </div>
         ) : (
-          <div className="flex flex-wrap justify-center gap-4">
-            {(skills || []).map((skill, index) => (
-              <motion.div
-                key={skill._id || skill.name}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{
-                  opacity: 1,
-                  y: 0,
-                  boxShadow: [
-                    "0 0 0px rgba(34, 197, 94, 0)",
-                    "0 0 20px 3px rgba(34, 197, 94, 1)",
-                    "0 0 0px rgba(34, 197, 94, 0)",
-                  ],
-                }}
-                viewport={{ once: true }}
-                transition={{
-                  duration: 0.3,
-                  delay: index * 0.08,
-                  boxShadow: {
-                    duration: 0.3,
-                    delay: index * 0.08,
-                    times: [0, 1, 0.5],
-                  },
-                }}
-                className="group bg-surface-light border border-border rounded-lg hover:border-primary hover:shadow-glow transition-all duration-300 w-20 sm:w-24 h-20 sm:h-24 relative overflow-hidden"
-              >
-                <span className="absolute inset-0 flex items-center justify-center transition-all duration-300 group-hover:-translate-y-3 text-text group-hover:text-primary">
-                  {getIcon(skill)}
-                </span>
-                <span aria-hidden="true" className="text-xs text-text-light absolute inset-0 flex items-center justify-center opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-5 truncate px-1">
-                  {skill.name}
-                </span>
-              </motion.div>
-            ))}
+          <div className="relative">
+            {/* Animation de révélation - wrapper autour des skills uniquement */}
+            <SkillsReveal duration={4} />
+
+            <div className="flex flex-wrap justify-center gap-4 sm:gap-5 py-2">
+              {(skills || []).map((skill, index) => {
+                const colors = categoryColors[skill.category] || categoryColors.Other;
+                return (
+                  <motion.div
+                    key={skill._id || skill.name}
+                    initial={{ opacity: 1, scale: 1 }}
+                    whileHover={{
+                      boxShadow: colors.glow,
+                    }}
+                    transition={{
+                      duration: 0.3,
+                    }}
+                    className="group bg-[#0f100c] border border-[#1c1d14] transition-all duration-300 hover:border-[#c8f000]/50 w-20 h-20 sm:w-24 sm:h-24 relative"
+                    style={{
+                      clipPath: 'polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px))'
+                    }}
+                  >
+                    <span className={`absolute inset-0 flex items-center justify-center transition-all duration-300 group-hover:-translate-y-4 text-[#f0f0ec] ${colors.text}`}>
+                      {getIcon(skill)}
+                    </span>
+                    <span
+                      aria-hidden="true"
+                      className="text-[10px] sm:text-[11px] font-mono text-[#f0f0ec] absolute inset-0 flex items-center justify-center opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-6 truncate px-1"
+                    >
+                      {skill.name}
+                    </span>
+                  </motion.div>
+                );
+              })}
+            </div>
           </div>
         )}
       </div>

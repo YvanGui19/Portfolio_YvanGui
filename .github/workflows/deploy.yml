@@ -1,0 +1,43 @@
+name: Deploy to VPS
+
+on:
+  push:
+    branches:
+      - v2
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy to VPS via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          port: ${{ secrets.VPS_PORT || 22 }}
+          script: |
+            cd /var/www/portfolio
+
+            # Pull des dernières modifications
+            git fetch origin
+            git checkout v2
+            git pull origin v2
+
+            # Mise à jour des dépendances client
+            cd /var/www/portfolio/client
+            npm ci --production=false
+
+            # Rebuild du frontend
+            npm run build
+
+            # Mise à jour des dépendances serveur
+            cd /var/www/portfolio/server
+            npm ci --production
+
+            # Redémarrage de l'API
+            pm2 restart portfolio-api
+
+            echo "Deployment completed successfully!"

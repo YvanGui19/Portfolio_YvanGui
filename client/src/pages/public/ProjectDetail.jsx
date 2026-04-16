@@ -1,274 +1,204 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Helmet } from "react-helmet-async";
 import { useParams, Link } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { HiPhotograph, HiGlobeAlt } from "react-icons/hi";
 import { FaGithub } from "react-icons/fa";
 import projectService from "../../services/projectService";
 import useFetch from "../../hooks/useFetch";
-import Button from "../../components/common/Button";
-import Card from "../../components/common/Card";
 import { getImageUrl } from "../../utils/imageUrl";
 
 function ProjectDetail() {
   const { id } = useParams();
-  const {
-    data: project,
-    loading,
-    error,
-  } = useFetch(() => projectService.getById(id), [id]);
+  const { data: project, loading, error } = useFetch(() => projectService.getById(id), [id]);
+  const { data: allProjects } = useFetch(() => projectService.getAll());
   const [activeImageIndex, setActiveImageIndex] = useState(0);
+
+  const nextProject = useMemo(() => {
+    if (!allProjects || !id) return null;
+    const currentIndex = allProjects.findIndex((p) => p._id === id);
+    if (currentIndex === -1) return null;
+    return allProjects[(currentIndex + 1) % allProjects.length];
+  }, [allProjects, id]);
+
+  const prevProject = useMemo(() => {
+    if (!allProjects || !id) return null;
+    const currentIndex = allProjects.findIndex((p) => p._id === id);
+    if (currentIndex === -1) return null;
+    return allProjects[(currentIndex - 1 + allProjects.length) % allProjects.length];
+  }, [allProjects, id]);
 
   if (loading) {
     return (
-      <div className="pt-24 pb-20 flex justify-center items-center min-h-screen">
-        <div className="text-center">
-          <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-          <p className="text-text-muted">Chargement du projet...</p>
-        </div>
+      <div className="pt-24 pb-20 flex justify-center items-center min-h-screen bg-black">
+        <span className="text-editorial-label text-[#f0f0ec]">LOADING...</span>
       </div>
     );
   }
 
   if (error || !project) {
     return (
-      <div className="pt-24 pb-20 flex justify-center items-center min-h-screen">
-        <div className="text-center">
-          <h1 className="text-4xl font-bold text-primary mb-4">404</h1>
-          <p className="text-text-muted mb-8">Projet non trouvé</p>
-          <Button to="/projects">Retour aux projets</Button>
-        </div>
+      <div className="min-h-screen flex flex-col items-center justify-center bg-black px-4">
+        <span className="text-editorial-label text-[#FF3030] mb-4">ERROR 404</span>
+        <h1 className="text-editorial-display text-white mb-8">NOT FOUND</h1>
+        <Link
+          to="/projects"
+          className="text-editorial-label text-[#c8f000] border-b border-[#c8f000] pb-1"
+        >
+          ← BACK TO PROJECTS
+        </Link>
       </div>
     );
   }
 
   return (
-    <div className="pt-24 pb-20">
+    <div className="pt-20 pb-24 min-h-screen relative">
       <Helmet>
-        <title>{`${project.title} | Yvan Gui - Développeur Web`}</title>
+        <title>{project.title} | Yvan Gui</title>
         <meta name="description" content={project.description} />
-        <meta property="og:title" content={`${project.title} | Yvan Gui`} />
-        <meta property="og:description" content={project.description} />
-        <meta property="og:type" content="article" />
-        <meta property="og:url" content={`https://portfolio-yvan-gui.vercel.app/projects/${id}`} />
-        <meta property="og:site_name" content="Yvan Gui - Portfolio" />
-        <meta property="og:locale" content="fr_FR" />
-        {project.images?.[0] && (
-          <meta property="og:image" content={getImageUrl(project.images[0])} />
-        )}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={project.title} />
-        <meta name="twitter:description" content={project.description} />
-        {project.images?.[0] && (
-          <meta name="twitter:image" content={getImageUrl(project.images[0])} />
-        )}
-              <link rel="canonical" href={`https://portfolio-yvan-gui.vercel.app/projects/${id}`} />
       </Helmet>
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <div className="max-w-[1200px] mx-auto px-6 sm:px-8">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="mb-8"
-        >
-          <div className="flex flex-wrap items-center gap-3 mb-4">
-            <h1 className="text-4xl font-bold">{project.title}</h1>
-            <span className="px-3 py-1 text-sm bg-primary/10 text-primary rounded-full">
-              {project.category}
-            </span>
+        <div className="mb-12">
+          <span className="text-editorial-label text-[#c8f000] block mb-4">
+            {project.category}
+          </span>
+          <h1 className="text-editorial-display text-white mb-6">
+            {project.title}
+          </h1>
+          <p className="text-[#f0f0ec] text-lg max-w-2xl leading-relaxed">
+            {project.description}
+          </p>
+        </div>
+
+        {/* Gallery */}
+        <div className="mb-12 bg-[#0A0A0A]">
+          <div className="relative overflow-hidden">
+            {project.images?.length > 0 ? (
+              <AnimatePresence mode="wait">
+                <motion.img
+                  key={activeImageIndex}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                  src={getImageUrl(project.images[activeImageIndex])}
+                  alt={project.title}
+                  className="w-full aspect-video object-cover"
+                />
+              </AnimatePresence>
+            ) : (
+              <div className="w-full aspect-video flex items-center justify-center">
+                <HiPhotograph className="w-16 h-16 text-[#222222]" />
+              </div>
+            )}
+
+            {project.images?.length > 1 && (
+              <>
+                <button
+                  onClick={() => setActiveImageIndex((prev) => (prev === 0 ? project.images.length - 1 : prev - 1))}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/80 text-white flex items-center justify-center cursor-pointer hover:bg-[#c8f000] hover:text-black transition-colors"
+                  aria-label="Image précédente"
+                >
+                  ←
+                </button>
+                <button
+                  onClick={() => setActiveImageIndex((prev) => (prev === project.images.length - 1 ? 0 : prev + 1))}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/80 text-white flex items-center justify-center cursor-pointer hover:bg-[#c8f000] hover:text-black transition-colors"
+                  aria-label="Image suivante"
+                >
+                  →
+                </button>
+                <div className="absolute bottom-4 right-4 text-editorial-label text-white bg-black/80 px-3 py-1">
+                  {activeImageIndex + 1} / {project.images.length}
+                </div>
+              </>
+            )}
           </div>
-          <p className="text-text-muted text-lg">{project.description}</p>
-        </motion.div>
 
-        {/* Galerie d'images */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="mb-8"
-        >
-          {/* Image principale */}
-          <Card className="overflow-hidden mb-4">
-            <div className="relative h-64 md:h-96 bg-surface-light flex items-center justify-center">
-              {project.images?.length > 0 ? (
-                <AnimatePresence mode="wait">
-                  <motion.img
-                    key={activeImageIndex}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                    src={getImageUrl(project.images[activeImageIndex])}
-                    alt={`${project.title} - Image ${activeImageIndex + 1}`}
-                    className="w-full h-full object-cover"
-                  />
-                </AnimatePresence>
-              ) : (
-                <HiPhotograph className="w-20 h-20 text-text-muted" />
-              )}
-
-              {/* Navigation flèches */}
-              {project.images?.length > 1 && (
-                <>
-                  <button
-                    onClick={() =>
-                      setActiveImageIndex((prev) =>
-                        prev === 0 ? project.images.length - 1 : prev - 1
-                      )
-                    }
-                    className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-background/80 hover:bg-background rounded-full flex items-center justify-center text-text hover:text-primary transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary"
-                    aria-label="Image précédente"
-                  >
-                    <svg
-                      className="w-5 h-5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M15 19l-7-7 7-7"
-                      />
-                    </svg>
-                  </button>
-                  <button
-                    onClick={() =>
-                      setActiveImageIndex((prev) =>
-                        prev === project.images.length - 1 ? 0 : prev + 1
-                      )
-                    }
-                    className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-background/80 hover:bg-background rounded-full flex items-center justify-center text-text hover:text-primary transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary"
-                    aria-label="Image suivante"
-                  >
-                    <svg
-                      className="w-5 h-5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M9 5l7 7-7 7"
-                      />
-                    </svg>
-                  </button>
-                  {/* Compteur */}
-                  <div className="absolute bottom-4 right-4 px-3 py-1 bg-background/80 rounded-full text-sm text-text">
-                    {activeImageIndex + 1} / {project.images.length}
-                  </div>
-                </>
-              )}
-            </div>
-          </Card>
-
-          {/* Miniatures */}
           {project.images?.length > 1 && (
-            <div className="flex gap-3 overflow-x-auto pb-2">
+            <div className="flex gap-2 p-4 overflow-x-auto">
               {project.images.map((image, index) => (
                 <button
                   key={index}
                   onClick={() => setActiveImageIndex(index)}
-                  aria-label={`Afficher image ${index + 1}`}
-                  className={`flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 transition-all cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background ${
+                  className={`flex-shrink-0 w-20 h-14 overflow-hidden cursor-pointer border-2 transition-all ${
                     index === activeImageIndex
-                      ? "border-primary shadow-glow"
-                      : "border-transparent hover:border-primary/50"
+                      ? "border-[#c8f000]"
+                      : "border-transparent opacity-50 hover:opacity-100"
                   }`}
+                  aria-label={`Voir image ${index + 1} sur ${project.images.length}`}
+                  aria-current={index === activeImageIndex ? "true" : undefined}
                 >
-                  <img
-                    src={getImageUrl(image)}
-                    alt={`${project.title} - Miniature ${index + 1}`}
-                    className="w-full h-full object-cover" loading="lazy"
-                  />
+                  <img src={getImageUrl(image)} alt={`${project.title} - Image ${index + 1}`} className="w-full h-full object-cover" />
                 </button>
               ))}
             </div>
           )}
-        </motion.div>
+        </div>
 
-        {/* Contenu */}
-        <div className="grid md:grid-cols-3 gap-8">
-          {/* Description longue */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="md:col-span-2"
-          >
-            <Card className="p-6">
-              <h2 className="text-xl font-semibold mb-4">À propos du projet</h2>
-              <div className="text-text-light leading-relaxed space-y-4">
-                <p>{project.longDescription || project.description}</p>
+        {/* Content grid */}
+        <div className="grid md:grid-cols-3 gap-12">
+          {/* Main content */}
+          <div className="md:col-span-2 space-y-10">
+            {/* Description */}
+            <div className="border-l-2 border-[#c8f000] pl-6">
+              <h2 className="text-editorial-label text-[#c8f000] mb-4">DESCRIPTION</h2>
+              <p className="text-[#f0f0ec] leading-relaxed">
+                {project.longDescription || project.description}
+              </p>
+            </div>
+
+            {/* Challenges & Solutions */}
+            {project.challenges?.length > 0 && (
+              <div>
+                <div className="grid grid-cols-2 gap-8 mb-6">
+                  <h3 className="text-editorial-label text-[#c8f000]">CHALLENGES</h3>
+                  <h3 className="text-editorial-label text-[#c8f000]">SOLUTIONS</h3>
+                </div>
+                <div className="space-y-4">
+                  {project.challenges.map((c, i) => (
+                    <div key={i} className="grid grid-cols-2 gap-8">
+                      <p className="text-[#d0d0cc]">{c}</p>
+                      <p className="text-[#d0d0cc]">{project.solutions?.[i] || "—"}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
-
-              {project.challenges?.length > 0 && (
-                <>
-                  <h3 className="text-lg font-semibold mt-6 mb-3">
-                    Défis relevés
-                  </h3>
-                  <ul className="list-disc list-inside text-text-light space-y-2">
-                    {project.challenges.map((challenge, index) => (
-                      <li key={index}>{challenge}</li>
-                    ))}
-                  </ul>
-                </>
-              )}
-
-              {project.solutions?.length > 0 && (
-                <>
-                  <h3 className="text-lg font-semibold mt-6 mb-3">
-                    Solutions apportées
-                  </h3>
-                  <ul className="list-disc list-inside text-text-light space-y-2">
-                    {project.solutions.map((solution, index) => (
-                      <li key={index}>{solution}</li>
-                    ))}
-                  </ul>
-                </>
-              )}
-            </Card>
-          </motion.div>
+            )}
+          </div>
 
           {/* Sidebar */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="space-y-6"
-          >
+          <div className="space-y-8">
             {/* Technologies */}
-            <Card className="p-6">
-              <h3 className="text-lg font-semibold mb-4">Technologies</h3>
+            <div className="border-l-2 border-[#c8f000] pl-6">
+              <h3 className="text-editorial-label text-[#c8f000] mb-4">TECH STACK</h3>
               <div className="flex flex-wrap gap-2">
                 {project.technologies?.map((tech) => (
                   <span
                     key={tech}
-                    className="px-3 py-1 text-sm text-primary border border-primary/50 rounded-full"
+                    className="px-3 py-1 bg-[#1a1a1a] text-[#d0d0cc] text-sm"
                   >
                     {tech}
                   </span>
                 ))}
               </div>
-            </Card>
+            </div>
 
-            {/* Liens */}
-            <Card className="p-6">
-              <h3 className="text-lg font-semibold mb-4">Liens</h3>
+            {/* Links */}
+            <div>
+              <h3 className="text-editorial-label text-[#f0f0ec] mb-4">LINKS</h3>
               <div className="space-y-3">
                 {project.githubUrl && (
                   <a
                     href={project.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-3 text-text-muted hover:text-primary transition-colors"
+                    className="flex items-center gap-3 text-[#f0f0ec] hover:text-[#c8f000] transition-colors"
                   >
                     <FaGithub className="w-5 h-5" />
-                    <span>Code source (GitHub)</span>
+                    <span className="text-sm">GITHUB</span>
                   </a>
                 )}
                 {project.liveUrl && (
@@ -276,36 +206,55 @@ function ProjectDetail() {
                     href={project.liveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-3 text-text-muted hover:text-primary transition-colors"
+                    className="flex items-center gap-3 text-[#f0f0ec] hover:text-[#c8f000] transition-colors"
                   >
                     <HiGlobeAlt className="w-5 h-5" />
-                    <span>Voir le site</span>
+                    <span className="text-sm">LIVE DEMO</span>
                   </a>
                 )}
                 {!project.githubUrl && !project.liveUrl && (
-                  <p className="text-text-muted text-sm">
-                    Aucun lien disponible
-                  </p>
+                  <p className="text-[#f0f0ec] text-sm">No links available</p>
                 )}
               </div>
-            </Card>
-          </motion.div>
+            </div>
+          </div>
         </div>
 
-        {/* Retour aux projets */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="flex justify-end mt-8"
-        >
+        {/* Navigation */}
+        <div className="mt-16 pt-8 border-t border-white/10 flex justify-between items-center">
+          {prevProject ? (
+            <Link
+              to={`/projects/${prevProject._id}`}
+              className="group flex items-center gap-3 text-[#f0f0ec] hover:text-[#c8f000] transition-colors"
+            >
+              <span className="group-hover:-translate-x-1 transition-transform">←</span>
+              <span className="text-editorial-label hidden sm:inline">{prevProject.title}</span>
+              <span className="text-editorial-label sm:hidden">PREV</span>
+            </Link>
+          ) : (
+            <span />
+          )}
+
           <Link
             to="/projects"
-            className="text-text-muted hover:text-primary transition-colors"
+            className="text-editorial-label text-[#f0f0ec] hover:text-white transition-colors"
           >
-            Retour aux projets →
+            ALL PROJECTS
           </Link>
-        </motion.div>
+
+          {nextProject ? (
+            <Link
+              to={`/projects/${nextProject._id}`}
+              className="group flex items-center gap-3 text-[#c8f000] hover:text-white transition-colors"
+            >
+              <span className="text-editorial-label hidden sm:inline">{nextProject.title}</span>
+              <span className="text-editorial-label sm:hidden">NEXT</span>
+              <span className="group-hover:translate-x-1 transition-transform">→</span>
+            </Link>
+          ) : (
+            <span />
+          )}
+        </div>
       </div>
     </div>
   );
