@@ -4,6 +4,44 @@
 - VPS Ubuntu 22.04+ avec accès SSH
 - Minimum 1GB RAM (2GB recommandé pour MongoDB)
 
+---
+
+## CI/CD avec GitHub Actions
+
+Le projet inclut un workflow GitHub Actions qui déploie automatiquement sur le VPS à chaque push sur la branche `v2`.
+
+### Configuration des secrets GitHub
+
+1. Aller dans **Settings > Secrets and variables > Actions** de ton repo GitHub
+2. Ajouter les secrets suivants :
+
+| Secret | Description |
+|--------|-------------|
+| `VPS_HOST` | Adresse IP ou nom de domaine du VPS |
+| `VPS_USER` | Utilisateur SSH (ex: `root` ou `deploy`) |
+| `VPS_SSH_KEY` | Clé privée SSH (contenu complet du fichier) |
+| `VPS_PORT` | Port SSH (optionnel, défaut: 22) |
+
+### Générer une clé SSH dédiée
+
+```bash
+# Sur ta machine locale
+ssh-keygen -t ed25519 -C "github-actions-deploy" -f ~/.ssh/github_deploy_key
+
+# Copier la clé publique sur le VPS
+ssh-copy-id -i ~/.ssh/github_deploy_key.pub user@YOUR_VPS_IP
+
+# Le contenu de ~/.ssh/github_deploy_key (clé privée) va dans le secret VPS_SSH_KEY
+cat ~/.ssh/github_deploy_key
+```
+
+### Déclenchement
+
+- **Automatique** : à chaque push sur la branche `v2`
+- **Manuel** : depuis l'onglet Actions > "Deploy to VPS" > "Run workflow"
+
+---
+
 ## Déploiement initial
 
 ### 1. Connexion au VPS
