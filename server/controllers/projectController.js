@@ -1,5 +1,5 @@
 const Project = require('../models/Project');
-const { deleteFromCloudinary, deleteMultipleFromCloudinary } = require('../middlewares/upload');
+const { deleteMultipleImages } = require('../middlewares/upload');
 
 // @desc    Récupérer tous les projets
 // @route   GET /api/projects
@@ -69,9 +69,9 @@ exports.updateProject = async (req, res) => {
       const removedImages = currentProject.images.filter(
         (img) => !req.body.images.includes(img)
       );
-      // Supprimer les images retirées de Cloudinary
+      // Supprimer les fichiers images retirés
       if (removedImages.length > 0) {
-        await deleteMultipleFromCloudinary(removedImages);
+        await deleteMultipleImages(removedImages);
       }
     }
 
@@ -101,9 +101,9 @@ exports.deleteProject = async (req, res) => {
       return res.status(404).json({ message: 'Projet non trouvé' });
     }
 
-    // Supprimer les images de Cloudinary
+    // Supprimer les fichiers images locaux
     if (project.images && project.images.length > 0) {
-      await deleteMultipleFromCloudinary(project.images);
+      await deleteMultipleImages(project.images);
     }
 
     // Supprimer le projet

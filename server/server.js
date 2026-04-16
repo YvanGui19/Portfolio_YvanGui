@@ -26,8 +26,8 @@ app.use(helmet({
       scriptSrc: ["'self'"],
       styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
       fontSrc: ["'self'", "https://fonts.gstatic.com"],
-      // Images locales + Cloudinary (pour migration progressive)
-      imgSrc: ["'self'", "data:", "blob:", "https://res.cloudinary.com", "https://*.cloudinary.com"],
+      // Images stockées localement
+      imgSrc: ["'self'", "data:", "blob:"],
       connectSrc: ["'self'", process.env.CLIENT_URL || "http://localhost:5173"],
       frameSrc: ["'none'"],
       objectSrc: ["'none'"],

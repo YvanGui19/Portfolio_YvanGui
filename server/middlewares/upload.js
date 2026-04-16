@@ -75,11 +75,6 @@ const processImage = async (req, res, next) => {
 const getFilepathFromUrl = (url) => {
   if (!url) return null;
 
-  // Si c'est une URL Cloudinary, on ne peut pas la supprimer localement
-  if (url.includes('cloudinary.com')) {
-    return null;
-  }
-
   // Extraire le chemin relatif et construire le chemin absolu
   const relativePath = url.replace(/^\//, '');
   return path.join(__dirname, '..', relativePath);
@@ -112,16 +107,9 @@ const deleteMultipleImages = async (imageUrls) => {
   return results;
 };
 
-// Aliases pour compatibilité avec le code existant
-const deleteFromCloudinary = deleteLocalImage;
-const deleteMultipleFromCloudinary = deleteMultipleImages;
-
 module.exports = {
   upload,
   processImage,
   deleteLocalImage,
   deleteMultipleImages,
-  // Aliases pour compatibilité
-  deleteFromCloudinary,
-  deleteMultipleFromCloudinary,
 };
