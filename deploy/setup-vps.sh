@@ -168,11 +168,6 @@ MONGO_URI=mongodb://${MONGO_USER}:${MONGO_PASS}@127.0.0.1:27017/${MONGO_DB_NAME}
 JWT_SECRET=${JWT_SECRET}
 JWT_EXPIRES_IN=24h
 
-# Cloudinary (optionnel - pour les images)
-CLOUDINARY_CLOUD_NAME=
-CLOUDINARY_API_KEY=
-CLOUDINARY_API_SECRET=
-
 # Email (optionnel)
 EMAIL_HOST=
 EMAIL_PORT=
@@ -182,6 +177,12 @@ EMAIL_PASS=
 # URL du frontend
 CLIENT_URL=http://${VPS_IP}
 ENVEOF
+
+# Créer le dossier uploads avec les bonnes permissions
+print_step "Configuration du dossier uploads..."
+mkdir -p $APP_DIR/server/uploads/projects
+chown -R $USER:$USER $APP_DIR/server/uploads
+chmod -R 755 $APP_DIR/server/uploads
 
 print_step "Fichier .env créé avec MongoDB local configuré"
 

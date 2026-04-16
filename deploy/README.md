@@ -32,12 +32,14 @@ Le script configure automatiquement :
 ### 4. Accéder au site
 Ouvrir `http://YOUR_VPS_IP` dans le navigateur.
 
-### 5. (Optionnel) Configurer Cloudinary/Email
+### 5. (Optionnel) Configurer l'envoi d'emails
 ```bash
 nano /var/www/portfolio/server/.env
-# Ajouter tes clés Cloudinary si tu utilises le stockage cloud
+# Ajouter tes identifiants SMTP si tu veux recevoir les messages du formulaire de contact
 pm2 restart portfolio-api
 ```
+
+**Note** : Les images sont stockées localement dans `/var/www/portfolio/server/uploads/` et servies par Nginx.
 
 ---
 

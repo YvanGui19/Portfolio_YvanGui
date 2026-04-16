@@ -1,6 +1,16 @@
 const multer = require('multer');
 const sharp = require('sharp');
-const cloudinary = require('../config/cloudinary');
+const path = require('path');
+const fs = require('fs');
+const crypto = require('crypto');
+
+// Dossier de stockage des images
+const UPLOADS_DIR = path.join(__dirname, '..', 'uploads', 'projects');
+
+// Créer le dossier s'il n'existe pas
+if (!fs.existsSync(UPLOADS_DIR)) {
+  fs.mkdirSync(UPLOADS_DIR, { recursive: true });
+}
 
 // Configuration du stockage en mémoire (pour traitement avec Sharp)
 const storage = multer.memoryStorage();
@@ -25,49 +35,35 @@ const upload = multer({
   },
 });
 
-// Upload vers Cloudinary depuis un buffer
-const uploadToCloudinary = (buffer) => {
-  return new Promise((resolve, reject) => {
-    const uploadStream = cloudinary.uploader.upload_stream(
-      {
-        folder: 'portfolio/projects',
-        format: 'webp',
-        transformation: [
-          { width: 1200, height: 800, crop: 'limit' },
-          { quality: 'auto:good' },
-        ],
-      },
-      (error, result) => {
-        if (error) reject(error);
-        else resolve(result);
-      }
-    );
-    uploadStream.end(buffer);
-  });
+// Générer un nom de fichier unique
+const generateFilename = () => {
+  const timestamp = Date.now();
+  const randomStr = crypto.randomBytes(8).toString('hex');
+  return `${timestamp}-${randomStr}.webp`;
 };
 
-// Middleware pour traiter et uploader l'image vers Cloudinary
+// Middleware pour traiter et sauvegarder l'image localement
 const processImage = async (req, res, next) => {
   if (!req.file) {
     return next();
   }
 
   try {
-    // Optimiser avec Sharp avant upload
-    const optimizedBuffer = await sharp(req.file.buffer)
+    const filename = generateFilename();
+    const filepath = path.join(UPLOADS_DIR, filename);
+
+    // Optimiser avec Sharp et sauvegarder
+    await sharp(req.file.buffer)
       .resize(1200, 800, {
         fit: 'inside',
         withoutEnlargement: true,
       })
       .webp({ quality: 80 })
-      .toBuffer();
+      .toFile(filepath);
 
-    // Upload vers Cloudinary
-    const result = await uploadToCloudinary(optimizedBuffer);
-
-    // Ajouter l'URL Cloudinary à la requête
-    req.file.filename = result.public_id;
-    req.file.path = result.secure_url;
+    // Ajouter le chemin relatif à la requête (pour stockage en BDD)
+    req.file.filename = filename;
+    req.file.path = `/uploads/projects/${filename}`;
 
     next();
   } catch (error) {
@@ -75,42 +71,57 @@ const processImage = async (req, res, next) => {
   }
 };
 
-// Extraire le public_id d'une URL Cloudinary
-const getPublicIdFromUrl = (url) => {
-  if (!url || !url.includes('cloudinary.com')) {
+// Extraire le chemin du fichier depuis l'URL
+const getFilepathFromUrl = (url) => {
+  if (!url) return null;
+
+  // Si c'est une URL Cloudinary, on ne peut pas la supprimer localement
+  if (url.includes('cloudinary.com')) {
     return null;
   }
-  // URL format: https://res.cloudinary.com/{cloud}/image/upload/v{version}/{folder}/{public_id}.{ext}
-  const matches = url.match(/\/upload\/(?:v\d+\/)?(.+)\.[^.]+$/);
-  return matches ? matches[1] : null;
+
+  // Extraire le chemin relatif et construire le chemin absolu
+  const relativePath = url.replace(/^\//, '');
+  return path.join(__dirname, '..', relativePath);
 };
 
-// Supprimer une image de Cloudinary
-const deleteFromCloudinary = async (imageUrl) => {
-  const publicId = getPublicIdFromUrl(imageUrl);
-  if (!publicId) {
+// Supprimer une image locale
+const deleteLocalImage = async (imageUrl) => {
+  const filepath = getFilepathFromUrl(imageUrl);
+  if (!filepath) {
     return false;
   }
+
   try {
-    await cloudinary.uploader.destroy(publicId);
-    return true;
+    if (fs.existsSync(filepath)) {
+      fs.unlinkSync(filepath);
+      return true;
+    }
+    return false;
   } catch (error) {
-    console.error('Erreur suppression Cloudinary:', error);
+    console.error('Erreur suppression image locale:', error);
     return false;
   }
 };
 
-// Supprimer plusieurs images de Cloudinary
-const deleteMultipleFromCloudinary = async (imageUrls) => {
+// Supprimer plusieurs images locales
+const deleteMultipleImages = async (imageUrls) => {
   const results = await Promise.all(
-    imageUrls.map((url) => deleteFromCloudinary(url))
+    imageUrls.map((url) => deleteLocalImage(url))
   );
   return results;
 };
 
+// Aliases pour compatibilité avec le code existant
+const deleteFromCloudinary = deleteLocalImage;
+const deleteMultipleFromCloudinary = deleteMultipleImages;
+
 module.exports = {
   upload,
   processImage,
+  deleteLocalImage,
+  deleteMultipleImages,
+  // Aliases pour compatibilité
   deleteFromCloudinary,
   deleteMultipleFromCloudinary,
 };

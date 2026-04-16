@@ -16,7 +16,7 @@ const app = express();
 
 // Middlewares de sécurité
 app.use(helmet({
-  // Permet le chargement cross-origin des ressources (images Cloudinary, etc.)
+  // Permet le chargement cross-origin des ressources
   crossOriginResourcePolicy: { policy: "cross-origin" },
 
   // Content Security Policy - adapté pour le portfolio
@@ -26,7 +26,8 @@ app.use(helmet({
       scriptSrc: ["'self'"],
       styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
       fontSrc: ["'self'", "https://fonts.gstatic.com"],
-      imgSrc: ["'self'", "data:", "https://res.cloudinary.com", "https://*.cloudinary.com"],
+      // Images locales + Cloudinary (pour migration progressive)
+      imgSrc: ["'self'", "data:", "blob:", "https://res.cloudinary.com", "https://*.cloudinary.com"],
       connectSrc: ["'self'", process.env.CLIENT_URL || "http://localhost:5173"],
       frameSrc: ["'none'"],
       objectSrc: ["'none'"],
