@@ -1,32 +1,32 @@
 # Portfolio - Yvan Gui
 
-Portfolio professionnel de developpeur web full stack, presentant mes projets, competences et parcours.
+Portfolio professionnel de développeur web full stack, présentant mes projets, compétences et parcours.
 
 [![Live Demo](https://img.shields.io/badge/demo-live-green)](https://yvangui.fr)
 [![React](https://img.shields.io/badge/React-19-blue)](https://react.dev/)
 [![Node.js](https://img.shields.io/badge/Node.js-Express-green)](https://nodejs.org/)
 [![MongoDB](https://img.shields.io/badge/MongoDB-Local-green)](https://www.mongodb.com/)
 
-## Demo
+## Démo
 
 - **Site** : [https://yvangui.fr](https://yvangui.fr)
 
-## Fonctionnalites
+## Fonctionnalités
 
 ### Public
 
-- Page d'accueil avec presentation et competences
-- Portfolio de projets avec filtres par categorie
-- Page detail projet avec galerie d'images
+- Page d'accueil avec présentation et compétences
+- Portfolio de projets avec filtres par catégorie
+- Page détail projet avec galerie d'images
 - Formulaire de contact
 - Mode CLI interactif (Easter egg)
 
 ### Admin
 
-- Authentification JWT securisee
+- Authentification JWT sécurisée
 - Gestion des projets (CRUD)
-- Gestion des competences
-- Gestion des experiences
+- Gestion des compétences
+- Gestion des expériences
 - Messagerie de contact
 
 ## Technologies
@@ -40,7 +40,7 @@ Portfolio professionnel de developpeur web full stack, presentant mes projets, c
 | Tailwind CSS  | 4       | Styles        |
 | Framer Motion | 12      | Animations    |
 | React Router  | 7       | Routing       |
-| Axios         | 1.13    | Requetes HTTP |
+| Axios         | 1.13    | Requêtes HTTP |
 | React Helmet  | 2       | SEO           |
 
 ### Backend
@@ -49,11 +49,11 @@ Portfolio professionnel de developpeur web full stack, presentant mes projets, c
 | ----------- | ------- | ---------------- |
 | Node.js     | 20+     | Runtime          |
 | Express     | 5       | Framework API    |
-| MongoDB     | 8       | Base de donnees  |
+| MongoDB     | 8       | Base de données  |
 | Mongoose    | 9       | ODM              |
 | JWT         | -       | Authentification |
 | Sharp       | -       | Optimisation images |
-| Helmet      | 8       | Securite HTTP    |
+| Helmet      | 8       | Sécurité HTTP    |
 
 ## Structure du projet
 
@@ -61,10 +61,10 @@ Portfolio professionnel de developpeur web full stack, presentant mes projets, c
 Portfolio/
 ├── client/                 # Frontend React
 │   ├── src/
-│   │   ├── components/     # Composants reutilisables
+│   │   ├── components/     # Composants réutilisables
 │   │   ├── pages/          # Pages (public & admin)
 │   │   ├── context/        # Contextes React
-│   │   ├── hooks/          # Hooks personnalises
+│   │   ├── hooks/          # Hooks personnalisés
 │   │   ├── services/       # Services API
 │   │   └── routes/         # Configuration routing
 │   ├── public/             # Assets statiques
@@ -72,30 +72,30 @@ Portfolio/
 │
 ├── server/                 # Backend Express
 │   ├── config/             # Configuration (DB)
-│   ├── controllers/        # Logique metier
+│   ├── controllers/        # Logique métier
 │   ├── middlewares/        # Middlewares (auth, upload)
-│   ├── models/             # Modeles Mongoose
+│   ├── models/             # Modèles Mongoose
 │   ├── routes/             # Routes API
-│   ├── uploads/            # Images uploadees
-│   └── server.js           # Point d'entree
+│   ├── uploads/            # Images uploadées
+│   └── server.js           # Point d'entrée
 │
-├── deploy/                 # Configuration deploiement VPS
+├── deploy/                 # Configuration déploiement VPS
 │   ├── setup-vps.sh        # Script installation VPS
-│   ├── update.sh           # Script mise a jour
+│   ├── update.sh           # Script mise à jour
 │   ├── nginx.conf          # Configuration Nginx
 │   └── ecosystem.config.js # Configuration PM2
 │
 └── .github/workflows/      # CI/CD GitHub Actions
-    └── deploy.yml          # Deploiement automatique
+    └── deploy.yml          # Déploiement automatique
 ```
 
 ## Installation locale
 
-### Prerequis
+### Prérequis
 
 - Node.js 20+
 - npm ou yarn
-- MongoDB installe localement
+- MongoDB installé localement
 
 ### 1. Cloner le projet
 
@@ -124,7 +124,7 @@ cp .env.example .env
 npm run dev
 ```
 
-### 4. Acceder a l'application
+### 4. Accéder à l'application
 
 - Frontend : http://localhost:5173
 - Backend : http://localhost:5000
@@ -164,22 +164,22 @@ PORT=5000
 NODE_ENV=development
 ```
 
-## Deploiement VPS
+## Déploiement VPS
 
-Le projet utilise GitHub Actions pour le deploiement automatique sur VPS.
+Le projet utilise GitHub Actions pour le déploiement automatique sur VPS.
 
 ### Configuration
 
 1. Configurer les secrets GitHub (Settings > Secrets > Actions) :
    - `VPS_HOST` : IP du VPS
    - `VPS_USER` : Utilisateur SSH
-   - `VPS_SSH_KEY` : Cle privee SSH
+   - `VPS_SSH_KEY` : Clé privée SSH
 
-2. Push sur `main` declenche le deploiement automatique
+2. Push sur `main` déclenche le déploiement automatique
 
-### Documentation complete
+### Documentation complète
 
-Voir [deploy/README.md](deploy/README.md) pour les instructions detaillees.
+Voir [deploy/README.md](deploy/README.md) pour les instructions détaillées.
 
 ## Optimisations
 
@@ -187,39 +187,39 @@ Voir [deploy/README.md](deploy/README.md) pour les instructions detaillees.
 
 - Code splitting avec React.lazy()
 - Lazy loading des images
-- Images optimisees avec Sharp (WebP)
-- Chunks separes (vendor, animations, utils)
+- Images optimisées avec Sharp (WebP)
+- Chunks séparés (vendor, animations, utils)
 
 ### SEO
 
 - Meta tags dynamiques (React Helmet)
 - Open Graph complet
 - Canonical URLs
-- Structure semantique HTML5
+- Structure sémantique HTML5
 
-### Accessibilite (WCAG)
+### Accessibilité (WCAG)
 
 - Skip link "Aller au contenu principal"
-- Navigation clavier complete
+- Navigation clavier complète
 - Attributs ARIA (aria-label, aria-pressed, aria-expanded)
-- Focus visible sur tous les elements interactifs
+- Focus visible sur tous les éléments interactifs
 - Alt text descriptifs sur les images
 - Structure de headings logique
 
-### Securite
+### Sécurité
 
 - Helmet.js (CSP, HSTS, X-Frame-Options)
 - Rate limiting
-- Validation des entrees
+- Validation des entrées
 - JWT HttpOnly cookies
-- CORS configure
+- CORS configuré
 
 ## Scripts disponibles
 
 ### Client
 
 ```bash
-npm run dev      # Serveur de developpement
+npm run dev      # Serveur de développement
 npm run build    # Build production
 npm run preview  # Preview du build
 npm run lint     # Linter ESLint
@@ -228,7 +228,7 @@ npm run lint     # Linter ESLint
 ### Server
 
 ```bash
-npm run dev      # Developpement avec nodemon
+npm run dev      # Développement avec nodemon
 npm start        # Production
 ```
 
@@ -237,23 +237,23 @@ npm start        # Production
 ### Public
 
 - `GET /api/projects` - Liste des projets
-- `GET /api/projects/:id` - Detail projet
-- `GET /api/skills` - Liste des competences
-- `GET /api/experiences` - Liste des experiences
+- `GET /api/projects/:id` - Détail projet
+- `GET /api/skills` - Liste des compétences
+- `GET /api/experiences` - Liste des expériences
 - `POST /api/contact` - Envoyer un message
 
-### Admin (authentifie)
+### Admin (authentifié)
 
 - `POST /api/auth/login` - Connexion
-- `POST /api/auth/logout` - Deconnexion
+- `POST /api/auth/logout` - Déconnexion
 - `CRUD /api/projects` - Gestion projets
-- `CRUD /api/skills` - Gestion competences
-- `CRUD /api/experiences` - Gestion experiences
-- `GET /api/messages` - Messages recus
+- `CRUD /api/skills` - Gestion compétences
+- `CRUD /api/experiences` - Gestion expériences
+- `GET /api/messages` - Messages reçus
 
 ## Auteur
 
-**Yvan Gui** - Developpeur Web Full Stack
+**Yvan Gui** - Développeur Web Full Stack
 
 - Portfolio : [yvangui.fr](https://yvangui.fr)
 - Email : yvan.gui19@gmail.com
@@ -261,4 +261,4 @@ npm start        # Production
 
 ## Licence
 
-Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de details.
+Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de détails.
