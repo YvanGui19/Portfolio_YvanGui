@@ -7,7 +7,7 @@
 set -e
 
 APP_DIR="/var/www/portfolio"
-BRANCH="v2"
+BRANCH="main"
 
 GREEN='\033[0;32m'
 NC='\033[0m'

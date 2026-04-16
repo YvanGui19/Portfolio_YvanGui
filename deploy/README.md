@@ -8,7 +8,7 @@
 
 ## CI/CD avec GitHub Actions
 
-Le projet inclut un workflow GitHub Actions qui déploie automatiquement sur le VPS à chaque push sur la branche `v2`.
+Le projet inclut un workflow GitHub Actions qui déploie automatiquement sur le VPS à chaque push sur la branche `main`.
 
 ### Configuration des secrets GitHub
 
@@ -37,7 +37,7 @@ cat ~/.ssh/github_deploy_key
 
 ### Déclenchement
 
-- **Automatique** : à chaque push sur la branche `v2`
+- **Automatique** : à chaque push sur la branche `main`
 - **Manuel** : depuis l'onglet Actions > "Deploy to VPS" > "Run workflow"
 
 ---
@@ -52,7 +52,7 @@ ssh user@YOUR_VPS_IP
 ### 2. Télécharger et exécuter le script
 ```bash
 # Télécharger le script de setup
-curl -O https://raw.githubusercontent.com/YvanGui19/Portfolio_YvanGui/v2/deploy/setup-vps.sh
+curl -O https://raw.githubusercontent.com/YvanGui19/Portfolio_YvanGui/main/deploy/setup-vps.sh
 
 # Rendre exécutable
 chmod +x setup-vps.sh
@@ -94,7 +94,7 @@ ssh user@YOUR_VPS_IP
 Ou manuellement :
 ```bash
 cd /var/www/portfolio
-git pull origin v2
+git pull origin main
 cd client && npm ci && npm run build
 cd ../server && npm ci
 pm2 restart portfolio-api
