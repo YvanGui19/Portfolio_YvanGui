@@ -1,8 +1,8 @@
 # Déploiement Portfolio sur VPS Ubuntu
 
 ## Prérequis
-- VPS Ubuntu 20.04+ avec accès SSH
-- Compte MongoDB Atlas (ou MongoDB local)
+- VPS Ubuntu 22.04+ avec accès SSH
+- Minimum 1GB RAM (2GB recommandé pour MongoDB)
 
 ## Déploiement initial
 
@@ -23,24 +23,21 @@ chmod +x setup-vps.sh
 ./setup-vps.sh
 ```
 
-### 3. Configurer l'environnement
+### 3. C'est prêt !
+Le script configure automatiquement :
+- MongoDB local avec authentification
+- JWT_SECRET généré automatiquement
+- CLIENT_URL avec l'IP du VPS
+
+### 4. Accéder au site
+Ouvrir `http://YOUR_VPS_IP` dans le navigateur.
+
+### 5. (Optionnel) Configurer Cloudinary/Email
 ```bash
-# Éditer le fichier .env du serveur
 nano /var/www/portfolio/server/.env
-```
-
-Variables à modifier :
-- `MONGO_URI` : Ta connexion MongoDB Atlas
-- `JWT_SECRET` : Générer avec `openssl rand -base64 32`
-- `CLIENT_URL` : `http://YOUR_VPS_IP`
-
-### 4. Redémarrer l'API
-```bash
+# Ajouter tes clés Cloudinary si tu utilises le stockage cloud
 pm2 restart portfolio-api
 ```
-
-### 5. Accéder au site
-Ouvrir `http://YOUR_VPS_IP` dans le navigateur.
 
 ---
 
@@ -83,6 +80,19 @@ sudo nginx -t                    # Tester la configuration
 sudo systemctl reload nginx      # Recharger la config
 sudo systemctl restart nginx     # Redémarrer
 sudo tail -f /var/log/nginx/error.log  # Logs d'erreur
+```
+
+### MongoDB
+```bash
+sudo systemctl status mongod     # État de MongoDB
+sudo systemctl restart mongod    # Redémarrer MongoDB
+mongosh                          # Shell MongoDB (sans auth)
+
+# Se connecter avec authentification
+mongosh "mongodb://portfolio_user:PASSWORD@127.0.0.1:27017/portfolio"
+
+# Voir les logs
+sudo tail -f /var/log/mongodb/mongod.log
 ```
 
 ### Logs
@@ -163,10 +173,18 @@ sudo tail -f /var/log/nginx/error.log
 
 ### Problème de connexion MongoDB
 ```bash
+# Vérifier que MongoDB tourne
+sudo systemctl status mongod
+
 # Vérifier le .env
 cat /var/www/portfolio/server/.env | grep MONGO
 
 # Tester la connexion manuellement
 cd /var/www/portfolio/server
-node -e "require('mongoose').connect(process.env.MONGO_URI).then(() => console.log('OK')).catch(console.error)"
+source .env
+mongosh "$MONGO_URI" --eval "db.stats()"
+
+# Si MongoDB ne démarre pas (erreur de mémoire)
+sudo systemctl restart mongod
+sudo journalctl -u mongod --no-pager -n 50
 ```

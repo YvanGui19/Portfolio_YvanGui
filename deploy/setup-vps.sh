@@ -2,6 +2,7 @@
 
 # ===========================================
 # Script de déploiement Portfolio sur VPS Ubuntu
+# Inclut: Node.js, Nginx, MongoDB, PM2
 # ===========================================
 
 set -e  # Arrêter en cas d'erreur
@@ -14,10 +15,14 @@ echo "=========================================="
 APP_DIR="/var/www/portfolio"
 REPO_URL="https://github.com/YvanGui19/Portfolio_YvanGui.git"
 BRANCH="v2"
+MONGO_DB_NAME="portfolio"
+MONGO_USER="portfolio_user"
+MONGO_PASS=$(openssl rand -base64 16 | tr -dc 'a-zA-Z0-9' | head -c 20)
 
 # Couleurs
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
+RED='\033[0;31m'
 NC='\033[0m'
 
 print_step() {
@@ -28,11 +33,81 @@ print_warning() {
     echo -e "${YELLOW}[WARNING]${NC} $1"
 }
 
+print_error() {
+    echo -e "${RED}[ERROR]${NC} $1"
+}
+
 # 1. Mise à jour système
 print_step "Mise à jour du système..."
 sudo apt update && sudo apt upgrade -y
 
-# 2. Installation des dépendances
+# 2. Installation de MongoDB 7.0
+print_step "Installation de MongoDB 7.0..."
+sudo apt install -y gnupg curl
+
+# Ajouter la clé GPG MongoDB
+curl -fsSL https://www.mongodb.org/static/pgp/server-7.0.asc | \
+   sudo gpg -o /usr/share/keyrings/mongodb-server-7.0.gpg --dearmor
+
+# Ajouter le repository MongoDB
+echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-7.0.gpg ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/7.0 multiverse" | \
+   sudo tee /etc/apt/sources.list.d/mongodb-org-7.0.list
+
+sudo apt update
+sudo apt install -y mongodb-org
+
+# Démarrer et activer MongoDB
+sudo systemctl start mongod
+sudo systemctl enable mongod
+
+# Attendre que MongoDB soit prêt
+sleep 3
+
+# Créer l'utilisateur admin et l'utilisateur de l'application
+print_step "Configuration de MongoDB..."
+mongosh --eval "
+use admin
+db.createUser({
+  user: 'admin',
+  pwd: '$(openssl rand -base64 16 | tr -dc 'a-zA-Z0-9' | head -c 20)',
+  roles: ['root']
+})
+
+use $MONGO_DB_NAME
+db.createUser({
+  user: '$MONGO_USER',
+  pwd: '$MONGO_PASS',
+  roles: [{ role: 'readWrite', db: '$MONGO_DB_NAME' }]
+})
+" || print_warning "Les utilisateurs MongoDB existent peut-être déjà"
+
+# Activer l'authentification MongoDB
+print_step "Activation de l'authentification MongoDB..."
+sudo tee /etc/mongod.conf > /dev/null << 'MONGOCONF'
+storage:
+  dbPath: /var/lib/mongodb
+  journal:
+    enabled: true
+
+systemLog:
+  destination: file
+  logAppend: true
+  path: /var/log/mongodb/mongod.log
+
+net:
+  port: 27017
+  bindIp: 127.0.0.1
+
+processManagement:
+  timeZoneInfo: /usr/share/zoneinfo
+
+security:
+  authorization: enabled
+MONGOCONF
+
+sudo systemctl restart mongod
+
+# 3. Installation de Node.js
 print_step "Installation de Node.js 20.x..."
 curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
 sudo apt install -y nodejs
@@ -79,27 +154,36 @@ npm run build
 
 # 7. Configuration de l'environnement
 print_step "Configuration de l'environnement serveur..."
-if [ ! -f "$APP_DIR/server/.env" ]; then
-    cat > $APP_DIR/server/.env << 'ENVEOF'
+JWT_SECRET=$(openssl rand -base64 32)
+VPS_IP=$(curl -s ifconfig.me || echo "YOUR_VPS_IP")
+
+cat > $APP_DIR/server/.env << ENVEOF
 NODE_ENV=production
 PORT=5000
 
-# MongoDB - Remplacer par ta connexion
-MONGODB_URI=mongodb+srv://user:password@cluster.mongodb.net/portfolio
+# MongoDB Local
+MONGO_URI=mongodb://${MONGO_USER}:${MONGO_PASS}@127.0.0.1:27017/${MONGO_DB_NAME}
 
-# JWT Secret - Générer un secret unique
-JWT_SECRET=CHANGE_ME_TO_A_SECURE_SECRET
+# JWT Secret (généré automatiquement)
+JWT_SECRET=${JWT_SECRET}
+JWT_EXPIRES_IN=24h
 
-# Cloudinary (optionnel)
+# Cloudinary (optionnel - pour les images)
 CLOUDINARY_CLOUD_NAME=
 CLOUDINARY_API_KEY=
 CLOUDINARY_API_SECRET=
 
+# Email (optionnel)
+EMAIL_HOST=
+EMAIL_PORT=
+EMAIL_USER=
+EMAIL_PASS=
+
 # URL du frontend
-CLIENT_URL=http://YOUR_VPS_IP
+CLIENT_URL=http://${VPS_IP}
 ENVEOF
-    print_warning "Fichier .env créé - MODIFIER LES VALEURS dans $APP_DIR/server/.env"
-fi
+
+print_step "Fichier .env créé avec MongoDB local configuré"
 
 # 8. Configuration Nginx
 print_step "Configuration de Nginx..."
