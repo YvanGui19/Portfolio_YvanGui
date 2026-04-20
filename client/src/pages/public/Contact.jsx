@@ -116,16 +116,6 @@ function Contact() {
                   </div>
                 </div>
 
-                {/* Status */}
-                <div className="flex items-start gap-4">
-                  <div className="w-5 h-5 flex items-center justify-center">
-                    <div className="w-2 h-2 rounded-full bg-lime" />
-                  </div>
-                  <div>
-                    <span className="font-mono text-[10px] tracking-[0.2em] text-[#f0f0ec]/60 block mb-1 uppercase">STATUS</span>
-                    <span className="text-lime text-sm font-mono">Disponible</span>
-                  </div>
-                </div>
               </div>
 
               {/* Artefact data strip */}
@@ -144,7 +134,6 @@ function Contact() {
 
               {/* Header terminal */}
               <div className="flex items-center gap-2 mb-6 pb-4 border-b border-lime/20">
-                <div className="w-2 h-2 rounded-full bg-lime animate-pulse" />
                 <span className="font-mono text-[10px] tracking-[0.2em] text-lime/80 uppercase">
                   message.new
                 </span>
