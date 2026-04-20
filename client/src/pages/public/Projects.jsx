@@ -1,7 +1,6 @@
 import { useState, useMemo } from "react";
 import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router-dom";
-import { HiPhotograph } from "react-icons/hi";
 import projectService from "../../services/projectService";
 import useFetch from "../../hooks/useFetch";
 import { getImageUrl } from "../../utils/imageUrl";
@@ -47,33 +46,64 @@ function Projects() {
       </Helmet>
 
       <div className="max-w-[1400px] mx-auto px-6 sm:px-8">
-        {/* Header */}
-        <div className="mb-12 sm:mb-16 pt-8">
+        {/* Header avec artefacts Marathon */}
+        <div className="mb-12 sm:mb-16 pt-8 relative">
+          {/* Artefacts décoratifs */}
+          <div className="marathon-diagonal-stripes-lime absolute -left-4 top-0 w-2 h-24 opacity-60" />
+          <div className="marathon-grid marathon-grid-lime absolute -right-4 top-4 w-16 h-16 opacity-30" />
+
+          {/* Numéro de section */}
+          <span className="font-mono text-[10px] tracking-[0.3em] text-lime/60 block mb-2">
+            [ 01 / PORTFOLIO ]
+          </span>
+
           <h1
             style={{ fontFamily: '"Big Shoulders Display", sans-serif' }}
             className="font-black text-[clamp(50px,10vw,120px)] text-[#f0f0ec] uppercase leading-[0.9] mb-4"
           >
             PROJETS
           </h1>
+
+          {/* Ligne décorative */}
+          <div className="flex items-center gap-4 mt-4">
+            <div className="h-[2px] w-16 bg-lime" />
+            <span className="font-mono text-[9px] tracking-[0.2em] text-[#f0f0ec]/40 uppercase">
+              Réalisations & Expériences
+            </span>
+          </div>
         </div>
 
-        {/* Filters */}
-        <div className="flex flex-wrap gap-4 sm:gap-8 mb-12 sm:mb-16">
-          {categories.map((category) => (
-            <button
-              key={category}
-              onClick={() => setActiveFilter(category)}
-              aria-pressed={activeFilter === category}
-              className={`font-mono text-[14px] sm:text-[16px] tracking-[0.15em] uppercase transition-colors cursor-pointer ${
-                activeFilter === category
-                  ? "text-[#C2FE0B]"
-                  : "text-[#f0f0ec] hover:text-[#f0f0ec]"
-              }`}
-            >
-              {category.toUpperCase()}
-            </button>
-          ))}
+        {/* Filters - Style terminal */}
+        <div className="relative mb-12 sm:mb-16 p-4 border border-lime/20 bg-[#0A0E1A]/80">
+          {/* Décoration coin */}
+          <div className="absolute -top-px -left-px w-3 h-3 border-t-2 border-l-2 border-lime" />
+          <div className="absolute -top-px -right-px w-3 h-3 border-t-2 border-r-2 border-lime" />
+          <div className="absolute -bottom-px -left-px w-3 h-3 border-b-2 border-l-2 border-lime" />
+          <div className="absolute -bottom-px -right-px w-3 h-3 border-b-2 border-r-2 border-lime" />
 
+          <div className="flex items-center gap-2 mb-3">
+            <span className="text-lime font-mono text-[10px]">▸</span>
+            <span className="font-mono text-[10px] tracking-[0.2em] text-[#f0f0ec]/60 uppercase">
+              Filtrer par catégorie
+            </span>
+          </div>
+
+          <div className="flex flex-wrap gap-4 sm:gap-6">
+            {categories.map((category) => (
+              <button
+                key={category}
+                onClick={() => setActiveFilter(category)}
+                aria-pressed={activeFilter === category}
+                className={`font-mono text-[12px] sm:text-[14px] tracking-[0.15em] uppercase transition-all cursor-pointer px-3 py-1 border ${
+                  activeFilter === category
+                    ? "text-[#0A0E1A] bg-lime border-lime shadow-[0_0_15px_rgba(194,254,11,0.4)]"
+                    : "text-[#f0f0ec] border-[#f0f0ec]/20 hover:border-lime/60 hover:text-lime"
+                }`}
+              >
+                {category.toUpperCase()}
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Grid */}
@@ -93,7 +123,7 @@ function Projects() {
                 tabIndex={0}
                 role="link"
                 aria-label={`Voir le projet ${project.title}`}
-                className="group relative cursor-pointer overflow-hidden h-[58vh] border-b-2 border-transparent hover:border-[#C2FE0B] transition-colors duration-300"
+                className="group relative cursor-pointer overflow-hidden h-[58vh] border border-lime/10 hover:border-lime/40 transition-all duration-300"
               >
                 {/* Fond */}
                 <div className="absolute inset-0 bg-[#0A0E1A]" />
@@ -104,7 +134,7 @@ function Projects() {
                     <img
                       src={getImageUrl(project.images[0])}
                       alt={project.title}
-                      className="w-full h-full object-cover opacity-40 transition-all duration-500 group-hover:opacity-60 group-hover:scale-[1.02]"
+                      className="w-full h-full object-cover opacity-30 transition-all duration-500 group-hover:opacity-50 group-hover:scale-[1.02]"
                       loading="lazy"
                     />
                   </div>
@@ -115,26 +145,48 @@ function Projects() {
                   className="absolute inset-0 z-[2] pointer-events-none"
                   style={{
                     background: `linear-gradient(to top,
-                      rgba(8, 9, 6, 0.97) 0%,
-                      rgba(8, 9, 6, 0.6) 38%,
-                      rgba(8, 9, 6, 0.05) 72%
+                      rgba(10, 14, 26, 0.98) 0%,
+                      rgba(10, 14, 26, 0.7) 40%,
+                      rgba(10, 14, 26, 0.2) 70%
                     )`,
                   }}
                 />
 
+                {/* CRT lines subtle effect */}
+                <div className="absolute inset-0 z-[3] pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500 hero-crt-lines" />
+
+                {/* Coins Marathon */}
+                <div className="absolute top-0 left-0 w-6 h-6 border-t-2 border-l-2 border-lime/40 group-hover:border-lime transition-colors z-[4]" />
+                <div className="absolute top-0 right-0 w-6 h-6 border-t-2 border-r-2 border-lime/40 group-hover:border-lime transition-colors z-[4]" />
+                <div className="absolute bottom-0 left-0 w-6 h-6 border-b-2 border-l-2 border-lime/40 group-hover:border-lime transition-colors z-[4]" />
+                <div className="absolute bottom-0 right-0 w-6 h-6 border-b-2 border-r-2 border-lime/40 group-hover:border-lime transition-colors z-[4]" />
+
+                {/* Data strip décorative */}
+                <div className="absolute top-4 left-4 z-[4] opacity-60 group-hover:opacity-100 transition-opacity">
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-lime animate-pulse" />
+                    <span className="font-mono text-[8px] tracking-[0.3em] text-lime/80 uppercase">
+                      {project.category || "Project"}
+                    </span>
+                  </div>
+                </div>
+
                 {/* Contenu */}
-                <div className="absolute bottom-0 left-0 right-0 z-[3] p-8 sm:p-10 flex justify-between items-end">
+                <div className="absolute bottom-0 left-0 right-0 z-[5] p-8 sm:p-10">
                   <div>
                     {/* Titre */}
                     <h2
                       style={{ fontFamily: '"Big Shoulders Display", sans-serif' }}
-                      className="font-black text-[clamp(28px,3.5vw,58px)] text-[#f0f0ec] uppercase leading-[0.92]"
+                      className="font-black text-[clamp(28px,3.5vw,58px)] text-[#f0f0ec] uppercase leading-[0.92] group-hover:text-lime transition-colors duration-300"
                     >
                       {project.title}
                     </h2>
 
+                    {/* Ligne de séparation */}
+                    <div className="w-12 h-[2px] bg-lime/40 group-hover:bg-lime group-hover:w-24 transition-all duration-300 mt-3" />
+
                     {/* Description */}
-                    <p className="font-mono text-[12px] text-[#f0f0ec] mt-3 max-w-md line-clamp-2 leading-[1.8]">
+                    <p className="font-mono text-[11px] text-[#f0f0ec]/80 mt-3 max-w-md line-clamp-2 leading-[1.8]">
                       {project.description}
                     </p>
 
@@ -143,23 +195,27 @@ function Projects() {
                       {project.technologies?.slice(0, 3).map((tech, i) => (
                         <span
                           key={i}
-                          className="font-mono text-[9px] tracking-[0.15em] text-[#f0f0ec] border border-[#1c1d14] px-3 py-1 uppercase transition-all duration-200 group-hover:border-[#6a7f00] group-hover:text-[#f0f0ec]"
+                          className="font-mono text-[9px] tracking-[0.15em] text-lime/70 border border-lime/30 px-3 py-1 uppercase transition-all duration-200 group-hover:border-lime group-hover:text-lime group-hover:shadow-[0_0_10px_rgba(194,254,11,0.2)]"
                         >
                           {tech}
                         </span>
                       ))}
                     </div>
                   </div>
+                </div>
 
-                                  </div>
-
-                {/* Numero decoratif */}
+                {/* Numero decoratif - style Marathon */}
                 <span
                   style={{ fontFamily: '"Big Shoulders Display", sans-serif' }}
-                  className="absolute top-6 right-6 font-black text-[64px] text-[#f0f0ec]/5 leading-none pointer-events-none z-[2]"
+                  className="absolute top-6 right-6 font-black text-[80px] text-lime/5 group-hover:text-lime/10 leading-none pointer-events-none z-[4] transition-colors"
                 >
                   {String(index + 1).padStart(2, "0")}
                 </span>
+
+                {/* Flèche indicative au hover */}
+                <div className="absolute bottom-8 right-8 z-[5] opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0">
+                  <span className="font-mono text-lime text-lg">→</span>
+                </div>
               </article>
             ))}
           </div>

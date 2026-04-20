@@ -41,50 +41,101 @@ function About() {
       </Helmet>
 
       <div className="max-w-[1200px] mx-auto px-6 sm:px-8">
-        {/* Header */}
-        <div className="mb-16 sm:mb-24 pt-8">
+        {/* Header avec artefacts Marathon */}
+        <div className="mb-16 sm:mb-24 pt-8 relative">
+          {/* Artefacts décoratifs */}
+          <div className="marathon-diagonal-stripes-lime absolute -left-4 top-0 w-2 h-24 opacity-60" />
+          <div className="marathon-grid marathon-grid-lime absolute -right-4 top-4 w-16 h-16 opacity-30" />
+
+          {/* Numéro de section */}
+          <span className="font-mono text-[10px] tracking-[0.3em] text-lime/60 block mb-2">
+            [ 02 / PROFIL ]
+          </span>
+
           <h1 className="text-editorial-display text-white">
             À PROPOS
           </h1>
+
+          {/* Ligne décorative */}
+          <div className="flex items-center gap-4 mt-4">
+            <div className="h-[2px] w-16 bg-lime" />
+            <span className="font-mono text-[9px] tracking-[0.2em] text-[#f0f0ec]/40 uppercase">
+              Parcours & Compétences
+            </span>
+          </div>
         </div>
 
         {/* Bio Section */}
         <div className="mb-20 sm:mb-28">
           <div className="grid lg:grid-cols-[1fr_300px] gap-12 lg:gap-16 items-center">
-            {/* Bio text */}
-            <div className="border-l-2 border-[#C2FE0B] pl-6 sm:pl-8 order-2 lg:order-1">
-              <p className="text-[#f0f0ec] text-lg sm:text-xl leading-relaxed mb-6">
-                Passionné par la technologie depuis toujours, j&apos;ai d&apos;abord construit ma carrière
-                dans l&apos;aéronautique. Pendant plus de dix ans, j&apos;ai travaillé sur des hélicoptères
-                et des avions.
-              </p>
-              <p className="text-[#d0d0cc] text-lg leading-relaxed mb-6">
-                Ces expériences m&apos;ont appris la précision, la rigueur et la fiabilité opérationnelle
-                dans des environnements exigeants.
-              </p>
-              <p className="text-[#d0d0cc] text-lg leading-relaxed">
-                Aujourd&apos;hui, je conçois des solutions web fiables et orientées utilisateur, avec la
-                même rigueur qui m&apos;a guidé dans l&apos;aéronautique.
-              </p>
+            {/* Bio text - Style terminal Marathon */}
+            <div className="relative order-2 lg:order-1">
+              {/* Container terminal */}
+              <div className="relative border border-lime/20 bg-[#0A0E1A]/60 p-6 sm:p-8">
+                {/* Coins décoratifs */}
+                <div className="absolute -top-px -left-px w-4 h-4 border-t-2 border-l-2 border-lime" />
+                <div className="absolute -top-px -right-px w-4 h-4 border-t-2 border-r-2 border-lime" />
+                <div className="absolute -bottom-px -left-px w-4 h-4 border-b-2 border-l-2 border-lime" />
+                <div className="absolute -bottom-px -right-px w-4 h-4 border-b-2 border-r-2 border-lime" />
+
+                {/* Header terminal */}
+                <div className="flex items-center gap-2 mb-6 pb-4 border-b border-lime/20">
+                  <div className="w-2 h-2 rounded-full bg-lime animate-pulse" />
+                  <span className="font-mono text-[10px] tracking-[0.2em] text-lime/80 uppercase">
+                    bio.profile
+                  </span>
+                </div>
+
+                <div className="border-l-2 border-lime pl-6">
+                  <p className="text-[#f0f0ec] text-lg sm:text-xl leading-relaxed mb-6">
+                    Passionné par la technologie depuis toujours, j&apos;ai d&apos;abord construit ma carrière
+                    dans l&apos;aéronautique. Pendant plus de dix ans, j&apos;ai travaillé sur des hélicoptères
+                    et des avions.
+                  </p>
+                  <p className="text-[#d0d0cc] text-lg leading-relaxed mb-6">
+                    Ces expériences m&apos;ont appris la précision, la rigueur et la fiabilité opérationnelle
+                    dans des environnements exigeants.
+                  </p>
+                  <p className="text-[#d0d0cc] text-lg leading-relaxed">
+                    Aujourd&apos;hui, je conçois des solutions web fiables et orientées utilisateur, avec la
+                    même rigueur qui m&apos;a guidé dans l&apos;aéronautique.
+                  </p>
+                </div>
+
+                {/* Artefact data strip */}
+                <div className="marathon-data-strip absolute -right-2 top-1/4 h-32 w-1 opacity-40" />
+              </div>
             </div>
 
             {/* Portrait */}
             <div className="flex justify-center lg:justify-end order-1 lg:order-2">
-              <SymbolPortrait
-                src="/images/profile.png"
-                width={300}
-                height={300}
-                gridStep={3}
-              />
+              <div className="relative">
+                {/* Cadre Marathon autour du portrait */}
+                <div className="absolute -inset-3 border border-lime/20" />
+                <div className="absolute -top-3 -left-3 w-4 h-4 border-t-2 border-l-2 border-lime" />
+                <div className="absolute -top-3 -right-3 w-4 h-4 border-t-2 border-r-2 border-lime" />
+                <div className="absolute -bottom-3 -left-3 w-4 h-4 border-b-2 border-l-2 border-lime" />
+                <div className="absolute -bottom-3 -right-3 w-4 h-4 border-b-2 border-r-2 border-lime" />
+                <SymbolPortrait
+                  src="/images/profile.png"
+                  width={300}
+                  height={300}
+                  gridStep={3}
+                />
+              </div>
             </div>
           </div>
         </div>
 
         {/* Timeline Section */}
         <div className="mb-20 sm:mb-28">
-          <h2 className="text-editorial-medium text-white mb-12">
-            PARCOURS
-          </h2>
+          <div className="flex items-center gap-4 mb-12">
+            <div className="marathon-diagonal-stripes-lime w-8 h-8 opacity-60" />
+            <h2 className="text-editorial-medium text-white">
+              PARCOURS
+            </h2>
+            <div className="flex-1 h-[1px] bg-gradient-to-r from-lime/40 to-transparent" />
+          </div>
 
           {loadingExp ? (
             <span className="text-editorial-label text-[#f0f0ec]">CHARGEMENT...</span>
@@ -169,9 +220,13 @@ function About() {
 
         {/* Skills Section */}
         <div className="mb-16">
-          <h2 className="text-editorial-medium text-white mb-12">
-            COMPÉTENCES
-          </h2>
+          <div className="flex items-center gap-4 mb-12">
+            <div className="marathon-grid marathon-grid-lime w-8 h-8 opacity-60" />
+            <h2 className="text-editorial-medium text-white">
+              COMPÉTENCES
+            </h2>
+            <div className="flex-1 h-[1px] bg-gradient-to-r from-lime/40 to-transparent" />
+          </div>
 
           {loadingSkills ? (
             <span className="text-editorial-label text-[#f0f0ec]">CHARGEMENT...</span>
@@ -196,17 +251,23 @@ function About() {
           )}
         </div>
 
-        {/* CTA */}
-        <div className="pt-16 text-center">
+        {/* CTA - Style Marathon */}
+        <div className="pt-16 text-center relative">
+          {/* Artefacts décoratifs */}
+          <div className="absolute left-1/4 top-1/2 -translate-y-1/2 marathon-diagonal-stripes-lime w-12 h-24 opacity-20" />
+          <div className="absolute right-1/4 top-1/2 -translate-y-1/2 marathon-diagonal-stripes-lime w-12 h-24 opacity-20" />
+
           <Link
             to="/projects"
-            className="inline-block bg-[#C2FE0B] text-[#0A0E1A] px-10 py-5 font-bold text-xl uppercase tracking-wide transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(200,240,0,0.4)]"
+            className="relative inline-block bg-lime text-[#0A0E1A] px-10 py-5 font-bold text-xl uppercase tracking-wide transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(194,254,11,0.5)] group"
             style={{
               fontFamily: '"Big Shoulders Display", sans-serif',
               clipPath: 'polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px))'
             }}
           >
-            VOIR MES PROJETS
+            <span className="relative z-10">VOIR MES PROJETS</span>
+            {/* Effet glitch au hover */}
+            <span className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-100" />
           </Link>
         </div>
       </div>
