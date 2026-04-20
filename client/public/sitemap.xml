@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://portfolio-yvan-gui.vercel.app/</loc>
+    <loc>https://yvangui.fr/</loc>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://portfolio-yvan-gui.vercel.app/projects</loc>
+    <loc>https://yvangui.fr/projects</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://portfolio-yvan-gui.vercel.app/about</loc>
+    <loc>https://yvangui.fr/about</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://portfolio-yvan-gui.vercel.app/contact</loc>
+    <loc>https://yvangui.fr/contact</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>

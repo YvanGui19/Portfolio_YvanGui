@@ -96,7 +96,6 @@ const techCategories = {
   Azure: "tools",
   GCP: "tools",
   "Google Cloud": "tools",
-  Vercel: "tools",
   Netlify: "tools",
   Heroku: "tools",
   Linux: "tools",
