@@ -67,7 +67,7 @@ function Projects() {
           {/* Ligne décorative */}
           <div className="flex items-center gap-4 mt-4">
             <div className="h-[2px] w-16 bg-lime" />
-            <span className="font-mono text-[9px] tracking-[0.2em] text-[#f0f0ec]/40 uppercase">
+            <span className="text-[#f0f0ec]/60 text-lg leading-relaxed">
               Réalisations & Expériences
             </span>
           </div>
