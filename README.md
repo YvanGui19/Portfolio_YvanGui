@@ -19,7 +19,7 @@ Portfolio professionnel de développeur web full stack, présentant mes projets,
 - Portfolio de projets avec filtres par catégorie
 - Page détail projet avec galerie d'images
 - Formulaire de contact
-- Mode CLI interactif (Easter egg)
+- Mode CLI interactif
 
 ### Admin
 
@@ -45,15 +45,15 @@ Portfolio professionnel de développeur web full stack, présentant mes projets,
 
 ### Backend
 
-| Technologie | Version | Usage            |
-| ----------- | ------- | ---------------- |
-| Node.js     | 20+     | Runtime          |
-| Express     | 5       | Framework API    |
-| MongoDB     | 8       | Base de données  |
-| Mongoose    | 9       | ODM              |
-| JWT         | -       | Authentification |
+| Technologie | Version | Usage               |
+| ----------- | ------- | ------------------- |
+| Node.js     | 20+     | Runtime             |
+| Express     | 5       | Framework API       |
+| MongoDB     | 8       | Base de données     |
+| Mongoose    | 9       | ODM                 |
+| JWT         | -       | Authentification    |
 | Sharp       | -       | Optimisation images |
-| Helmet      | 8       | Sécurité HTTP    |
+| Helmet      | 8       | Sécurité HTTP       |
 
 ## Structure du projet
 
