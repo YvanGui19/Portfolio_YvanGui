@@ -74,15 +74,15 @@ function Projects() {
         </div>
 
         {/* Filters - Style terminal */}
-        <div className="relative mb-12 sm:mb-16 p-4 border border-lime/20 bg-[#0A0E1A]/80">
+        <div className="relative mb-12 sm:mb-16 p-4 border border-cyan/20 bg-[#0A0E1A]/80">
           {/* Décoration coin */}
-          <div className="absolute -top-px -left-px w-3 h-3 border-t-2 border-l-2 border-lime" />
-          <div className="absolute -top-px -right-px w-3 h-3 border-t-2 border-r-2 border-lime" />
-          <div className="absolute -bottom-px -left-px w-3 h-3 border-b-2 border-l-2 border-lime" />
-          <div className="absolute -bottom-px -right-px w-3 h-3 border-b-2 border-r-2 border-lime" />
+          <div className="absolute -top-px -left-px w-3 h-3 border-t-2 border-l-2 border-cyan" />
+          <div className="absolute -top-px -right-px w-3 h-3 border-t-2 border-r-2 border-cyan" />
+          <div className="absolute -bottom-px -left-px w-3 h-3 border-b-2 border-l-2 border-cyan" />
+          <div className="absolute -bottom-px -right-px w-3 h-3 border-b-2 border-r-2 border-cyan" />
 
           <div className="flex items-center gap-2 mb-3">
-            <span className="text-lime font-mono text-[10px]">▸</span>
+            <span className="text-cyan font-mono text-[10px]">▸</span>
             <span className="font-mono text-[10px] tracking-[0.2em] text-[#f0f0ec]/60 uppercase">
               Filtrer par catégorie
             </span>
@@ -96,8 +96,8 @@ function Projects() {
                 aria-pressed={activeFilter === category}
                 className={`font-mono text-[12px] sm:text-[14px] tracking-[0.15em] uppercase transition-all cursor-pointer px-3 py-1 border ${
                   activeFilter === category
-                    ? "text-[#0A0E1A] bg-lime border-lime shadow-[0_0_15px_rgba(194,254,11,0.4)]"
-                    : "text-[#f0f0ec] border-[#f0f0ec]/20 hover:border-lime/60 hover:text-lime"
+                    ? "text-[#0A0E1A] bg-cyan border-cyan shadow-[0_0_15px_rgba(1,255,255,0.4)]"
+                    : "text-[#f0f0ec] border-[#f0f0ec]/20 hover:border-cyan/60 hover:text-cyan"
                 }`}
               >
                 {category.toUpperCase()}
@@ -164,8 +164,8 @@ function Projects() {
                 {/* Data strip décorative */}
                 <div className="absolute top-4 left-4 z-[4] opacity-60 group-hover:opacity-100 transition-opacity">
                   <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-lime animate-pulse" />
-                    <span className="font-mono text-[8px] tracking-[0.3em] text-lime/80 uppercase">
+                    <div className="w-2 h-2 bg-cyan" />
+                    <span className="font-mono text-[8px] tracking-[0.3em] text-cyan/80 uppercase">
                       {project.category || "Project"}
                     </span>
                   </div>

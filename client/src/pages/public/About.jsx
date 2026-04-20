@@ -120,6 +120,7 @@ function About() {
                   width={300}
                   height={300}
                   gridStep={3}
+                  colorLight="#01FFFF"
                 />
               </div>
             </div>
@@ -167,7 +168,7 @@ function About() {
                   <div className="text-right mt-6">
                     <button
                       onClick={() => setShowAllExperiences(!showAllExperiences)}
-                      className="px-3 py-1.5 text-[10px] font-mono tracking-wider uppercase border border-[#C2FE0B] text-[#C2FE0B] hover:bg-[#C2FE0B] hover:text-[#0A0E1A] transition-all cursor-pointer"
+                      className="px-3 py-1.5 text-[10px] font-mono tracking-wider uppercase border border-cyan text-cyan hover:bg-cyan hover:text-[#0A0E1A] transition-all cursor-pointer"
                       aria-expanded={showAllExperiences}
                       aria-label={showAllExperiences ? "Réduire la liste des expériences" : "Voir toutes les expériences"}
                     >
@@ -204,7 +205,7 @@ function About() {
                   <div className="text-right mt-6">
                     <button
                       onClick={() => setShowAllEducation(!showAllEducation)}
-                      className="px-3 py-1.5 text-[10px] font-mono tracking-wider uppercase border border-[#C2FE0B] text-[#C2FE0B] hover:bg-[#C2FE0B] hover:text-[#0A0E1A] transition-all cursor-pointer"
+                      className="px-3 py-1.5 text-[10px] font-mono tracking-wider uppercase border border-cyan text-cyan hover:bg-cyan hover:text-[#0A0E1A] transition-all cursor-pointer"
                       aria-expanded={showAllEducation}
                       aria-label={showAllEducation ? "Réduire la liste des formations" : "Voir toutes les formations"}
                     >

@@ -116,19 +116,19 @@ function ProjectDetail() {
                 <>
                   <button
                     onClick={() => setActiveImageIndex((prev) => (prev === 0 ? project.images.length - 1 : prev - 1))}
-                    className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 border border-lime/40 bg-[#0A0E1A]/90 text-lime flex items-center justify-center cursor-pointer hover:bg-lime hover:text-[#0A0E1A] hover:shadow-[0_0_20px_rgba(194,254,11,0.4)] transition-all"
+                    className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 border border-cyan/40 bg-[#0A0E1A]/90 text-cyan flex items-center justify-center cursor-pointer hover:bg-cyan hover:text-[#0A0E1A] hover:shadow-[0_0_20px_rgba(1,255,255,0.4)] transition-all"
                     aria-label="Image précédente"
                   >
                     ←
                   </button>
                   <button
                     onClick={() => setActiveImageIndex((prev) => (prev === project.images.length - 1 ? 0 : prev + 1))}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 border border-lime/40 bg-[#0A0E1A]/90 text-lime flex items-center justify-center cursor-pointer hover:bg-lime hover:text-[#0A0E1A] hover:shadow-[0_0_20px_rgba(194,254,11,0.4)] transition-all"
+                    className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 border border-cyan/40 bg-[#0A0E1A]/90 text-cyan flex items-center justify-center cursor-pointer hover:bg-cyan hover:text-[#0A0E1A] hover:shadow-[0_0_20px_rgba(1,255,255,0.4)] transition-all"
                     aria-label="Image suivante"
                   >
                     →
                   </button>
-                  <div className="absolute bottom-4 right-4 font-mono text-[10px] tracking-[0.2em] text-lime bg-[#0A0E1A]/90 border border-lime/40 px-4 py-2 uppercase">
+                  <div className="absolute bottom-4 right-4 font-mono text-[10px] tracking-[0.2em] text-cyan bg-[#0A0E1A]/90 border border-cyan/40 px-4 py-2 uppercase">
                     {String(activeImageIndex + 1).padStart(2, "0")} / {String(project.images.length).padStart(2, "0")}
                   </div>
                 </>
