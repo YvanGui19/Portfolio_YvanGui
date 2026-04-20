@@ -100,7 +100,7 @@ export const StripeHeader = memo(function StripeHeader({
         <div
           className="relative z-10 flex items-center justify-center h-full px-4"
           style={{
-            backgroundColor: 'rgba(10, 14, 26, 0.7)',
+            backgroundColor: 'rgba(0, 0, 0, 0.7)',
             backdropFilter: 'blur(4px)',
           }}
         >

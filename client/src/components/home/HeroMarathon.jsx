@@ -38,14 +38,14 @@ function HeroMarathon() {
         <div className="hero-crt-lines absolute inset-0 opacity-[0.03]" />
       </div>
 
-      {/* Zone de contenu avec fond localisé style VerrouPass */}
+      {/* Zone de contenu avec fond localisé */}
       <div
         className="flex-1 flex items-center relative z-10 w-full"
         style={{
           background: `linear-gradient(to top,
-            rgba(10, 14, 26, 0.95) 0%,
-            rgba(10, 14, 26, 0.85) 40%,
-            rgba(10, 14, 26, 0.4) 70%,
+            rgba(0, 0, 0, 0.95) 0%,
+            rgba(0, 0, 0, 0.85) 40%,
+            rgba(0, 0, 0, 0.4) 70%,
             transparent 100%
           )`,
         }}

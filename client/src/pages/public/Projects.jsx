@@ -145,9 +145,9 @@ function Projects() {
                   className="absolute inset-0 z-[2] pointer-events-none"
                   style={{
                     background: `linear-gradient(to top,
-                      rgba(10, 14, 26, 0.98) 0%,
-                      rgba(10, 14, 26, 0.7) 40%,
-                      rgba(10, 14, 26, 0.2) 70%
+                      rgba(0, 0, 0, 0.98) 0%,
+                      rgba(0, 0, 0, 0.7) 40%,
+                      rgba(0, 0, 0, 0.2) 70%
                     )`,
                   }}
                 />
