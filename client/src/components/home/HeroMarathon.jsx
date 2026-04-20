@@ -6,18 +6,18 @@ import { HeroBackground } from "../canvas";
 
 function HeroMarathon() {
   return (
-    <section className="min-h-screen bg-[#080906] relative overflow-hidden flex flex-col">
+    <section className="min-h-screen bg-[#0A0E1A] relative overflow-hidden flex flex-col">
       {/* Fond Canvas procedural */}
       <HeroBackground className="opacity-90" />
 
-      {/* Zone de contenu avec fond localisé style Marathon */}
+      {/* Zone de contenu avec fond localisé style VerrouPass */}
       <div
         className="flex-1 flex items-center relative z-10 w-full"
         style={{
           background: `linear-gradient(to top,
-            rgba(8, 9, 6, 0.95) 0%,
-            rgba(8, 9, 6, 0.85) 40%,
-            rgba(8, 9, 6, 0.4) 70%,
+            rgba(10, 14, 26, 0.95) 0%,
+            rgba(10, 14, 26, 0.85) 40%,
+            rgba(10, 14, 26, 0.4) 70%,
             transparent 100%
           )`,
         }}
@@ -41,7 +41,7 @@ function HeroMarathon() {
                 style={{
                   fontFamily: '"Big Shoulders Display", sans-serif',
                   color: 'transparent',
-                  WebkitTextStroke: '2px #c8f000',
+                  WebkitTextStroke: '2px #C2FE0B',
                   fontWeight: 900,
                 }}
               >
@@ -49,20 +49,20 @@ function HeroMarathon() {
               </span>
             </h1>
 
-            {/* Description - Style Marathon avec coins coupés */}
+            {/* Description - Style VerrouPass avec coins coupés et glow */}
             <div
-              className="max-w-[400px] lg:mt-[clamp(77px,11.5vw,172px)] bg-[#c8f000] p-6 sm:p-8"
+              className="max-w-[400px] lg:mt-[clamp(77px,11.5vw,172px)] bg-[#C2FE0B] p-6 sm:p-8 shadow-[0_0_30px_rgba(194,254,11,0.3)]"
               style={{
                 clipPath: 'polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px))'
               }}
             >
               <p
                 style={{ fontFamily: '"Big Shoulders Display", sans-serif' }}
-                className="text-[#080906] text-[20px] sm:text-[24px] font-bold uppercase leading-[1.1] mb-3"
+                className="text-[#0A0E1A] text-[20px] sm:text-[24px] font-bold uppercase leading-[1.1] mb-3"
               >
                 Développeur Web Full Stack
               </p>
-              <p className="font-mono text-[13px] sm:text-[14px] leading-[1.7] text-[#080906]/80">
+              <p className="font-mono text-[13px] sm:text-[14px] leading-[1.7] text-[#0A0E1A]/80">
                 Ancien expert technique dans l'aéronautique, j'ai choisi de mettre mes compétences d'analyse, de rigueur et de résolution de problèmes au service du développement web.
               </p>
             </div>

@@ -10,8 +10,8 @@ const SymbolPortrait = memo(function SymbolPortrait({
   width = 280,
   height = 350,
   gridStep = 4,
-  colorLight = '#c8f000',
-  colorDark = '#080906',
+  colorLight = '#C2FE0B',
+  colorDark = '#0A0E1A',
   className = '',
 }) {
   const canvasRef = useRef(null);
@@ -106,10 +106,10 @@ const SymbolPortrait = memo(function SymbolPortrait({
   return (
     <div className={`relative ${className}`}>
       {/* Corner brackets */}
-      <div className="absolute -top-2 -left-2 w-6 h-6 border-t-2 border-l-2 border-[#c8f000]" />
-      <div className="absolute -top-2 -right-2 w-6 h-6 border-t-2 border-r-2 border-[#c8f000]" />
-      <div className="absolute -bottom-2 -left-2 w-6 h-6 border-b-2 border-l-2 border-[#c8f000]" />
-      <div className="absolute -bottom-2 -right-2 w-6 h-6 border-b-2 border-r-2 border-[#c8f000]" />
+      <div className="absolute -top-2 -left-2 w-6 h-6 border-t-2 border-l-2 border-[#C2FE0B]" />
+      <div className="absolute -top-2 -right-2 w-6 h-6 border-t-2 border-r-2 border-[#C2FE0B]" />
+      <div className="absolute -bottom-2 -left-2 w-6 h-6 border-b-2 border-l-2 border-[#C2FE0B]" />
+      <div className="absolute -bottom-2 -right-2 w-6 h-6 border-b-2 border-r-2 border-[#C2FE0B]" />
 
       <canvas
         ref={canvasRef}

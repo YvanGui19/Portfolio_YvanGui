@@ -21,7 +21,7 @@ function Projects() {
 
   if (loading) {
     return (
-      <div className="pt-24 pb-20 flex justify-center items-center min-h-screen bg-[#080906]">
+      <div className="pt-24 pb-20 flex justify-center items-center min-h-screen bg-[#0A0E1A]">
         <span className="font-mono text-[10px] tracking-[0.2em] text-[#f0f0ec] uppercase">
           LOADING...
         </span>
@@ -31,7 +31,7 @@ function Projects() {
 
   if (error) {
     return (
-      <div className="pt-24 pb-20 flex justify-center items-center min-h-screen bg-[#080906]">
+      <div className="pt-24 pb-20 flex justify-center items-center min-h-screen bg-[#0A0E1A]">
         <span className="font-mono text-[10px] tracking-[0.2em] text-[#FF3030] uppercase">
           ERROR
         </span>
@@ -66,7 +66,7 @@ function Projects() {
               aria-pressed={activeFilter === category}
               className={`font-mono text-[14px] sm:text-[16px] tracking-[0.15em] uppercase transition-colors cursor-pointer ${
                 activeFilter === category
-                  ? "text-[#c8f000]"
+                  ? "text-[#C2FE0B]"
                   : "text-[#f0f0ec] hover:text-[#f0f0ec]"
               }`}
             >
@@ -93,10 +93,10 @@ function Projects() {
                 tabIndex={0}
                 role="link"
                 aria-label={`Voir le projet ${project.title}`}
-                className="group relative cursor-pointer overflow-hidden h-[58vh] border-b-2 border-transparent hover:border-[#c8f000] transition-colors duration-300"
+                className="group relative cursor-pointer overflow-hidden h-[58vh] border-b-2 border-transparent hover:border-[#C2FE0B] transition-colors duration-300"
               >
                 {/* Fond */}
-                <div className="absolute inset-0 bg-[#080906]" />
+                <div className="absolute inset-0 bg-[#0A0E1A]" />
 
                 {/* Image si disponible */}
                 {project.images?.[0] && (

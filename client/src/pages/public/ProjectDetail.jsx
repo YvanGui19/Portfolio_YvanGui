@@ -43,7 +43,7 @@ function ProjectDetail() {
         <h1 className="text-editorial-display text-white mb-8">NOT FOUND</h1>
         <Link
           to="/projects"
-          className="text-editorial-label text-[#c8f000] border-b border-[#c8f000] pb-1"
+          className="text-editorial-label text-[#C2FE0B] border-b border-[#C2FE0B] pb-1"
         >
           ← BACK TO PROJECTS
         </Link>
@@ -61,7 +61,7 @@ function ProjectDetail() {
       <div className="max-w-[1200px] mx-auto px-6 sm:px-8">
         {/* Header */}
         <div className="mb-12">
-          <span className="text-editorial-label text-[#c8f000] block mb-4">
+          <span className="text-editorial-label text-[#C2FE0B] block mb-4">
             {project.category}
           </span>
           <h1 className="text-editorial-display text-white mb-6">
@@ -98,14 +98,14 @@ function ProjectDetail() {
               <>
                 <button
                   onClick={() => setActiveImageIndex((prev) => (prev === 0 ? project.images.length - 1 : prev - 1))}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/80 text-white flex items-center justify-center cursor-pointer hover:bg-[#c8f000] hover:text-black transition-colors"
+                  className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/80 text-white flex items-center justify-center cursor-pointer hover:bg-[#C2FE0B] hover:text-black transition-colors"
                   aria-label="Image précédente"
                 >
                   ←
                 </button>
                 <button
                   onClick={() => setActiveImageIndex((prev) => (prev === project.images.length - 1 ? 0 : prev + 1))}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/80 text-white flex items-center justify-center cursor-pointer hover:bg-[#c8f000] hover:text-black transition-colors"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-black/80 text-white flex items-center justify-center cursor-pointer hover:bg-[#C2FE0B] hover:text-black transition-colors"
                   aria-label="Image suivante"
                 >
                   →
@@ -125,7 +125,7 @@ function ProjectDetail() {
                   onClick={() => setActiveImageIndex(index)}
                   className={`flex-shrink-0 w-20 h-14 overflow-hidden cursor-pointer border-2 transition-all ${
                     index === activeImageIndex
-                      ? "border-[#c8f000]"
+                      ? "border-[#C2FE0B]"
                       : "border-transparent opacity-50 hover:opacity-100"
                   }`}
                   aria-label={`Voir image ${index + 1} sur ${project.images.length}`}
@@ -143,8 +143,8 @@ function ProjectDetail() {
           {/* Main content */}
           <div className="md:col-span-2 space-y-10">
             {/* Description */}
-            <div className="border-l-2 border-[#c8f000] pl-6">
-              <h2 className="text-editorial-label text-[#c8f000] mb-4">DESCRIPTION</h2>
+            <div className="border-l-2 border-[#C2FE0B] pl-6">
+              <h2 className="text-editorial-label text-[#C2FE0B] mb-4">DESCRIPTION</h2>
               <p className="text-[#f0f0ec] leading-relaxed">
                 {project.longDescription || project.description}
               </p>
@@ -154,8 +154,8 @@ function ProjectDetail() {
             {project.challenges?.length > 0 && (
               <div>
                 <div className="grid grid-cols-2 gap-8 mb-6">
-                  <h3 className="text-editorial-label text-[#c8f000]">CHALLENGES</h3>
-                  <h3 className="text-editorial-label text-[#c8f000]">SOLUTIONS</h3>
+                  <h3 className="text-editorial-label text-[#C2FE0B]">CHALLENGES</h3>
+                  <h3 className="text-editorial-label text-[#C2FE0B]">SOLUTIONS</h3>
                 </div>
                 <div className="space-y-4">
                   {project.challenges.map((c, i) => (
@@ -172,8 +172,8 @@ function ProjectDetail() {
           {/* Sidebar */}
           <div className="space-y-8">
             {/* Technologies */}
-            <div className="border-l-2 border-[#c8f000] pl-6">
-              <h3 className="text-editorial-label text-[#c8f000] mb-4">TECH STACK</h3>
+            <div className="border-l-2 border-[#C2FE0B] pl-6">
+              <h3 className="text-editorial-label text-[#C2FE0B] mb-4">TECH STACK</h3>
               <div className="flex flex-wrap gap-2">
                 {project.technologies?.map((tech) => (
                   <span
@@ -195,7 +195,7 @@ function ProjectDetail() {
                     href={project.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-3 text-[#f0f0ec] hover:text-[#c8f000] transition-colors"
+                    className="flex items-center gap-3 text-[#f0f0ec] hover:text-[#C2FE0B] transition-colors"
                   >
                     <FaGithub className="w-5 h-5" />
                     <span className="text-sm">GITHUB</span>
@@ -206,7 +206,7 @@ function ProjectDetail() {
                     href={project.liveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-3 text-[#f0f0ec] hover:text-[#c8f000] transition-colors"
+                    className="flex items-center gap-3 text-[#f0f0ec] hover:text-[#C2FE0B] transition-colors"
                   >
                     <HiGlobeAlt className="w-5 h-5" />
                     <span className="text-sm">LIVE DEMO</span>
@@ -225,7 +225,7 @@ function ProjectDetail() {
           {prevProject ? (
             <Link
               to={`/projects/${prevProject._id}`}
-              className="group flex items-center gap-3 text-[#f0f0ec] hover:text-[#c8f000] transition-colors"
+              className="group flex items-center gap-3 text-[#f0f0ec] hover:text-[#C2FE0B] transition-colors"
             >
               <span className="group-hover:-translate-x-1 transition-transform">←</span>
               <span className="text-editorial-label hidden sm:inline">{prevProject.title}</span>
@@ -245,7 +245,7 @@ function ProjectDetail() {
           {nextProject ? (
             <Link
               to={`/projects/${nextProject._id}`}
-              className="group flex items-center gap-3 text-[#c8f000] hover:text-white transition-colors"
+              className="group flex items-center gap-3 text-[#C2FE0B] hover:text-white transition-colors"
             >
               <span className="text-editorial-label hidden sm:inline">{nextProject.title}</span>
               <span className="text-editorial-label sm:hidden">NEXT</span>

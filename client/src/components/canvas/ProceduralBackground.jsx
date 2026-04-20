@@ -18,9 +18,9 @@ const ProceduralBackground = memo(function ProceduralBackground({
   // Grid settings
   gridStep = 24, // Increased for better performance
 
-  // Colors (Marathon mockup palette)
-  colorLime = '#c8f000',
-  colorBlack = '#080906',
+  // Colors (VerrouPass palette)
+  colorLime = '#C2FE0B',
+  colorBlack = '#0A0E1A',
 
   // Animation settings
   animated = false,

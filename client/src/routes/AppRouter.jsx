@@ -38,7 +38,7 @@ function SkipLink() {
   return (
     <a
       href="#main-content"
-      className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[9999] focus:px-4 focus:py-2 focus:bg-[#c8f000] focus:text-[#080906] focus:font-bold focus:no-underline focus:outline-2 focus:outline-offset-2 focus:outline-white"
+      className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[9999] focus:px-4 focus:py-2 focus:bg-[#C2FE0B] focus:text-[#0A0E1A] focus:font-bold focus:no-underline focus:outline-2 focus:outline-offset-2 focus:outline-white"
     >
       Aller au contenu principal
     </a>
@@ -67,7 +67,7 @@ function AppRouter() {
             <Route
               path="/*"
               element={
-                <div className="min-h-screen bg-[#080906] text-text flex flex-col relative">
+                <div className="min-h-screen bg-[#0A0E1A] text-text flex flex-col relative">
                   <GlitchCursor />
                   <ProceduralBackground
                     animated={true}

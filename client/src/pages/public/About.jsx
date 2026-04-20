@@ -117,7 +117,7 @@ function About() {
                   <div className="text-right mt-6">
                     <button
                       onClick={() => setShowAllExperiences(!showAllExperiences)}
-                      className="px-3 py-1.5 text-[10px] font-mono tracking-wider uppercase border border-[#C2FE0B] text-[#C2FE0B] hover:bg-[#C2FE0B] hover:text-[#080906] transition-all cursor-pointer"
+                      className="px-3 py-1.5 text-[10px] font-mono tracking-wider uppercase border border-[#C2FE0B] text-[#C2FE0B] hover:bg-[#C2FE0B] hover:text-[#0A0E1A] transition-all cursor-pointer"
                       aria-expanded={showAllExperiences}
                       aria-label={showAllExperiences ? "Réduire la liste des expériences" : "Voir toutes les expériences"}
                     >
@@ -129,19 +129,19 @@ function About() {
 
               {/* Formations */}
               <div>
-                <h3 className="font-heading text-[24px] text-[#c8f000] mb-8 uppercase">
+                <h3 className="font-heading text-[24px] text-[#C2FE0B] mb-8 uppercase">
                   FORMATIONS
                 </h3>
                 <div className="space-y-6">
                   {(showAllEducation ? educationExperiences : educationExperiences.slice(0, 3)).map((exp, i) => (
                     <div
                       key={exp._id}
-                      className="border-l border-white/10 pl-6 hover:border-[#c8f000] transition-colors"
+                      className="border-l border-white/10 pl-6 hover:border-[#C2FE0B] transition-colors"
                     >
                       <span className="text-micro text-[#f0f0ec]">0{i + 1}</span>
                       <div className="flex justify-between items-start mt-1 mb-2">
                         <h4 className="text-white font-medium text-base">{exp.title}</h4>
-                        <span className="text-editorial-label text-[#c8f000]">
+                        <span className="text-editorial-label text-[#C2FE0B]">
                           {exp.startDate && new Date(exp.startDate).getFullYear()}
                           {exp.endDate ? ` - ${new Date(exp.endDate).getFullYear()}` : " - PRÉSENT"}
                         </span>
@@ -154,7 +154,7 @@ function About() {
                   <div className="text-right mt-6">
                     <button
                       onClick={() => setShowAllEducation(!showAllEducation)}
-                      className="px-3 py-1.5 text-[10px] font-mono tracking-wider uppercase border border-[#c8f000] text-[#c8f000] hover:bg-[#c8f000] hover:text-[#080906] transition-all cursor-pointer"
+                      className="px-3 py-1.5 text-[10px] font-mono tracking-wider uppercase border border-[#C2FE0B] text-[#C2FE0B] hover:bg-[#C2FE0B] hover:text-[#0A0E1A] transition-all cursor-pointer"
                       aria-expanded={showAllEducation}
                       aria-label={showAllEducation ? "Réduire la liste des formations" : "Voir toutes les formations"}
                     >
@@ -200,7 +200,7 @@ function About() {
         <div className="pt-16 text-center">
           <Link
             to="/projects"
-            className="inline-block bg-[#c8f000] text-[#080906] px-10 py-5 font-bold text-xl uppercase tracking-wide transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(200,240,0,0.4)]"
+            className="inline-block bg-[#C2FE0B] text-[#0A0E1A] px-10 py-5 font-bold text-xl uppercase tracking-wide transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(200,240,0,0.4)]"
             style={{
               fontFamily: '"Big Shoulders Display", sans-serif',
               clipPath: 'polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px))'

@@ -1,22 +1,22 @@
 import { memo, useCallback } from "react";
 
-// Couleur de hover unifiée lime
+// VerrouPass hover glow effects
 const hoverColorStyles = {
-  lime: "hover:border-lime/30 hover:shadow-[0_0_20px_rgba(194,254,11,0.1)]",
-  cyan: "hover:border-lime/30 hover:shadow-[0_0_20px_rgba(194,254,11,0.1)]",
-  violet: "hover:border-lime/30 hover:shadow-[0_0_20px_rgba(194,254,11,0.1)]",
+  lime: "hover:border-lime/40 hover:shadow-[0_0_20px_rgba(194,254,11,0.15)]",
+  cyan: "hover:border-cyan/40 hover:shadow-[0_0_20px_rgba(1,255,255,0.15)]",
+  violet: "hover:border-violet/40 hover:shadow-[0_0_20px_rgba(167,139,250,0.15)]",
 };
 
 const focusColorStyles = {
   lime: "focus:ring-lime",
-  cyan: "focus:ring-lime",
-  violet: "focus:ring-lime",
+  cyan: "focus:ring-cyan",
+  violet: "focus:ring-violet",
 };
 
 const Card = memo(function Card({ children, className = "", hover = false, hoverColor = "lime", onClick, ...props }) {
-  // Marathon style - no rounded corners, subtle border
+  // VerrouPass style - mid-navy background with lime/20 border
   const baseStyles =
-    "bg-mid-navy border border-white/5";
+    "bg-mid-navy border border-lime/20";
 
   const hoverStyles = hover
     ? `transition-all duration-300 ${hoverColorStyles[hoverColor] || hoverColorStyles.lime} hover:-translate-y-1`

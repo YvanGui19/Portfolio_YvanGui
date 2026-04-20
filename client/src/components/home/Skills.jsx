@@ -5,7 +5,6 @@ import useFetch from "../../hooks/useFetch";
 import { SkillsReveal } from "../canvas";
 import {
   SiHtml5,
-  SiCss3,
   SiJavascript,
   SiReact,
   SiNodedotjs,
@@ -19,7 +18,6 @@ import {
   SiVuedotjs,
   SiAngular,
   SiDocker,
-  SiAmazonwebservices,
   SiNextdotjs,
   SiPostgresql,
   SiMysql,
@@ -33,6 +31,7 @@ import {
   SiSymfony,
 } from "react-icons/si";
 import { BiCodeAlt, BiServer, BiWrench, BiLayer } from "react-icons/bi";
+import { FaCss3Alt, FaAws } from "react-icons/fa";
 import { BsWindow } from "react-icons/bs";
 
 // Icônes par défaut selon la catégorie
@@ -46,20 +45,20 @@ const categoryIcons = {
 // Couleurs par catégorie - Style Marathon
 const categoryColors = {
   Frontend: {
-    text: "group-hover:text-[#c8f000]",
-    glow: "0 0 20px 3px rgba(200, 240, 0, 0.4)",
+    text: "group-hover:text-[#C2FE0B]",
+    glow: "0 0 20px 3px rgba(194, 254, 11, 0.4)",
   },
   Backend: {
-    text: "group-hover:text-[#c8f000]",
-    glow: "0 0 20px 3px rgba(200, 240, 0, 0.4)",
+    text: "group-hover:text-[#C2FE0B]",
+    glow: "0 0 20px 3px rgba(194, 254, 11, 0.4)",
   },
   Tools: {
-    text: "group-hover:text-[#c8f000]",
-    glow: "0 0 20px 3px rgba(200, 240, 0, 0.4)",
+    text: "group-hover:text-[#C2FE0B]",
+    glow: "0 0 20px 3px rgba(194, 254, 11, 0.4)",
   },
   Other: {
-    text: "group-hover:text-[#c8f000]",
-    glow: "0 0 20px 3px rgba(200, 240, 0, 0.4)",
+    text: "group-hover:text-[#C2FE0B]",
+    glow: "0 0 20px 3px rgba(194, 254, 11, 0.4)",
   },
 };
 
@@ -67,8 +66,8 @@ const categoryColors = {
 const skillIcons = {
   HTML5: SiHtml5,
   HTML: SiHtml5,
-  CSS3: SiCss3,
-  CSS: SiCss3,
+  CSS3: FaCss3Alt,
+  CSS: FaCss3Alt,
   JavaScript: SiJavascript,
   JS: SiJavascript,
   React: SiReact,
@@ -93,7 +92,7 @@ const skillIcons = {
   VueJS: SiVuedotjs,
   Angular: SiAngular,
   Docker: SiDocker,
-  AWS: SiAmazonwebservices,
+  AWS: FaAws,
   "Next.js": SiNextdotjs,
   NextJS: SiNextdotjs,
   PostgreSQL: SiPostgresql,
@@ -122,7 +121,7 @@ function Skills() {
   }, []);
 
   return (
-    <section className="bg-[#080906] relative overflow-hidden">
+    <section className="bg-[#0A0E1A] relative overflow-hidden">
       {/* Header de section */}
       <div className="py-24 sm:py-28 px-8 sm:px-12 lg:px-14">
         <h2
@@ -166,7 +165,7 @@ function Skills() {
                     transition={{
                       duration: 0.3,
                     }}
-                    className="group bg-[#0f100c] border border-[#1c1d14] transition-all duration-300 hover:border-[#c8f000]/50 w-20 h-20 sm:w-24 sm:h-24 relative"
+                    className="group bg-[#0f100c] border border-[#1c1d14] transition-all duration-300 hover:border-[#C2FE0B]/50 w-20 h-20 sm:w-24 sm:h-24 relative"
                     style={{
                       clipPath: 'polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px))'
                     }}

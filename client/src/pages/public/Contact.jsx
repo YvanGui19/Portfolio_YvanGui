@@ -66,10 +66,10 @@ function Contact() {
         <div className="grid lg:grid-cols-5 gap-12 lg:gap-16">
           {/* Info Panel */}
           <div className="lg:col-span-2">
-            <div className="border-l-2 border-[#c8f000] pl-6">
+            <div className="border-l-2 border-[#C2FE0B] pl-6">
               {/* Email */}
               <div className="mb-8 flex items-start gap-4">
-                <HiMail className="w-5 h-5 text-[#c8f000] mt-0.5" />
+                <HiMail className="w-5 h-5 text-[#C2FE0B] mt-0.5" />
                 <div>
                   <span className="text-editorial-label text-[#f0f0ec] block mb-1">EMAIL</span>
                   <span className="text-white text-sm">yvan.gui19@gmail.com</span>
@@ -78,7 +78,7 @@ function Contact() {
 
               {/* Location */}
               <div className="mb-8 flex items-start gap-4">
-                <HiLocationMarker className="w-5 h-5 text-[#c8f000] mt-0.5" />
+                <HiLocationMarker className="w-5 h-5 text-[#C2FE0B] mt-0.5" />
                 <div>
                   <span className="text-editorial-label text-[#f0f0ec] block mb-1">LOCALISATION</span>
                   <span className="text-white text-sm">Toulouse, France</span>
@@ -101,7 +101,7 @@ function Contact() {
                   value={formData.name}
                   onChange={handleChange}
                   placeholder="Votre nom"
-                  className="w-full bg-transparent border-b border-white/20 text-white py-3 focus:border-[#c8f000] focus:outline-none transition-colors placeholder:text-[#d0d0cc]"
+                  className="w-full bg-transparent border-b border-white/20 text-white py-3 focus:border-[#01FFFF] focus:shadow-[0_0_15px_rgba(1,255,255,0.2)] focus:outline-none transition-colors placeholder:text-[#d0d0cc]"
                 />
                 {errors.name && (
                   <p className="text-[#FF3030] text-xs mt-2" role="alert" aria-live="polite">{errors.name}</p>
@@ -118,7 +118,7 @@ function Contact() {
                   value={formData.email}
                   onChange={handleChange}
                   placeholder="Votre email"
-                  className="w-full bg-transparent border-b border-white/20 text-white py-3 focus:border-[#c8f000] focus:outline-none transition-colors placeholder:text-[#d0d0cc]"
+                  className="w-full bg-transparent border-b border-white/20 text-white py-3 focus:border-[#01FFFF] focus:shadow-[0_0_15px_rgba(1,255,255,0.2)] focus:outline-none transition-colors placeholder:text-[#d0d0cc]"
                 />
                 {errors.email && (
                   <p className="text-[#FF3030] text-xs mt-2" role="alert" aria-live="polite">{errors.email}</p>
@@ -135,7 +135,7 @@ function Contact() {
                   onChange={handleChange}
                   rows={5}
                   placeholder="Votre message..."
-                  className="w-full bg-transparent border-b border-white/20 text-white py-3 focus:border-[#c8f000] focus:outline-none transition-colors resize-none placeholder:text-[#d0d0cc]"
+                  className="w-full bg-transparent border-b border-white/20 text-white py-3 focus:border-[#01FFFF] focus:shadow-[0_0_15px_rgba(1,255,255,0.2)] focus:outline-none transition-colors resize-none placeholder:text-[#d0d0cc]"
                 />
                 {errors.message && (
                   <p className="text-[#FF3030] text-xs mt-2" role="alert" aria-live="polite">{errors.message}</p>
@@ -145,7 +145,7 @@ function Contact() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full py-5 bg-[#c8f000] text-[#080906] font-bold text-xl uppercase tracking-wide transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(200,240,0,0.4)] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:shadow-none cursor-pointer"
+                className="w-full py-5 bg-[#C2FE0B] text-[#0A0E1A] font-bold text-xl uppercase tracking-wide transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(194,254,11,0.4)] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:shadow-none cursor-pointer"
                 style={{
                   fontFamily: '"Big Shoulders Display", sans-serif',
                   clipPath: 'polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px))'
@@ -155,7 +155,7 @@ function Contact() {
               </button>
 
               {submitStatus === "success" && (
-                <p className="text-[#c8f000] text-center text-sm">
+                <p className="text-[#C2FE0B] text-center text-sm">
                   MESSAGE ENVOYÉ AVEC SUCCÈS
                 </p>
               )}

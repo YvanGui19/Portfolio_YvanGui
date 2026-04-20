@@ -35,8 +35,8 @@ function Header() {
       <header
         className={`fixed top-0 left-0 right-0 z-[1000] transition-all duration-300 ${
           isScrolled
-            ? "bg-[#080906]/95 backdrop-blur-md"
-            : "bg-[#080906]/80 backdrop-blur-sm"
+            ? "bg-[#0A0E1A]/95 backdrop-blur-md"
+            : "bg-[#0A0E1A]/80 backdrop-blur-sm"
         }`}
       >
         <div className="max-w-[1400px] mx-auto px-6 sm:px-8">
@@ -46,8 +46,8 @@ function Header() {
               to="/"
               className="font-heading text-[24px] sm:text-[28px] uppercase tracking-tight transition-colors group"
             >
-              <span className="text-white group-hover:text-[#c8f000]">YVAN</span>
-              <span className="text-[#c8f000]">GUI</span>
+              <span className="text-white group-hover:text-[#C2FE0B]">YVAN</span>
+              <span className="text-[#C2FE0B]">GUI</span>
             </Link>
 
             {/* Navigation desktop - Minimal */}
@@ -59,8 +59,8 @@ function Header() {
                   className={({ isActive }) =>
                     `font-mono text-[13px] tracking-[0.08em] uppercase transition-colors ${
                       isActive
-                        ? "text-[#c8f000]"
-                        : "text-white hover:text-[#c8f000]"
+                        ? "text-[#C2FE0B]"
+                        : "text-white hover:text-[#C2FE0B]"
                     }`
                   }
                 >
@@ -68,10 +68,10 @@ function Header() {
                 </NavLink>
               ))}
 
-              {/* Terminal button - simple text */}
+              {/* Terminal button - cyan accent */}
               <button
                 onClick={toggleMode}
-                className="flex items-center gap-2 font-mono text-[13px] tracking-[0.08em] text-[#c8f000] hover:text-white transition-colors cursor-pointer"
+                className="flex items-center gap-2 font-mono text-[13px] tracking-[0.08em] text-[#01FFFF] hover:text-white transition-colors cursor-pointer"
                 aria-label="Mode CLI"
               >
                 <BiTerminal className="w-4 h-4" />
@@ -83,7 +83,7 @@ function Header() {
             <div className="md:hidden flex items-center gap-3">
               <button
                 onClick={toggleMode}
-                className="w-10 h-10 flex items-center justify-center text-[#c8f000] cursor-pointer"
+                className="w-10 h-10 flex items-center justify-center text-[#01FFFF] cursor-pointer"
                 aria-label="Mode CLI"
               >
                 <BiTerminal className="w-5 h-5" />
@@ -104,7 +104,7 @@ function Header() {
 
       {/* Mobile menu - fullscreen editorial */}
       <div
-        className={`fixed inset-0 bg-[#080906] z-[999] md:hidden transition-all duration-500 ${
+        className={`fixed inset-0 bg-[#0A0E1A] z-[999] md:hidden transition-all duration-500 ${
           isMenuOpen ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"
         }`}
       >
@@ -128,10 +128,10 @@ function Header() {
             end
             onClick={() => setIsMenuOpen(false)}
             className={({ isActive }) =>
-              `block py-4 border-b border-white/10 ${isActive ? "text-[#c8f000]" : "text-white"}`
+              `block py-4 border-b border-white/10 ${isActive ? "text-[#C2FE0B]" : "text-white"}`
             }
           >
-            <span className="font-heading text-[48px] sm:text-[64px] tracking-tight uppercase hover:text-[#c8f000] transition-colors">
+            <span className="font-heading text-[48px] sm:text-[64px] tracking-tight uppercase hover:text-[#C2FE0B] transition-colors">
               ACCUEIL
             </span>
           </NavLink>
@@ -142,10 +142,10 @@ function Header() {
               to={link.to}
               onClick={() => setIsMenuOpen(false)}
               className={({ isActive }) =>
-                `block py-4 border-b border-white/10 ${isActive ? "text-[#c8f000]" : "text-white"}`
+                `block py-4 border-b border-white/10 ${isActive ? "text-[#C2FE0B]" : "text-white"}`
               }
             >
-              <span className="font-heading text-[48px] sm:text-[64px] tracking-tight uppercase hover:text-[#c8f000] transition-colors">
+              <span className="font-heading text-[48px] sm:text-[64px] tracking-tight uppercase hover:text-[#C2FE0B] transition-colors">
                 {link.label}
               </span>
             </NavLink>

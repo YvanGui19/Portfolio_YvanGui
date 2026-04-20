@@ -29,10 +29,10 @@ function FeaturedProjects() {
       tabIndex={0}
       role="link"
       aria-label={`Voir le projet ${project.title}`}
-      className="group cursor-pointer relative overflow-hidden h-[400px] border-b-2 border-transparent hover:border-[#c8f000] transition-colors duration-300"
+      className="group cursor-pointer relative overflow-hidden h-[400px] border-b-2 border-transparent hover:border-[#C2FE0B] transition-colors duration-300"
     >
       {/* Fond noir */}
-      <div className="absolute inset-0 bg-[#080906]" />
+      <div className="absolute inset-0 bg-[#0A0E1A]" />
 
       {/* Image du projet si disponible */}
       {project.images?.[0] && (
@@ -49,7 +49,7 @@ function FeaturedProjects() {
       {/* Lettre Marathon en filigrane */}
       <MarathonLetter
         index={index}
-        className="absolute z-0 text-[#c8f000] opacity-[0.05] transition-opacity duration-500 group-hover:opacity-[0.09] pointer-events-none"
+        className="absolute z-0 text-[#C2FE0B] opacity-[0.05] transition-opacity duration-500 group-hover:opacity-[0.09] pointer-events-none"
         style={{
           right: '-6%',
           top: '8%',
@@ -101,7 +101,7 @@ function FeaturedProjects() {
   );
 
   return (
-    <section className="bg-[#080906] relative overflow-hidden pb-24 sm:pb-32">
+    <section className="bg-[#0A0E1A] relative overflow-hidden pb-24 sm:pb-32">
       {/* Header de section */}
       <div className="pt-24 pb-8 sm:pt-28 sm:pb-10 px-8 sm:px-12 lg:px-14 flex justify-between items-end">
         <div>
@@ -122,7 +122,7 @@ function FeaturedProjects() {
         </div>
         <button
           onClick={() => navigate('/projects')}
-          className="hidden sm:block font-mono text-[14px] tracking-[0.15em] text-[#f0f0ec] uppercase border-b border-[#1c1d14] pb-1 transition-colors hover:text-[#c8f000] hover:border-[#c8f000] cursor-pointer"
+          className="hidden sm:block font-mono text-[14px] tracking-[0.15em] text-[#f0f0ec] uppercase border-b border-[#1c1d14] pb-1 transition-colors hover:text-[#C2FE0B] hover:border-[#C2FE0B] cursor-pointer"
         >
           Tous les projets →
         </button>
@@ -152,7 +152,7 @@ function FeaturedProjects() {
       <div className="sm:hidden py-8 text-center border-t border-[#1c1d14]">
         <button
           onClick={() => navigate('/projects')}
-          className="font-mono text-[10px] tracking-[0.22em] text-[#f0f0ec] uppercase border-b border-[#1c1d14] pb-1 transition-colors hover:text-[#c8f000] hover:border-[#c8f000] cursor-pointer"
+          className="font-mono text-[10px] tracking-[0.22em] text-[#f0f0ec] uppercase border-b border-[#1c1d14] pb-1 transition-colors hover:text-[#C2FE0B] hover:border-[#C2FE0B] cursor-pointer"
         >
           Tous les projets →
         </button>

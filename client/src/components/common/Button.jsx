@@ -16,49 +16,47 @@ const clipPathMarathon = {
 
 const variants = {
   primary: {
-    className: 'bg-lime text-black hover:bg-white hover:-translate-y-0.5 focus-visible:ring-lime',
+    // VerrouPass: Lime background with lime glow on hover
+    className: 'bg-lime text-black hover:bg-white hover:-translate-y-0.5 hover:shadow-[0_0_20px_rgba(194,254,11,0.4)] focus-visible:ring-lime',
     style: clipPathMarathon,
-    hoverShadow: '0 4px 20px rgba(194, 254, 11, 0.3)'
   },
   outline: {
-    className: 'bg-transparent text-lime border border-lime hover:bg-lime/10 focus-visible:ring-lime focus-visible:ring-offset-0',
+    // VerrouPass: Transparent with lime border, subtle glow on hover
+    className: 'bg-transparent text-lime border border-lime/40 hover:border-lime hover:bg-lime/10 hover:shadow-[0_0_20px_rgba(194,254,11,0.2)] focus-visible:ring-lime focus-visible:ring-offset-0',
     style: {},
-    hoverShadow: '0 0 20px rgba(194, 254, 11, 0.1)'
+  },
+  secondary: {
+    // VerrouPass: Cyan accent variant
+    className: 'bg-transparent text-cyan border border-cyan/40 hover:border-cyan hover:bg-cyan/10 hover:shadow-[0_0_20px_rgba(1,255,255,0.3)] focus-visible:ring-cyan focus-visible:ring-offset-0',
+    style: {},
   },
   ghost: {
-    className: 'bg-transparent text-grey border border-slate hover:text-white hover:border-white focus-visible:ring-white focus-visible:ring-offset-0',
+    className: 'bg-transparent text-grey border border-slate hover:text-white hover:border-white/50 focus-visible:ring-white focus-visible:ring-offset-0',
     style: {},
-    hoverShadow: null
   },
   danger: {
-    className: 'bg-red text-white hover:-translate-y-0.5 focus-visible:ring-red',
+    className: 'bg-red text-white hover:-translate-y-0.5 hover:shadow-[0_0_20px_rgba(255,48,48,0.3)] focus-visible:ring-red',
     style: clipPathMarathon,
-    hoverShadow: '0 4px 20px rgba(255, 71, 87, 0.3)'
   },
   cyan: {
-    className: 'bg-cyan text-black hover:-translate-y-0.5 focus-visible:ring-cyan',
+    className: 'bg-cyan text-black hover:-translate-y-0.5 hover:shadow-[0_0_20px_rgba(1,255,255,0.4)] focus-visible:ring-cyan',
     style: clipPathMarathon,
-    hoverShadow: '0 4px 20px rgba(1, 255, 255, 0.3)'
   },
   violet: {
-    className: 'bg-violet text-black hover:-translate-y-0.5 focus-visible:ring-violet',
+    className: 'bg-violet text-black hover:-translate-y-0.5 hover:shadow-[0_0_20px_rgba(167,139,250,0.3)] focus-visible:ring-violet',
     style: clipPathMarathon,
-    hoverShadow: '0 4px 20px rgba(167, 139, 250, 0.3)'
   },
   'outline-lime': {
-    className: 'btn-clipped btn-clipped-lime text-lime hover:text-black focus-visible:ring-lime',
+    className: 'btn-clipped btn-clipped-lime text-lime hover:text-black hover:shadow-[0_0_20px_rgba(194,254,11,0.2)] focus-visible:ring-lime',
     style: {},
-    hoverShadow: '0 0 20px rgba(194, 254, 11, 0.2)'
   },
   'outline-cyan': {
-    className: 'btn-clipped btn-clipped-cyan text-cyan hover:text-black focus-visible:ring-cyan',
+    className: 'btn-clipped btn-clipped-cyan text-cyan hover:text-black hover:shadow-[0_0_20px_rgba(1,255,255,0.2)] focus-visible:ring-cyan',
     style: {},
-    hoverShadow: '0 0 20px rgba(1, 255, 255, 0.2)'
   },
   'outline-violet': {
-    className: 'btn-clipped btn-clipped-violet text-violet hover:text-black focus-visible:ring-violet',
+    className: 'btn-clipped btn-clipped-violet text-violet hover:text-black hover:shadow-[0_0_20px_rgba(167,139,250,0.2)] focus-visible:ring-violet',
     style: {},
-    hoverShadow: '0 0 20px rgba(167, 139, 250, 0.2)'
   },
 }
 

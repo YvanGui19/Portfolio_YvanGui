@@ -7,40 +7,41 @@
   --breakpoint-xs: 400px;
 
   /* ═══════════════════════════════════════════════════════════════════════════
-     MARATHON V2 - PALETTE MAQUETTE (Lime #c8f000 + Noir #080906)
+     VERROUPASS DESIGN - PALETTE (Lime #C2FE0B + Dark Navy #0A0E1A)
      ═══════════════════════════════════════════════════════════════════════════ */
 
-  /* Palette principale - Maquette Marathon */
-  --color-K: #080906;   /* Noir profond (fond principal) */
-  --color-L: #c8f000;   /* Lime (accent principal) */
-  --color-L2: #6a7f00;  /* Lime fonce */
+  /* Palette principale - VerrouPass */
+  --color-K: #0A0E1A;   /* Dark Navy (fond principal) */
+  --color-L: #C2FE0B;   /* Lime VerrouPass (accent principal) */
+  --color-L2: #92C008;  /* Lime fonce */
   --color-W: #f0f0ec;   /* Blanc casse (texte) */
   --color-M: #525248;   /* Gris (texte secondaire) */
-  --color-B: #1c1d14;   /* Bordures */
+  --color-B: #1C2333;   /* Mid Navy (bordures) */
 
-  /* Couleur principale - LIME FLUO (mise a jour) */
-  --color-lime: #c8f000;
-  --color-lime-dim: #6a7f00;
-  --color-lime-glow: rgba(200, 240, 0, 0.4);
+  /* Couleur principale - LIME VERROUPASS */
+  --color-lime: #C2FE0B;
+  --color-lime-dim: #92C008;
+  --color-lime-glow: rgba(194, 254, 11, 0.4);
 
   /* Accents secondaires */
-  --color-cyan: #00F0FF;
-  --color-cyan-dim: #0099AA;
+  --color-cyan: #01FFFF;
+  --color-cyan-dim: #00B3B3;
+  --color-cyan-glow: rgba(1, 255, 255, 0.3);
   --color-red: #FF3030;
   --color-orange: #E8763A;
 
-  /* Fonds - Noir profond (mise a jour) */
-  --color-void: #080906;
-  --color-deep: #0A0A0A;
-  --color-surface: #111111;
-  --color-steel: #1c1d14;
+  /* Fonds - Dark Navy VerrouPass */
+  --color-void: #0A0E1A;
+  --color-deep: #0D1221;
+  --color-surface: #141928;
+  --color-steel: #1C2333;
 
   /* Aliases fond */
-  --color-dark-navy: #080906;
-  --color-dark-blue: #050505;
-  --color-mid-navy: #0A0A0A;
-  --color-slate: #1c1d14;
-  --color-black: #080906;
+  --color-dark-navy: #0A0E1A;
+  --color-dark-blue: #080C15;
+  --color-mid-navy: #1C2333;
+  --color-slate: #1C2333;
+  --color-black: #0A0E1A;
 
   /* Texte (mise a jour) */
   --color-white: #f0f0ec;
@@ -49,19 +50,19 @@
   --color-grey: #525248;
 
   /* Aliases pour compatibilite */
-  --color-primary: #c8f000;
-  --color-primary-dark: #6a7f00;
-  --color-background: #080906;
-  --color-surface-light: #111111;
-  --color-border: #1c1d14;
+  --color-primary: #C2FE0B;
+  --color-primary-dark: #92C008;
+  --color-background: #0A0E1A;
+  --color-surface-light: #141928;
+  --color-border: #1C2333;
   --color-text: #f0f0ec;
   --color-text-muted: #525248;
   --color-text-light: #f0f0ec;
   --color-danger: #FF3030;
   --color-danger-dim: #CC2020;
   --color-warning: #E8763A;
-  --color-terminal-bg: #080906;
-  --color-terminal-header: #0A0A0A;
+  --color-terminal-bg: #0A0E1A;
+  --color-terminal-header: #0D1221;
   --color-blaze: #E8763A;
   --color-blaze-dim: #7A3A18;
   --color-cryo: #00F0FF;
@@ -81,7 +82,7 @@
   /* Ombres - Glow Lime */
   --shadow-glow: 0 0 20px rgba(194, 254, 11, 0.3);
   --shadow-glow-lg: 0 0 40px rgba(194, 254, 11, 0.4);
-  --shadow-glow-cyan: 0 0 20px rgba(0, 240, 255, 0.3);
+  --shadow-glow-cyan: 0 0 20px rgba(1, 255, 255, 0.3);
   --shadow-glow-red: 0 0 20px rgba(255, 48, 48, 0.3);
   --shadow-glow-violet: 0 0 20px rgba(167, 139, 250, 0.3);
   --shadow-glow-orange: 0 0 20px rgba(232, 118, 58, 0.3);
@@ -340,6 +341,57 @@
 
 .hover-underline-editorial:hover::after {
   width: 100%;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   VERROUPASS GLOW EFFECTS
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Glow effects */
+.glow-lime {
+  box-shadow: 0 0 20px rgba(194, 254, 11, 0.4);
+}
+
+.glow-lime-hover:hover {
+  box-shadow: 0 0 20px rgba(194, 254, 11, 0.4);
+}
+
+.glow-lime-lg {
+  box-shadow: 0 0 40px rgba(194, 254, 11, 0.5);
+}
+
+.glow-cyan {
+  box-shadow: 0 0 20px rgba(1, 255, 255, 0.4);
+}
+
+.glow-cyan-hover:hover {
+  box-shadow: 0 0 20px rgba(1, 255, 255, 0.4);
+}
+
+/* Input focus cyan glow */
+.input-focus-cyan:focus {
+  border-color: #01FFFF;
+  box-shadow: 0 0 15px rgba(1, 255, 255, 0.25);
+  outline: none;
+}
+
+/* Card VerrouPass style */
+.card-verrou {
+  background: #1C2333;
+  border: 1px solid rgba(194, 254, 11, 0.2);
+  transition: all 0.3s ease;
+}
+
+.card-verrou:hover {
+  border-color: rgba(194, 254, 11, 0.4);
+  box-shadow: 0 0 20px rgba(194, 254, 11, 0.15);
+}
+
+/* Heading VerrouPass style */
+.heading-verrou {
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════

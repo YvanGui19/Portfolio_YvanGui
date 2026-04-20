@@ -7,16 +7,16 @@ function Footer() {
       style={{
         background: `repeating-linear-gradient(
           -45deg,
-          #080906,
-          #080906 12px,
-          #c8f000 12px,
-          #c8f000 24px
+          #0A0E1A,
+          #0A0E1A 12px,
+          #C2FE0B 12px,
+          #C2FE0B 24px
         )`,
       }}
     >
       <div className="max-w-[1400px] mx-auto px-6 sm:px-8">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-          <span className="text-[#080906] text-sm font-mono font-bold bg-[#c8f000] px-3 py-1">
+          <span className="text-[#0A0E1A] text-sm font-mono font-bold bg-[#C2FE0B] px-3 py-1">
             © {new Date().getFullYear()} Yvan Gui
           </span>
 
@@ -25,7 +25,7 @@ function Footer() {
               href="https://github.com/YvanGui19"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-[#c8f000] text-[#080906] hover:bg-[#f0f0ec] transition-colors p-2"
+              className="bg-[#C2FE0B] text-[#0A0E1A] hover:bg-[#f0f0ec] transition-colors p-2"
               aria-label="GitHub"
             >
               <FaGithub className="w-5 h-5" />
@@ -34,7 +34,7 @@ function Footer() {
               href="https://www.linkedin.com/in/yvangui"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-[#c8f000] text-[#080906] hover:bg-[#f0f0ec] transition-colors p-2"
+              className="bg-[#C2FE0B] text-[#0A0E1A] hover:bg-[#f0f0ec] transition-colors p-2"
               aria-label="LinkedIn"
             >
               <FaLinkedin className="w-5 h-5" />
