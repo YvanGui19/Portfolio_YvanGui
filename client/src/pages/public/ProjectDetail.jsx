@@ -112,9 +112,6 @@ function ProjectDetail() {
                 </div>
               )}
 
-              {/* CRT lines effect on hover */}
-              <div className="absolute inset-0 hero-crt-lines opacity-30 pointer-events-none" />
-
               {project.images?.length > 1 && (
                 <>
                   <button
