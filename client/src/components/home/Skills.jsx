@@ -122,22 +122,40 @@ function Skills() {
 
   return (
     <section className="bg-[#0A0E1A] relative overflow-hidden">
+      {/* Artefacts Marathon */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="marathon-diagonal-stripes-lime absolute top-16 right-8 w-2 h-24 opacity-30" />
+        <div className="marathon-grid marathon-grid-cyan absolute bottom-16 left-8 w-10 h-10 opacity-20" />
+        <div className="marathon-data-strip absolute top-1/3 right-4 h-32 w-1 opacity-20" />
+      </div>
+
       {/* Header de section */}
-      <div className="py-24 sm:py-28 px-8 sm:px-12 lg:px-14">
-        <h2
-          style={{ fontFamily: '"Big Shoulders Display", sans-serif' }}
-          className="font-black text-[clamp(50px,7vw,96px)] uppercase leading-[0.9]"
-        >
-          <span className="text-[#f0f0ec]">TECH </span>
-          <span
-            style={{
-              color: 'transparent',
-              WebkitTextStroke: '2px #f0f0ec',
-            }}
+      <div className="py-24 sm:py-28 px-8 sm:px-12 lg:px-14 relative">
+        {/* Numéro de section */}
+        <span className="font-mono text-[10px] tracking-[0.3em] text-cyan/50 block mb-4">
+          [ 01 / COMPÉTENCES ]
+        </span>
+
+        <div className="flex items-end gap-6">
+          <h2
+            style={{ fontFamily: '"Big Shoulders Display", sans-serif' }}
+            className="font-black text-[clamp(50px,7vw,96px)] uppercase leading-[0.9]"
           >
-            STACK
-          </span>
-        </h2>
+            <span className="text-[#f0f0ec]">TECH </span>
+            <span
+              style={{
+                color: 'transparent',
+                WebkitTextStroke: '2px #f0f0ec',
+              }}
+            >
+              STACK
+            </span>
+          </h2>
+          <div className="hidden sm:flex items-center gap-3 pb-4">
+            <div className="h-[2px] w-16 bg-cyan/40" />
+            <div className="w-2 h-2 bg-cyan" />
+          </div>
+        </div>
       </div>
 
       <div className="px-8 sm:px-12 lg:px-14 pb-24 sm:pb-28">

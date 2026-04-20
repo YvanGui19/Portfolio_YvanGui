@@ -29,7 +29,7 @@ function FeaturedProjects() {
       tabIndex={0}
       role="link"
       aria-label={`Voir le projet ${project.title}`}
-      className="group cursor-pointer relative overflow-hidden h-[400px] border-b-2 border-transparent hover:border-[#C2FE0B] transition-colors duration-300"
+      className="group cursor-pointer relative overflow-hidden h-[400px] border border-lime/10 hover:border-lime/40 transition-all duration-300"
     >
       {/* Fond noir */}
       <div className="absolute inset-0 bg-[#0A0E1A]" />
@@ -40,7 +40,7 @@ function FeaturedProjects() {
           <img
             src={getImageUrl(project.images[0])}
             alt={project.title}
-            className="w-full h-full object-cover opacity-80 transition-all duration-500 group-hover:opacity-95 group-hover:scale-[1.02]"
+            className="w-full h-full object-cover opacity-60 transition-all duration-500 group-hover:opacity-80 group-hover:scale-[1.02]"
             loading="lazy"
           />
         </div>
@@ -63,32 +63,51 @@ function FeaturedProjects() {
         className="absolute inset-0 z-[2] pointer-events-none"
         style={{
           background: `linear-gradient(to top,
-            rgba(8, 9, 6, 0.97) 0%,
-            rgba(8, 9, 6, 0.6) 38%,
-            rgba(8, 9, 6, 0.05) 72%
+            rgba(10, 14, 26, 0.98) 0%,
+            rgba(10, 14, 26, 0.7) 40%,
+            rgba(10, 14, 26, 0.2) 70%
           )`,
         }}
       />
 
+      {/* Coins Marathon */}
+      <div className="absolute top-0 left-0 w-5 h-5 border-t-2 border-l-2 border-lime/30 group-hover:border-lime transition-colors z-[4]" />
+      <div className="absolute top-0 right-0 w-5 h-5 border-t-2 border-r-2 border-lime/30 group-hover:border-lime transition-colors z-[4]" />
+      <div className="absolute bottom-0 left-0 w-5 h-5 border-b-2 border-l-2 border-lime/30 group-hover:border-lime transition-colors z-[4]" />
+      <div className="absolute bottom-0 right-0 w-5 h-5 border-b-2 border-r-2 border-lime/30 group-hover:border-lime transition-colors z-[4]" />
+
+      {/* Catégorie indicator */}
+      <div className="absolute top-4 left-4 z-[4] opacity-60 group-hover:opacity-100 transition-opacity">
+        <div className="flex items-center gap-2">
+          <div className="w-2 h-2 bg-cyan" />
+          <span className="font-mono text-[8px] tracking-[0.3em] text-cyan/80 uppercase">
+            {project.category || "Project"}
+          </span>
+        </div>
+      </div>
+
       {/* Contenu */}
-      <div className="absolute bottom-0 left-0 right-0 z-[3] p-6 flex justify-between items-end">
+      <div className="absolute bottom-0 left-0 right-0 z-[3] p-6">
         <div>
           {/* Titre */}
           <h3
             style={{ fontFamily: '"Big Shoulders Display", sans-serif' }}
-            className="font-black uppercase leading-[0.92] text-[clamp(24px,2.5vw,36px)] text-[#f0f0ec]"
+            className="font-black uppercase leading-[0.92] text-[clamp(24px,2.5vw,36px)] text-[#f0f0ec] group-hover:text-lime transition-colors"
           >
             {project.title.split(' ').map((word, i) => (
               <span key={i} className="block">{word}</span>
             ))}
           </h3>
 
+          {/* Ligne de séparation */}
+          <div className="w-10 h-[2px] bg-lime/40 group-hover:bg-lime group-hover:w-16 transition-all duration-300 mt-3" />
+
           {/* Tags */}
           <div className="flex gap-2 mt-4 flex-wrap">
             {project.technologies?.slice(0, 3).map((tech, i) => (
               <span
                 key={i}
-                className="font-mono text-[9px] tracking-[0.15em] text-[#f0f0ec] border border-[#1c1d14] px-3 py-1 uppercase transition-all duration-200 group-hover:border-[#6a7f00] group-hover:text-[#f0f0ec]"
+                className="font-mono text-[9px] tracking-[0.15em] text-lime/70 border border-lime/30 px-3 py-1 uppercase transition-all duration-200 group-hover:border-lime group-hover:text-lime"
               >
                 {tech}
               </span>
@@ -96,36 +115,59 @@ function FeaturedProjects() {
           </div>
         </div>
 
-              </div>
+        {/* Flèche indicative */}
+        <div className="absolute bottom-6 right-6 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0">
+          <span className="font-mono text-lime text-lg">→</span>
+        </div>
+      </div>
     </article>
   );
 
   return (
     <section className="bg-[#0A0E1A] relative overflow-hidden pb-24 sm:pb-32">
+      {/* Artefacts Marathon */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="marathon-diagonal-stripes-lime absolute top-20 left-8 w-2 h-24 opacity-30" />
+        <div className="marathon-grid marathon-grid-lime absolute bottom-32 right-12 w-10 h-10 opacity-20" />
+        <div className="marathon-data-strip absolute top-1/2 left-4 h-40 w-1 opacity-20" />
+      </div>
+
       {/* Header de section */}
-      <div className="pt-24 pb-8 sm:pt-28 sm:pb-10 px-8 sm:px-12 lg:px-14 flex justify-between items-end">
-        <div>
-          <h2
-            style={{ fontFamily: '"Big Shoulders Display", sans-serif' }}
-            className="font-black text-[clamp(50px,7vw,96px)] uppercase leading-[0.9]"
-          >
-            <span className="text-[#f0f0ec]">PRO</span>
-            <span
-              style={{
-                color: 'transparent',
-                WebkitTextStroke: '2px #f0f0ec',
-              }}
+      <div className="pt-24 pb-8 sm:pt-28 sm:pb-10 px-8 sm:px-12 lg:px-14 relative">
+        {/* Numéro de section */}
+        <span className="font-mono text-[10px] tracking-[0.3em] text-lime/50 block mb-4">
+          [ 02 / RÉALISATIONS ]
+        </span>
+
+        <div className="flex justify-between items-end">
+          <div className="flex items-end gap-6">
+            <h2
+              style={{ fontFamily: '"Big Shoulders Display", sans-serif' }}
+              className="font-black text-[clamp(50px,7vw,96px)] uppercase leading-[0.9]"
             >
-              JETS
-            </span>
-          </h2>
+              <span className="text-[#f0f0ec]">PRO</span>
+              <span
+                style={{
+                  color: 'transparent',
+                  WebkitTextStroke: '2px #f0f0ec',
+                }}
+              >
+                JETS
+              </span>
+            </h2>
+            <div className="hidden sm:flex items-center gap-3 pb-4">
+              <div className="h-[2px] w-16 bg-lime/40" />
+              <div className="w-2 h-2 bg-lime" />
+            </div>
+          </div>
+          <button
+            onClick={() => navigate('/projects')}
+            className="hidden sm:flex items-center gap-2 font-mono text-[12px] tracking-[0.15em] text-[#f0f0ec] uppercase px-4 py-2 border border-lime/30 transition-all hover:text-lime hover:border-lime hover:shadow-[0_0_15px_rgba(194,254,11,0.2)] cursor-pointer"
+          >
+            Tous les projets
+            <span className="text-lime">→</span>
+          </button>
         </div>
-        <button
-          onClick={() => navigate('/projects')}
-          className="hidden sm:block font-mono text-[14px] tracking-[0.15em] text-[#f0f0ec] uppercase border-b border-[#1c1d14] pb-1 transition-colors hover:text-[#C2FE0B] hover:border-[#C2FE0B] cursor-pointer"
-        >
-          Tous les projets →
-        </button>
       </div>
 
       {loading ? (
@@ -149,12 +191,13 @@ function FeaturedProjects() {
       )}
 
       {/* Bouton mobile */}
-      <div className="sm:hidden py-8 text-center border-t border-[#1c1d14]">
+      <div className="sm:hidden py-8 text-center border-t border-lime/20">
         <button
           onClick={() => navigate('/projects')}
-          className="font-mono text-[10px] tracking-[0.22em] text-[#f0f0ec] uppercase border-b border-[#1c1d14] pb-1 transition-colors hover:text-[#C2FE0B] hover:border-[#C2FE0B] cursor-pointer"
+          className="inline-flex items-center gap-2 font-mono text-[10px] tracking-[0.2em] text-[#f0f0ec] uppercase px-4 py-2 border border-lime/30 transition-all hover:text-lime hover:border-lime cursor-pointer"
         >
-          Tous les projets →
+          Tous les projets
+          <span className="text-lime">→</span>
         </button>
       </div>
     </section>

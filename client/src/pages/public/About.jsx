@@ -252,10 +252,9 @@ function About() {
         </div>
 
         {/* CTA - Style Marathon */}
-        <div className="pt-16 text-center relative">
-          {/* Artefacts décoratifs */}
-          <div className="absolute left-1/4 top-1/2 -translate-y-1/2 marathon-diagonal-stripes-lime w-12 h-24 opacity-20" />
-          <div className="absolute right-1/4 top-1/2 -translate-y-1/2 marathon-diagonal-stripes-lime w-12 h-24 opacity-20" />
+        <div className="pt-16 flex justify-center items-center gap-8 sm:gap-16">
+          {/* Artefact gauche */}
+          <div className="marathon-diagonal-stripes-lime w-12 h-24 opacity-20 hidden sm:block" />
 
           <Link
             to="/projects"
@@ -269,6 +268,9 @@ function About() {
             {/* Effet glitch au hover */}
             <span className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-100" />
           </Link>
+
+          {/* Artefact droit */}
+          <div className="marathon-diagonal-stripes-lime w-12 h-24 opacity-20 hidden sm:block" />
         </div>
       </div>
     </div>
