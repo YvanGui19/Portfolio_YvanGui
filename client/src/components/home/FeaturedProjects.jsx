@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import projectService from "../../services/projectService";
 import useFetch from "../../hooks/useFetch";
 import { getImageUrl } from "../../utils/imageUrl";
-import { MarathonLetter } from "../marathon/MarathonLetters";
+import { MarathonLetter, LetterH, LetterM } from "../marathon/MarathonLetters";
 
 /**
  * FeaturedProjects - Style MARATHON comme la maquette
@@ -125,11 +125,14 @@ function FeaturedProjects() {
 
   return (
     <section className="bg-[#0A0E1A] relative overflow-hidden pb-24 sm:pb-32">
-      {/* Artefacts Marathon */}
+      {/* Symboles Marathon géants en arrière-plan */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="marathon-diagonal-stripes-lime absolute top-20 left-8 w-2 h-24 opacity-30" />
-        <div className="marathon-grid marathon-grid-lime absolute bottom-32 right-12 w-10 h-10 opacity-20" />
-        <div className="marathon-data-strip absolute top-1/2 left-4 h-40 w-1 opacity-20" />
+        <LetterH
+          className="absolute -right-[15%] top-[10%] w-[55%] h-auto text-lime opacity-[0.025]"
+        />
+        <LetterM
+          className="absolute -left-[20%] bottom-[5%] w-[45%] h-auto text-cyan opacity-[0.02]"
+        />
       </div>
 
       {/* Header de section */}
@@ -140,26 +143,20 @@ function FeaturedProjects() {
         </span>
 
         <div className="flex justify-between items-end">
-          <div className="flex items-end gap-6">
-            <h2
-              style={{ fontFamily: '"Big Shoulders Display", sans-serif' }}
-              className="font-black text-[clamp(50px,7vw,96px)] uppercase leading-[0.9]"
+          <h2
+            style={{ fontFamily: '"Big Shoulders Display", sans-serif' }}
+            className="font-black text-[clamp(50px,7vw,96px)] uppercase leading-[0.9]"
+          >
+            <span className="text-[#f0f0ec]">PRO</span>
+            <span
+              style={{
+                color: 'transparent',
+                WebkitTextStroke: '2px #f0f0ec',
+              }}
             >
-              <span className="text-[#f0f0ec]">PRO</span>
-              <span
-                style={{
-                  color: 'transparent',
-                  WebkitTextStroke: '2px #f0f0ec',
-                }}
-              >
-                JETS
-              </span>
-            </h2>
-            <div className="hidden sm:flex items-center gap-3 pb-4">
-              <div className="h-[2px] w-16 bg-lime/40" />
-              <div className="w-2 h-2 bg-lime" />
-            </div>
-          </div>
+              JETS
+            </span>
+          </h2>
           <button
             onClick={() => navigate('/projects')}
             className="hidden sm:flex items-center gap-2 font-mono text-[12px] tracking-[0.15em] text-[#f0f0ec] uppercase px-4 py-2 border border-lime/30 transition-all hover:text-lime hover:border-lime hover:shadow-[0_0_15px_rgba(194,254,11,0.2)] cursor-pointer"

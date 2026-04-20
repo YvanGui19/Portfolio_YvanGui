@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { motion } from "framer-motion";
 import skillService from "../../services/skillService";
 import useFetch from "../../hooks/useFetch";
-import { SkillsReveal } from "../canvas";
+import { LetterM, LetterR } from "../marathon/MarathonLetters";
 import {
   SiHtml5,
   SiJavascript,
@@ -122,11 +122,14 @@ function Skills() {
 
   return (
     <section className="bg-[#0A0E1A] relative overflow-hidden">
-      {/* Artefacts Marathon */}
+      {/* Symboles Marathon géants en arrière-plan */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="marathon-diagonal-stripes-lime absolute top-16 right-8 w-2 h-24 opacity-30" />
-        <div className="marathon-grid marathon-grid-cyan absolute bottom-16 left-8 w-10 h-10 opacity-20" />
-        <div className="marathon-data-strip absolute top-1/3 right-4 h-32 w-1 opacity-20" />
+        <LetterM
+          className="absolute -left-[10%] top-1/2 -translate-y-1/2 w-[50%] h-auto text-lime opacity-[0.03]"
+        />
+        <LetterR
+          className="absolute -right-[5%] top-1/2 -translate-y-1/2 w-[40%] h-auto text-cyan opacity-[0.03]"
+        />
       </div>
 
       {/* Header de section */}
@@ -136,26 +139,20 @@ function Skills() {
           [ 01 / COMPÉTENCES ]
         </span>
 
-        <div className="flex items-end gap-6">
-          <h2
-            style={{ fontFamily: '"Big Shoulders Display", sans-serif' }}
-            className="font-black text-[clamp(50px,7vw,96px)] uppercase leading-[0.9]"
+        <h2
+          style={{ fontFamily: '"Big Shoulders Display", sans-serif' }}
+          className="font-black text-[clamp(50px,7vw,96px)] uppercase leading-[0.9]"
+        >
+          <span className="text-[#f0f0ec]">TECH </span>
+          <span
+            style={{
+              color: 'transparent',
+              WebkitTextStroke: '2px #f0f0ec',
+            }}
           >
-            <span className="text-[#f0f0ec]">TECH </span>
-            <span
-              style={{
-                color: 'transparent',
-                WebkitTextStroke: '2px #f0f0ec',
-              }}
-            >
-              STACK
-            </span>
-          </h2>
-          <div className="hidden sm:flex items-center gap-3 pb-4">
-            <div className="h-[2px] w-16 bg-cyan/40" />
-            <div className="w-2 h-2 bg-cyan" />
-          </div>
-        </div>
+            STACK
+          </span>
+        </h2>
       </div>
 
       <div className="px-8 sm:px-12 lg:px-14 pb-24 sm:pb-28">
@@ -167,9 +164,6 @@ function Skills() {
           </div>
         ) : (
           <div className="relative">
-            {/* Animation de révélation - wrapper autour des skills uniquement */}
-            <SkillsReveal duration={4} />
-
             <div className="flex flex-wrap justify-center gap-4 sm:gap-5 py-2">
               {(skills || []).map((skill, index) => {
                 const colors = categoryColors[skill.category] || categoryColors.Other;

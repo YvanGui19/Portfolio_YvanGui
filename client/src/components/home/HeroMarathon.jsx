@@ -58,7 +58,7 @@ function HeroMarathon() {
 
           <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-8">
             {/* Nom - Big Shoulders Display */}
-            <h1 className="leading-[0.88] relative">
+            <h1 className="leading-[0.88]">
               <span
                 className="block text-[clamp(88px,13vw,196px)] text-[#f0f0ec] uppercase"
                 style={{
@@ -80,11 +80,6 @@ function HeroMarathon() {
               >
                 GUI
               </span>
-              {/* Ligne décorative sous le nom */}
-              <div className="flex items-center gap-3 mt-4">
-                <div className="h-[2px] w-12 bg-lime" />
-                <div className="w-2 h-2 bg-cyan" />
-              </div>
             </h1>
 
             {/* Description - Style VerrouPass avec coins coupés et glow */}
@@ -113,11 +108,6 @@ function HeroMarathon() {
         </div>
       </div>
 
-      {/* Indicateur de scroll */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2">
-        <span className="font-mono text-[9px] tracking-[0.3em] text-[#f0f0ec]/40 uppercase">Scroll</span>
-        <div className="w-[1px] h-8 bg-gradient-to-b from-lime/60 to-transparent animate-pulse" />
-      </div>
     </section>
   );
 }
