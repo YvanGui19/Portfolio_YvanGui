@@ -11,7 +11,7 @@ const SymbolPortrait = memo(function SymbolPortrait({
   height = 350,
   gridStep = 4,
   colorLight = '#C2FE0B',
-  colorDark = '#0A0E1A',
+  colorDark = '#000000',
   className = '',
 }) {
   const canvasRef = useRef(null);

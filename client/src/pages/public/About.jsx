@@ -71,7 +71,7 @@ function About() {
             {/* Bio text - Style terminal Marathon */}
             <div className="relative order-2 lg:order-1">
               {/* Container terminal */}
-              <div className="relative border border-lime/20 bg-[#0A0E1A]/60 p-6 sm:p-8">
+              <div className="relative border border-lime/20 bg-[#000000]/60 p-6 sm:p-8">
                 {/* Coins décoratifs */}
                 <div className="absolute -top-px -left-px w-4 h-4 border-t-2 border-l-2 border-lime" />
                 <div className="absolute -top-px -right-px w-4 h-4 border-t-2 border-r-2 border-lime" />
@@ -168,7 +168,7 @@ function About() {
                   <div className="text-right mt-6">
                     <button
                       onClick={() => setShowAllExperiences(!showAllExperiences)}
-                      className="px-3 py-1.5 text-[10px] font-mono tracking-wider uppercase border border-cyan text-cyan hover:bg-cyan hover:text-[#0A0E1A] transition-all cursor-pointer"
+                      className="px-3 py-1.5 text-[10px] font-mono tracking-wider uppercase border border-cyan text-cyan hover:bg-cyan hover:text-[#000000] transition-all cursor-pointer"
                       aria-expanded={showAllExperiences}
                       aria-label={showAllExperiences ? "Réduire la liste des expériences" : "Voir toutes les expériences"}
                     >
@@ -205,7 +205,7 @@ function About() {
                   <div className="text-right mt-6">
                     <button
                       onClick={() => setShowAllEducation(!showAllEducation)}
-                      className="px-3 py-1.5 text-[10px] font-mono tracking-wider uppercase border border-cyan text-cyan hover:bg-cyan hover:text-[#0A0E1A] transition-all cursor-pointer"
+                      className="px-3 py-1.5 text-[10px] font-mono tracking-wider uppercase border border-cyan text-cyan hover:bg-cyan hover:text-[#000000] transition-all cursor-pointer"
                       aria-expanded={showAllEducation}
                       aria-label={showAllEducation ? "Réduire la liste des formations" : "Voir toutes les formations"}
                     >
@@ -258,7 +258,7 @@ function About() {
 
           <Link
             to="/projects"
-            className="relative inline-block bg-lime text-[#0A0E1A] px-10 py-5 font-bold text-xl uppercase tracking-wide transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(194,254,11,0.5)] group"
+            className="relative inline-block bg-lime text-[#000000] px-10 py-5 font-bold text-xl uppercase tracking-wide transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(194,254,11,0.5)] group"
             style={{
               fontFamily: '"Big Shoulders Display", sans-serif',
               clipPath: 'polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px))'

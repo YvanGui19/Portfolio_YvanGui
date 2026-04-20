@@ -121,8 +121,8 @@ const MarathonSymbolGrid = memo(function MarathonSymbolGrid({
     fontFamily: 'var(--font-mono)',
     fontSize: `${cellSize * 0.6}px`,
     lineHeight: `${cellSize}px`,
-    color: inverted ? '#C2FE0B' : '#0A0E1A',
-    backgroundColor: inverted ? '#0A0E1A' : 'transparent',
+    color: inverted ? '#C2FE0B' : '#000000',
+    backgroundColor: inverted ? '#000000' : 'transparent',
     transform: mode === 'scrolling' ? `translateY(-${offset}px)` : 'none',
     transition: mode === 'pulse' ? 'opacity 0.3s ease' : 'none',
   }), [cols, cellSize, inverted, mode, offset]);

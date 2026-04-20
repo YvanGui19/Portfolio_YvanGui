@@ -7,11 +7,11 @@
   --breakpoint-xs: 400px;
 
   /* ═══════════════════════════════════════════════════════════════════════════
-     VERROUPASS DESIGN - PALETTE (Lime #C2FE0B + Dark Navy #0A0E1A)
+     VERROUPASS DESIGN - PALETTE (Lime #C2FE0B + Dark Navy #000000)
      ═══════════════════════════════════════════════════════════════════════════ */
 
   /* Palette principale - VerrouPass */
-  --color-K: #0A0E1A;   /* Dark Navy (fond principal) */
+  --color-K: #000000;   /* Dark Navy (fond principal) */
   --color-L: #C2FE0B;   /* Lime VerrouPass (accent principal) */
   --color-L2: #92C008;  /* Lime fonce */
   --color-W: #f0f0ec;   /* Blanc casse (texte) */
@@ -31,17 +31,17 @@
   --color-orange: #E8763A;
 
   /* Fonds - Dark Navy VerrouPass */
-  --color-void: #0A0E1A;
+  --color-void: #000000;
   --color-deep: #0D1221;
   --color-surface: #141928;
   --color-steel: #1C2333;
 
   /* Aliases fond */
-  --color-dark-navy: #0A0E1A;
+  --color-dark-navy: #000000;
   --color-dark-blue: #080C15;
   --color-mid-navy: #1C2333;
   --color-slate: #1C2333;
-  --color-black: #0A0E1A;
+  --color-black: #000000;
 
   /* Texte (mise a jour) */
   --color-white: #f0f0ec;
@@ -52,7 +52,7 @@
   /* Aliases pour compatibilite */
   --color-primary: #C2FE0B;
   --color-primary-dark: #92C008;
-  --color-background: #0A0E1A;
+  --color-background: #000000;
   --color-surface-light: #141928;
   --color-border: #1C2333;
   --color-text: #f0f0ec;
@@ -61,7 +61,7 @@
   --color-danger: #FF3030;
   --color-danger-dim: #CC2020;
   --color-warning: #E8763A;
-  --color-terminal-bg: #0A0E1A;
+  --color-terminal-bg: #000000;
   --color-terminal-header: #0D1221;
   --color-blaze: #E8763A;
   --color-blaze-dim: #7A3A18;

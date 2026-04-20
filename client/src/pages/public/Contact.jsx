@@ -83,7 +83,7 @@ function Contact() {
         <div className="grid lg:grid-cols-5 gap-12 lg:gap-16">
           {/* Info Panel - Style terminal Marathon */}
           <div className="lg:col-span-2">
-            <div className="relative border border-cyan/20 bg-[#0A0E1A]/60 p-6">
+            <div className="relative border border-cyan/20 bg-[#000000]/60 p-6">
               {/* Coins décoratifs */}
               <div className="absolute -top-px -left-px w-3 h-3 border-t-2 border-l-2 border-cyan" />
               <div className="absolute -top-px -right-px w-3 h-3 border-t-2 border-r-2 border-cyan" />
@@ -125,7 +125,7 @@ function Contact() {
 
           {/* Form - Style terminal Marathon */}
           <div className="lg:col-span-3">
-            <div className="relative border border-lime/20 bg-[#0A0E1A]/60 p-6 sm:p-8">
+            <div className="relative border border-lime/20 bg-[#000000]/60 p-6 sm:p-8">
               {/* Coins décoratifs */}
               <div className="absolute -top-px -left-px w-4 h-4 border-t-2 border-l-2 border-lime" />
               <div className="absolute -top-px -right-px w-4 h-4 border-t-2 border-r-2 border-lime" />
@@ -154,7 +154,7 @@ function Contact() {
                     value={formData.name}
                     onChange={handleChange}
                     placeholder="Votre nom"
-                    className="w-full bg-[#0A0E1A] border border-lime/20 text-white py-3 px-4 focus:border-cyan focus:shadow-[0_0_15px_rgba(1,255,255,0.2)] focus:outline-none transition-all placeholder:text-[#f0f0ec]/30 font-mono text-sm"
+                    className="w-full bg-[#000000] border border-lime/20 text-white py-3 px-4 focus:border-cyan focus:shadow-[0_0_15px_rgba(1,255,255,0.2)] focus:outline-none transition-all placeholder:text-[#f0f0ec]/30 font-mono text-sm"
                   />
                   {errors.name && (
                     <p className="text-[#FF3030] text-xs mt-2 font-mono" role="alert" aria-live="polite">⚠ {errors.name}</p>
@@ -171,7 +171,7 @@ function Contact() {
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="Votre email"
-                    className="w-full bg-[#0A0E1A] border border-lime/20 text-white py-3 px-4 focus:border-cyan focus:shadow-[0_0_15px_rgba(1,255,255,0.2)] focus:outline-none transition-all placeholder:text-[#f0f0ec]/30 font-mono text-sm"
+                    className="w-full bg-[#000000] border border-lime/20 text-white py-3 px-4 focus:border-cyan focus:shadow-[0_0_15px_rgba(1,255,255,0.2)] focus:outline-none transition-all placeholder:text-[#f0f0ec]/30 font-mono text-sm"
                   />
                   {errors.email && (
                     <p className="text-[#FF3030] text-xs mt-2 font-mono" role="alert" aria-live="polite">⚠ {errors.email}</p>
@@ -188,7 +188,7 @@ function Contact() {
                     onChange={handleChange}
                     rows={5}
                     placeholder="Votre message..."
-                    className="w-full bg-[#0A0E1A] border border-lime/20 text-white py-3 px-4 focus:border-cyan focus:shadow-[0_0_15px_rgba(1,255,255,0.2)] focus:outline-none transition-all resize-none placeholder:text-[#f0f0ec]/30 font-mono text-sm"
+                    className="w-full bg-[#000000] border border-lime/20 text-white py-3 px-4 focus:border-cyan focus:shadow-[0_0_15px_rgba(1,255,255,0.2)] focus:outline-none transition-all resize-none placeholder:text-[#f0f0ec]/30 font-mono text-sm"
                   />
                   {errors.message && (
                     <p className="text-[#FF3030] text-xs mt-2 font-mono" role="alert" aria-live="polite">⚠ {errors.message}</p>
@@ -198,7 +198,7 @@ function Contact() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="relative w-full py-5 bg-lime text-[#0A0E1A] font-bold text-xl uppercase tracking-wide transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_40px_rgba(194,254,11,0.5)] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:shadow-none cursor-pointer group overflow-hidden"
+                  className="relative w-full py-5 bg-lime text-[#000000] font-bold text-xl uppercase tracking-wide transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_40px_rgba(194,254,11,0.5)] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:shadow-none cursor-pointer group overflow-hidden"
                   style={{
                     fontFamily: '"Big Shoulders Display", sans-serif',
                     clipPath: 'polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px))'

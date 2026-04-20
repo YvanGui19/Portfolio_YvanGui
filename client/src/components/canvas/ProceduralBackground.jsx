@@ -20,7 +20,7 @@ const ProceduralBackground = memo(function ProceduralBackground({
 
   // Colors (VerrouPass palette)
   colorLime = '#C2FE0B',
-  colorBlack = '#0A0E1A',
+  colorBlack = '#000000',
 
   // Animation settings
   animated = false,

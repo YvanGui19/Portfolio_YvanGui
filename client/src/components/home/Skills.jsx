@@ -2,7 +2,6 @@ import { useCallback } from "react";
 import { motion } from "framer-motion";
 import skillService from "../../services/skillService";
 import useFetch from "../../hooks/useFetch";
-import { SymbolX, SymbolSquare, SymbolCircleDot, SymbolStar6, SymbolPlus } from "../marathon/HeroSymbols";
 import {
   SiHtml5,
   SiJavascript,
@@ -121,26 +120,7 @@ function Skills() {
   }, []);
 
   return (
-    <section className="bg-[#0A0E1A] relative overflow-hidden">
-      {/* Symboles du hero en arrière-plan - grands et statiques */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <SymbolX
-          className="absolute -left-[5%] top-[10%] w-[280px] sm:w-[400px] h-auto text-lime opacity-[0.04]"
-        />
-        <SymbolSquare
-          className="absolute right-[5%] top-[5%] w-[200px] sm:w-[300px] h-auto text-cyan opacity-[0.03]"
-        />
-        <SymbolCircleDot
-          className="absolute left-[15%] bottom-[10%] w-[180px] sm:w-[250px] h-auto text-lime opacity-[0.03]"
-        />
-        <SymbolStar6
-          className="absolute right-[10%] bottom-[15%] w-[220px] sm:w-[320px] h-auto text-cyan opacity-[0.04]"
-        />
-        <SymbolPlus
-          className="absolute left-[50%] top-[50%] -translate-x-1/2 -translate-y-1/2 w-[350px] sm:w-[500px] h-auto text-lime opacity-[0.02]"
-        />
-      </div>
-
+    <section className="bg-transparent relative overflow-hidden">
       {/* Header de section */}
       <div className="py-24 sm:py-28 px-8 sm:px-12 lg:px-14 relative">
         {/* Numéro de section */}

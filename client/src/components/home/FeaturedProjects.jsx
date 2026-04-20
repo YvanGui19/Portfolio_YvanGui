@@ -4,7 +4,6 @@ import projectService from "../../services/projectService";
 import useFetch from "../../hooks/useFetch";
 import { getImageUrl } from "../../utils/imageUrl";
 import { MarathonLetter } from "../marathon/MarathonLetters";
-import { SymbolSquareDot, SymbolRing, SymbolBullseye, SymbolStar4 } from "../marathon/HeroSymbols";
 
 /**
  * FeaturedProjects - Style MARATHON comme la maquette
@@ -33,7 +32,7 @@ function FeaturedProjects() {
       className="group cursor-pointer relative overflow-hidden h-[400px] border border-lime/10 hover:border-lime/40 transition-all duration-300"
     >
       {/* Fond noir */}
-      <div className="absolute inset-0 bg-[#0A0E1A]" />
+      <div className="absolute inset-0 bg-[#000000]" />
 
       {/* Image du projet si disponible */}
       {project.images?.[0] && (
@@ -125,23 +124,7 @@ function FeaturedProjects() {
   );
 
   return (
-    <section className="bg-[#0A0E1A] relative overflow-hidden pb-24 sm:pb-32">
-      {/* Symboles du hero en arrière-plan - grands et statiques */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <SymbolSquareDot
-          className="absolute -left-[3%] top-[8%] w-[250px] sm:w-[350px] h-auto text-lime opacity-[0.04]"
-        />
-        <SymbolRing
-          className="absolute right-[8%] top-[20%] w-[280px] sm:w-[400px] h-auto text-cyan opacity-[0.03]"
-        />
-        <SymbolBullseye
-          className="absolute left-[20%] bottom-[5%] w-[200px] sm:w-[280px] h-auto text-lime opacity-[0.03]"
-        />
-        <SymbolStar4
-          className="absolute right-[5%] bottom-[10%] w-[180px] sm:w-[250px] h-auto text-cyan opacity-[0.04]"
-        />
-      </div>
-
+    <section className="bg-transparent relative overflow-hidden pb-24 sm:pb-32">
       {/* Header de section */}
       <div className="pt-24 pb-8 sm:pt-28 sm:pb-10 px-8 sm:px-12 lg:px-14 relative">
         {/* Numéro de section */}

@@ -20,7 +20,7 @@ function Projects() {
 
   if (loading) {
     return (
-      <div className="pt-24 pb-20 flex justify-center items-center min-h-screen bg-[#0A0E1A]">
+      <div className="pt-24 pb-20 flex justify-center items-center min-h-screen bg-[#000000]">
         <span className="font-mono text-[10px] tracking-[0.2em] text-[#f0f0ec] uppercase">
           LOADING...
         </span>
@@ -30,7 +30,7 @@ function Projects() {
 
   if (error) {
     return (
-      <div className="pt-24 pb-20 flex justify-center items-center min-h-screen bg-[#0A0E1A]">
+      <div className="pt-24 pb-20 flex justify-center items-center min-h-screen bg-[#000000]">
         <span className="font-mono text-[10px] tracking-[0.2em] text-[#FF3030] uppercase">
           ERROR
         </span>
@@ -74,7 +74,7 @@ function Projects() {
         </div>
 
         {/* Filters - Style terminal */}
-        <div className="relative mb-12 sm:mb-16 p-4 border border-cyan/20 bg-[#0A0E1A]/80">
+        <div className="relative mb-12 sm:mb-16 p-4 border border-cyan/20 bg-[#000000]/80">
           {/* Décoration coin */}
           <div className="absolute -top-px -left-px w-3 h-3 border-t-2 border-l-2 border-cyan" />
           <div className="absolute -top-px -right-px w-3 h-3 border-t-2 border-r-2 border-cyan" />
@@ -96,7 +96,7 @@ function Projects() {
                 aria-pressed={activeFilter === category}
                 className={`font-mono text-[12px] sm:text-[14px] tracking-[0.15em] uppercase transition-all cursor-pointer px-3 py-1 border ${
                   activeFilter === category
-                    ? "text-[#0A0E1A] bg-cyan border-cyan shadow-[0_0_15px_rgba(1,255,255,0.4)]"
+                    ? "text-[#000000] bg-cyan border-cyan shadow-[0_0_15px_rgba(1,255,255,0.4)]"
                     : "text-[#f0f0ec] border-[#f0f0ec]/20 hover:border-cyan/60 hover:text-cyan"
                 }`}
               >
@@ -126,7 +126,7 @@ function Projects() {
                 className="group relative cursor-pointer overflow-hidden h-[58vh] border border-lime/10 hover:border-lime/40 transition-all duration-300"
               >
                 {/* Fond */}
-                <div className="absolute inset-0 bg-[#0A0E1A]" />
+                <div className="absolute inset-0 bg-[#000000]" />
 
                 {/* Image si disponible */}
                 {project.images?.[0] && (

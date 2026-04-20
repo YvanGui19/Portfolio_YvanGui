@@ -15,7 +15,7 @@ const SkillsReveal = memo(function SkillsReveal({
   onComplete,
   duration = 1.8, // Total animation duration in seconds
   colorLime = '#C2FE0B',
-  colorBlack = '#0A0E1A',
+  colorBlack = '#000000',
   className = '',
 }) {
   const canvasRef = useRef(null);

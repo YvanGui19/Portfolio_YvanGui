@@ -6,7 +6,7 @@ import { HeroBackground } from "../canvas";
 
 function HeroMarathon() {
   return (
-    <section className="min-h-screen bg-[#0A0E1A] relative overflow-hidden flex flex-col">
+    <section className="min-h-screen bg-[#000000] relative overflow-hidden flex flex-col">
       {/* Fond Canvas procedural */}
       <HeroBackground className="opacity-90" />
 
@@ -93,11 +93,11 @@ function HeroMarathon() {
               >
                 <p
                   style={{ fontFamily: '"Big Shoulders Display", sans-serif' }}
-                  className="text-[#0A0E1A] text-[20px] sm:text-[24px] font-bold uppercase leading-[1.1] mb-3"
+                  className="text-[#000000] text-[20px] sm:text-[24px] font-bold uppercase leading-[1.1] mb-3"
                 >
                   Développeur Web Full Stack
                 </p>
-                <p className="font-mono text-[13px] sm:text-[14px] leading-[1.7] text-[#0A0E1A]/80">
+                <p className="font-mono text-[13px] sm:text-[14px] leading-[1.7] text-[#000000]/80">
                   Ancien expert technique dans l'aéronautique, j'ai choisi de mettre mes compétences d'analyse, de rigueur et de résolution de problèmes au service du développement web.
                 </p>
               </div>

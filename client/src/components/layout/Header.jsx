@@ -35,8 +35,8 @@ function Header() {
       <header
         className={`fixed top-0 left-0 right-0 z-[1000] transition-all duration-300 ${
           isScrolled
-            ? "bg-[#0A0E1A]/95 backdrop-blur-md"
-            : "bg-[#0A0E1A]/80 backdrop-blur-sm"
+            ? "bg-[#000000]/95 backdrop-blur-md"
+            : "bg-[#000000]/80 backdrop-blur-sm"
         }`}
       >
         <div className="max-w-[1400px] mx-auto px-6 sm:px-8">
@@ -104,7 +104,7 @@ function Header() {
 
       {/* Mobile menu - fullscreen editorial */}
       <div
-        className={`fixed inset-0 bg-[#0A0E1A] z-[999] md:hidden transition-all duration-500 ${
+        className={`fixed inset-0 bg-[#000000] z-[999] md:hidden transition-all duration-500 ${
           isMenuOpen ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"
         }`}
       >
