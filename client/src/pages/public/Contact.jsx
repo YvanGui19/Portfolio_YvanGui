@@ -92,7 +92,6 @@ function Contact() {
 
               {/* Header terminal */}
               <div className="flex items-center gap-2 mb-6 pb-4 border-b border-cyan/20">
-                <div className="w-2 h-2 rounded-full bg-cyan animate-pulse" />
                 <span className="font-mono text-[10px] tracking-[0.2em] text-cyan/80 uppercase">
                   contact.info
                 </span>
@@ -120,7 +119,7 @@ function Contact() {
                 {/* Status */}
                 <div className="flex items-start gap-4">
                   <div className="w-5 h-5 flex items-center justify-center">
-                    <div className="w-2 h-2 rounded-full bg-lime animate-pulse" />
+                    <div className="w-2 h-2 rounded-full bg-lime" />
                   </div>
                   <div>
                     <span className="font-mono text-[10px] tracking-[0.2em] text-[#f0f0ec]/60 block mb-1 uppercase">STATUS</span>

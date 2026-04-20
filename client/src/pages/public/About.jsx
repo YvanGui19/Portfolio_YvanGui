@@ -80,7 +80,6 @@ function About() {
 
                 {/* Header terminal */}
                 <div className="flex items-center gap-2 mb-6 pb-4 border-b border-lime/20">
-                  <div className="w-2 h-2 rounded-full bg-lime animate-pulse" />
                   <span className="font-mono text-[10px] tracking-[0.2em] text-lime/80 uppercase">
                     bio.profile
                   </span>
