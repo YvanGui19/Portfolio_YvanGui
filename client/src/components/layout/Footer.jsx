@@ -9,8 +9,8 @@ function Footer() {
           -45deg,
           #000000,
           #000000 12px,
-          #C2FE0B 12px,
-          #C2FE0B 24px
+          #1a2205 12px,
+          #1a2205 24px
         )`,
       }}
     >

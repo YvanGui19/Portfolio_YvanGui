@@ -152,8 +152,6 @@ function Projects() {
                   }}
                 />
 
-                {/* CRT lines subtle effect */}
-                <div className="absolute inset-0 z-[3] pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500 hero-crt-lines" />
 
                 {/* Coins Marathon */}
                 <div className="absolute top-0 left-0 w-6 h-6 border-t-2 border-l-2 border-lime/40 group-hover:border-lime transition-colors z-[4]" />
