@@ -118,7 +118,7 @@ function FeaturedProjects() {
   return (
     <section className="relative overflow-hidden pb-24 sm:pb-32">
       {/* Header de section */}
-      <div className="pt-24 pb-8 sm:pt-28 sm:pb-10 px-8 sm:px-12 lg:px-14 relative">
+      <div className="pt-12 pb-8 sm:pt-16 sm:pb-10 px-8 sm:px-12 lg:px-14 relative">
         {/* Numéro de section */}
 <div className="flex justify-between items-end">
           <h2

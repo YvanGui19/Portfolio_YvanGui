@@ -247,7 +247,7 @@ function Skills() {
 
   return (
     <section className="relative">
-      <div className="pt-16 sm:pt-20 pb-4 px-8 sm:px-12 lg:px-14 relative">
+      <div className="pt-16 sm:pt-20 pb-10 sm:pb-12 px-8 sm:px-12 lg:px-14 relative">
         <h2
           style={{ fontFamily: '"Big Shoulders Display", sans-serif' }}
           className="font-black text-[clamp(50px,7vw,96px)] uppercase leading-[0.9]"
@@ -256,7 +256,7 @@ function Skills() {
         </h2>
       </div>
 
-      <div className="px-4 sm:px-12 lg:px-14 pb-12 sm:pb-16">
+      <div className="px-4 sm:px-12 lg:px-14 pb-4 sm:pb-6">
         {loading ? (
           <div className="flex justify-center items-center py-10">
             <span className="font-mono text-[12px] tracking-[0.2em] text-[#f0f0ec] uppercase">
