@@ -120,11 +120,11 @@ function Skills() {
   }, []);
 
   return (
-    <section className="bg-transparent relative overflow-hidden">
+    <section className="relative overflow-hidden">
       {/* Header de section */}
       <div className="py-24 sm:py-28 px-8 sm:px-12 lg:px-14 relative">
         {/* Numéro de section */}
-        <span className="font-mono text-[10px] tracking-[0.3em] text-cyan/50 block mb-4">
+        <span className="font-mono text-[12px] tracking-[0.2em] text-lime/80 font-semibold block mb-4">
           [ 01 / COMPÉTENCES ]
         </span>
 
@@ -133,14 +133,7 @@ function Skills() {
           className="font-black text-[clamp(50px,7vw,96px)] uppercase leading-[0.9]"
         >
           <span className="text-[#f0f0ec]">TECH </span>
-          <span
-            style={{
-              color: 'transparent',
-              WebkitTextStroke: '2px #f0f0ec',
-            }}
-          >
-            STACK
-          </span>
+          <span className="text-[#f0f0ec]">STACK</span>
         </h2>
       </div>
 

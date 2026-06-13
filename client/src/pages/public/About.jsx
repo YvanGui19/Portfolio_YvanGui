@@ -41,28 +41,11 @@ function About() {
       </Helmet>
 
       <div className="max-w-[1200px] mx-auto px-6 sm:px-8">
-        {/* Header avec artefacts Marathon */}
+        {/* Header */}
         <div className="mb-16 sm:mb-24 pt-8 relative">
-          {/* Artefacts décoratifs */}
-          <div className="marathon-diagonal-stripes-lime absolute -left-4 top-0 w-2 h-24 opacity-60" />
-          <div className="marathon-grid marathon-grid-lime absolute -right-4 top-4 w-16 h-16 opacity-30" />
-
-          {/* Numéro de section */}
-          <span className="font-mono text-[10px] tracking-[0.3em] text-lime/60 block mb-2">
-            [ 02 / PROFIL ]
-          </span>
-
           <h1 className="text-editorial-display text-white">
             À PROPOS
           </h1>
-
-          {/* Ligne décorative */}
-          <div className="flex items-center gap-4 mt-4">
-            <div className="h-[2px] w-16 bg-lime" />
-            <span className="text-[#f0f0ec]/60 text-lg leading-relaxed">
-              Parcours & Compétences
-            </span>
-          </div>
         </div>
 
         {/* Bio Section */}
@@ -71,7 +54,7 @@ function About() {
             {/* Bio text - Style terminal Marathon */}
             <div className="relative order-2 lg:order-1">
               {/* Container terminal */}
-              <div className="relative border border-lime/20 bg-[#000000]/60 p-6 sm:p-8">
+              <div className="relative bg-lime/10 backdrop-blur-md p-6 sm:p-8">
                 {/* Coins décoratifs */}
                 <div className="absolute -top-px -left-px w-4 h-4 border-t-2 border-l-2 border-lime" />
                 <div className="absolute -top-px -right-px w-4 h-4 border-t-2 border-r-2 border-lime" />
@@ -91,11 +74,11 @@ function About() {
                     dans l&apos;aéronautique. Pendant plus de dix ans, j&apos;ai travaillé sur des hélicoptères
                     et des avions.
                   </p>
-                  <p className="text-[#d0d0cc] text-lg leading-relaxed mb-6">
+                  <p className="text-[#f0f0ec] text-lg sm:text-xl leading-relaxed mb-6">
                     Ces expériences m&apos;ont appris la précision, la rigueur et la fiabilité opérationnelle
                     dans des environnements exigeants.
                   </p>
-                  <p className="text-[#d0d0cc] text-lg leading-relaxed">
+                  <p className="text-[#f0f0ec] text-lg sm:text-xl leading-relaxed">
                     Aujourd&apos;hui, je conçois des solutions web fiables et orientées utilisateur, avec la
                     même rigueur qui m&apos;a guidé dans l&apos;aéronautique.
                   </p>
@@ -130,11 +113,10 @@ function About() {
         {/* Timeline Section */}
         <div className="mb-20 sm:mb-28">
           <div className="flex items-center gap-4 mb-12">
-            <div className="marathon-diagonal-stripes-lime w-8 h-8 opacity-60" />
             <h2 className="text-editorial-medium text-white">
               PARCOURS
             </h2>
-            <div className="flex-1 h-[1px] bg-gradient-to-r from-lime/40 to-transparent" />
+            <div className="flex-1 h-[2px] bg-gradient-to-r from-lime to-transparent" />
           </div>
 
           {loadingExp ? (
@@ -225,7 +207,7 @@ function About() {
             <h2 className="text-editorial-medium text-white">
               COMPÉTENCES
             </h2>
-            <div className="flex-1 h-[1px] bg-gradient-to-r from-lime/40 to-transparent" />
+            <div className="flex-1 h-[2px] bg-gradient-to-r from-lime to-transparent" />
           </div>
 
           {loadingSkills ? (
@@ -251,11 +233,8 @@ function About() {
           )}
         </div>
 
-        {/* CTA - Style Marathon */}
-        <div className="pt-16 flex justify-center items-center gap-8 sm:gap-16">
-          {/* Artefact gauche */}
-          <div className="marathon-diagonal-stripes-lime w-12 h-24 opacity-20 hidden sm:block" />
-
+        {/* CTA */}
+        <div className="pt-16 flex justify-center items-center">
           <Link
             to="/projects"
             className="relative inline-block bg-lime text-[#000000] px-10 py-5 font-bold text-xl uppercase tracking-wide transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(194,254,11,0.5)] group"
@@ -268,9 +247,6 @@ function About() {
             {/* Effet glitch au hover */}
             <span className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-100" />
           </Link>
-
-          {/* Artefact droit */}
-          <div className="marathon-diagonal-stripes-lime w-12 h-24 opacity-20 hidden sm:block" />
         </div>
       </div>
     </div>

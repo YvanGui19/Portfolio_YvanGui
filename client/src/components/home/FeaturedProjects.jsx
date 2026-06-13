@@ -124,11 +124,11 @@ function FeaturedProjects() {
   );
 
   return (
-    <section className="bg-transparent relative overflow-hidden pb-24 sm:pb-32">
+    <section className="relative overflow-hidden pb-24 sm:pb-32">
       {/* Header de section */}
       <div className="pt-24 pb-8 sm:pt-28 sm:pb-10 px-8 sm:px-12 lg:px-14 relative">
         {/* Numéro de section */}
-        <span className="font-mono text-[10px] tracking-[0.3em] text-lime/50 block mb-4">
+        <span className="font-mono text-[12px] tracking-[0.2em] text-lime/80 font-semibold block mb-4">
           [ 02 / RÉALISATIONS ]
         </span>
 
@@ -137,19 +137,11 @@ function FeaturedProjects() {
             style={{ fontFamily: '"Big Shoulders Display", sans-serif' }}
             className="font-black text-[clamp(50px,7vw,96px)] uppercase leading-[0.9]"
           >
-            <span className="text-[#f0f0ec]">PRO</span>
-            <span
-              style={{
-                color: 'transparent',
-                WebkitTextStroke: '2px #f0f0ec',
-              }}
-            >
-              JETS
-            </span>
+            <span className="text-[#f0f0ec]">PROJETS</span>
           </h2>
           <button
             onClick={() => navigate('/projects')}
-            className="hidden sm:flex items-center gap-2 font-mono text-[12px] tracking-[0.15em] text-[#f0f0ec] uppercase px-4 py-2 border border-lime/30 transition-all hover:text-lime hover:border-lime hover:shadow-[0_0_15px_rgba(194,254,11,0.2)] cursor-pointer"
+            className="hidden sm:flex items-center gap-2 font-mono text-[12px] tracking-[0.15em] text-[#f0f0ec] uppercase px-5 py-2.5 bg-lime/10 backdrop-blur-md transition-all hover:text-lime hover:bg-lime/20 hover:shadow-[0_0_20px_rgba(194,254,11,0.3)] cursor-pointer"
           >
             Tous les projets
             <span className="text-lime">→</span>
@@ -181,7 +173,7 @@ function FeaturedProjects() {
       <div className="sm:hidden py-8 text-center border-t border-lime/20">
         <button
           onClick={() => navigate('/projects')}
-          className="inline-flex items-center gap-2 font-mono text-[10px] tracking-[0.2em] text-[#f0f0ec] uppercase px-4 py-2 border border-lime/30 transition-all hover:text-lime hover:border-lime cursor-pointer"
+          className="inline-flex items-center gap-2 font-mono text-[10px] tracking-[0.2em] text-[#f0f0ec] uppercase px-5 py-2.5 bg-lime/10 backdrop-blur-md transition-all hover:text-lime hover:bg-lime/20 cursor-pointer"
         >
           Tous les projets
           <span className="text-lime">→</span>

@@ -23,9 +23,7 @@ function Home() {
       </Helmet>
 
       <HeroMarathon />
-
       <Skills />
-
       <FeaturedProjects />
     </>
   )

@@ -7,7 +7,7 @@ import ScrollToTop from '../components/common/ScrollToTop'
 import Header from '../components/layout/Header'
 import Footer from '../components/layout/Footer'
 import GlitchCursor from '../components/GlitchCursor'
-import { ProceduralBackground } from '../components/canvas'
+import { HeroBackground } from '../components/canvas'
 import FlowingSymbols from '../components/canvas/FlowingSymbols'
 
 // Page d'accueil (chargement immédiat pour LCP)
@@ -70,17 +70,18 @@ function AppRouter() {
               element={
                 <div className="min-h-screen bg-[#000000] text-text flex flex-col relative">
                   <GlitchCursor />
-                  <ProceduralBackground
-                    animated={true}
-                    gridStep={28}
-                    targetFps={24}
-                    speed={0.006}
-                    className="fixed opacity-[0.06]"
-                  />
+
+                  {/* Fond Canvas global — visible derrière toutes les pages */}
+                  <div className="fixed inset-0 z-0 pointer-events-none">
+                    <HeroBackground className="opacity-90 w-full h-full" />
+                  </div>
+                  {/* Voile uniforme par-dessus le canvas */}
+                  <div className="fixed inset-0 z-[1] bg-black/65 pointer-events-none" />
+
                   <FlowingSymbols />
                   <SkipLink />
                   <Header />
-                  <main id="main-content" className="flex-1 relative z-[1]">
+                  <main id="main-content" className="flex-1 relative z-[10]">
                     <Suspense fallback={<PageLoader />}>
                       <Routes>
                         <Route path="/" element={<Home />} />

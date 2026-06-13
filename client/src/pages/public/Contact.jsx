@@ -56,34 +56,17 @@ function Contact() {
       </Helmet>
 
       <div className="max-w-[1000px] mx-auto px-6 sm:px-8">
-        {/* Header avec artefacts Marathon */}
+        {/* Header */}
         <div className="mb-14 sm:mb-20 pt-8 relative">
-          {/* Artefacts décoratifs */}
-          <div className="marathon-diagonal-stripes-cyan absolute -left-4 top-0 w-2 h-24 opacity-60" />
-          <div className="marathon-grid marathon-grid-cyan absolute -right-4 top-4 w-16 h-16 opacity-30" />
-
-          {/* Numéro de section */}
-          <span className="font-mono text-[10px] tracking-[0.3em] text-cyan/60 block mb-2">
-            [ 03 / CONNEXION ]
-          </span>
-
           <h1 className="text-editorial-display text-white">
             CONTACT
           </h1>
-
-          {/* Ligne décorative */}
-          <div className="flex items-center gap-4 mt-4">
-            <div className="h-[2px] w-16 bg-cyan" />
-            <span className="text-[#f0f0ec]/60 text-lg leading-relaxed">
-              Travaillons ensemble
-            </span>
-          </div>
         </div>
 
         <div className="grid lg:grid-cols-5 gap-12 lg:gap-16">
           {/* Info Panel - Style terminal Marathon */}
           <div className="lg:col-span-2">
-            <div className="relative border border-cyan/20 bg-[#000000]/60 p-6">
+            <div className="relative bg-cyan/10 backdrop-blur-md p-6">
               {/* Coins décoratifs */}
               <div className="absolute -top-px -left-px w-3 h-3 border-t-2 border-l-2 border-cyan" />
               <div className="absolute -top-px -right-px w-3 h-3 border-t-2 border-r-2 border-cyan" />
@@ -125,7 +108,7 @@ function Contact() {
 
           {/* Form - Style terminal Marathon */}
           <div className="lg:col-span-3">
-            <div className="relative border border-lime/20 bg-[#000000]/60 p-6 sm:p-8">
+            <div className="relative bg-lime/10 backdrop-blur-md p-6 sm:p-8">
               {/* Coins décoratifs */}
               <div className="absolute -top-px -left-px w-4 h-4 border-t-2 border-l-2 border-lime" />
               <div className="absolute -top-px -right-px w-4 h-4 border-t-2 border-r-2 border-lime" />
@@ -137,16 +120,12 @@ function Contact() {
                 <span className="font-mono text-[10px] tracking-[0.2em] text-lime/80 uppercase">
                   message.new
                 </span>
-                <div className="flex-1" />
-                <span className="font-mono text-[9px] text-[#f0f0ec]/40">
-                  ▸ TRANSMISSION
-                </span>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
-                  <label className="flex items-center gap-2 text-[10px] font-mono tracking-[0.2em] text-lime/80 mb-3 uppercase">
-                    <span className="text-lime">▸</span> NOM
+                  <label className="block text-[10px] font-mono tracking-[0.2em] text-lime/80 mb-3 uppercase">
+                    NOM
                   </label>
                   <input
                     type="text"
@@ -162,8 +141,8 @@ function Contact() {
                 </div>
 
                 <div>
-                  <label className="flex items-center gap-2 text-[10px] font-mono tracking-[0.2em] text-lime/80 mb-3 uppercase">
-                    <span className="text-lime">▸</span> EMAIL
+                  <label className="block text-[10px] font-mono tracking-[0.2em] text-lime/80 mb-3 uppercase">
+                    EMAIL
                   </label>
                   <input
                     type="email"
@@ -179,8 +158,8 @@ function Contact() {
                 </div>
 
                 <div>
-                  <label className="flex items-center gap-2 text-[10px] font-mono tracking-[0.2em] text-lime/80 mb-3 uppercase">
-                    <span className="text-lime">▸</span> MESSAGE
+                  <label className="block text-[10px] font-mono tracking-[0.2em] text-lime/80 mb-3 uppercase">
+                    MESSAGE
                   </label>
                   <textarea
                     name="message"

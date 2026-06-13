@@ -46,35 +46,18 @@ function Projects() {
       </Helmet>
 
       <div className="max-w-[1400px] mx-auto px-6 sm:px-8">
-        {/* Header avec artefacts Marathon */}
+        {/* Header */}
         <div className="mb-12 sm:mb-16 pt-8 relative">
-          {/* Artefacts décoratifs */}
-          <div className="marathon-diagonal-stripes-lime absolute -left-4 top-0 w-2 h-24 opacity-60" />
-          <div className="marathon-grid marathon-grid-lime absolute -right-4 top-4 w-16 h-16 opacity-30" />
-
-          {/* Numéro de section */}
-          <span className="font-mono text-[10px] tracking-[0.3em] text-lime/60 block mb-2">
-            [ 01 / PORTFOLIO ]
-          </span>
-
           <h1
             style={{ fontFamily: '"Big Shoulders Display", sans-serif' }}
             className="font-black text-[clamp(50px,10vw,120px)] text-[#f0f0ec] uppercase leading-[0.9] mb-4"
           >
             PROJETS
           </h1>
-
-          {/* Ligne décorative */}
-          <div className="flex items-center gap-4 mt-4">
-            <div className="h-[2px] w-16 bg-lime" />
-            <span className="text-[#f0f0ec]/60 text-lg leading-relaxed">
-              Réalisations & Expériences
-            </span>
-          </div>
         </div>
 
         {/* Filters - Style terminal */}
-        <div className="relative mb-12 sm:mb-16 p-4 border border-cyan/20 bg-[#000000]/80">
+        <div className="relative mb-12 sm:mb-16 p-4 bg-cyan/10 backdrop-blur-md">
           {/* Décoration coin */}
           <div className="absolute -top-px -left-px w-3 h-3 border-t-2 border-l-2 border-cyan" />
           <div className="absolute -top-px -right-px w-3 h-3 border-t-2 border-r-2 border-cyan" />
