@@ -460,7 +460,7 @@ function TerminalInterface() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="h-screen bg-dark-navy flex flex-col overflow-hidden relative"
+      className="h-[100dvh] bg-dark-navy flex flex-col overflow-hidden relative"
     >
       {/* Top status bar (tmux style) */}
       <div className="flex-shrink-0">

@@ -17,12 +17,12 @@ function HeroMarathon() {
 
       {/* Zone de contenu — le voile est appliqué globalement au niveau layout */}
       <div className="flex-1 flex items-center relative z-10 w-full">
-        <div className="w-full px-8 sm:px-12 lg:px-[190px] pb-16 sm:pb-20 pt-16">
-          <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-8">
+        <div className="w-full px-4 sm:px-12 lg:px-[190px] pb-12 sm:pb-20 pt-12 sm:pt-16">
+          <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6 sm:gap-8">
             {/* Nom - Big Shoulders Display */}
             <h1 className="leading-[0.88]">
               <span
-                className="block text-[clamp(88px,13vw,196px)] text-[#f0f0ec] uppercase"
+                className="block text-[clamp(54px,16vw,90px)] sm:text-[clamp(88px,13vw,196px)] text-[#f0f0ec] uppercase"
                 style={{
                   fontFamily: '"Big Shoulders Display", sans-serif',
                   textShadow: '0 4px 30px rgba(0, 0, 0, 0.6)',
@@ -32,7 +32,7 @@ function HeroMarathon() {
                 YVAN
               </span>
               <span
-                className="block text-[clamp(88px,13vw,196px)] uppercase text-[#C2FE0B]"
+                className="block text-[clamp(54px,16vw,90px)] sm:text-[clamp(88px,13vw,196px)] uppercase text-[#C2FE0B]"
                 style={{
                   fontFamily: '"Big Shoulders Display", sans-serif',
                   fontWeight: 900,

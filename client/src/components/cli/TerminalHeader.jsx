@@ -49,7 +49,7 @@ function TerminalHeader({ onShowHelp, helpVisible }) {
 
       {/* Center - Title */}
       <div className="flex-1 flex items-center justify-center text-grey/60">
-        <span className="text-lime">yvan</span><span className="text-white">@</span><span className="text-cyan hidden xs:inline">portfolio</span><span className="text-cyan xs:hidden">pf</span><span className="hidden sm:inline"><span className="text-white">:</span><span className="text-violet">~</span><span className="text-lime">$</span></span>
+        <span className="text-lime">yvan</span><span className="text-cyan">@</span><span className="text-cyan hidden xs:inline">portfolio</span><span className="text-cyan xs:hidden">pf</span><span className="hidden sm:inline"><span className="text-white">:</span><span className="text-violet">~</span><span className="text-lime">$</span></span>
       </div>
 
       {/* Right section - System info */}

@@ -4,7 +4,7 @@ function TerminalLine({ line }) {
       <div className="flex flex-wrap items-center text-[0.75rem] sm:text-[0.85rem]">
         {/* User@host:path$ */}
         <span className="text-lime font-bold">{line.user}</span>
-        <span className="text-white">@</span>
+        <span className="text-cyan">@</span>
         <span className="text-cyan font-bold">{line.host}</span>
         <span className="text-white">:</span>
         <span className="text-violet font-bold">{line.path}</span>

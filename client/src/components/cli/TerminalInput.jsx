@@ -84,7 +84,7 @@ function TerminalInput({
 
   return (
     <div
-      className="flex items-center px-2 sm:px-4 py-2 sm:py-3 font-mono text-[0.75rem] sm:text-[0.85rem] cursor-text"
+      className="flex items-center px-2 sm:px-4 py-2 sm:py-3 font-mono text-[16px] sm:text-[0.85rem] cursor-text"
       onClick={handleContainerClick}
     >
       {/* Prompt prefix - compact on mobile */}
@@ -97,7 +97,7 @@ function TerminalInput({
         <>
           <div className="flex items-center">
             <span className="text-lime font-bold">yvan</span>
-            <span className="text-white">@</span>
+            <span className="text-cyan">@</span>
             <span className="text-cyan font-bold">portfolio</span>
             <span className="text-white">:</span>
             <span className="text-violet font-bold">{displayPath}</span>

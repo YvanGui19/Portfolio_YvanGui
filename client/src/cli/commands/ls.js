@@ -51,7 +51,7 @@ const lsCommand = {
       const lineWidth = 6 + 10 + 6 + 7 + maxNameLen; // [ID] + perms + size + date + name
 
       const lines = [
-        { type: "text", content: `total ${entries.length}`, className: "text-grey/60" },
+        { type: "text", content: `total ${entries.length}`, className: "text-cyan" },
         { type: "text", content: "-".repeat(lineWidth), className: "text-white/10" },
       ];
 
@@ -70,7 +70,7 @@ const lsCommand = {
       });
 
       lines.push({ type: "text", content: "-".repeat(lineWidth), className: "text-white/10" });
-      lines.push({ type: "text", content: "// [TIPS] tapez directement le numéro d'ID au lieu du nom complet après votre commande", className: "text-white/20" });
+      lines.push({ type: "text", content: "// [TIPS] tapez directement le numéro d'ID au lieu du nom complet après votre commande", className: "text-orange" });
 
       return lines;
     }
@@ -79,7 +79,7 @@ const lsCommand = {
     const nameColWidth = 44;
     const lines = [
       { type: "text", content: `+------+${"-".repeat(nameColWidth + 2)}+`, className: "text-white/20" },
-      { type: "text", content: `|  ID  | ${"Nom".padEnd(nameColWidth)} |`, className: "text-grey/60" },
+      { type: "text", content: `|  ID  | ${"Nom".padEnd(nameColWidth)} |`, className: "text-cyan" },
       { type: "text", content: `+------+${"-".repeat(nameColWidth + 2)}+`, className: "text-white/20" },
     ];
 
@@ -96,7 +96,7 @@ const lsCommand = {
     });
 
     lines.push({ type: "text", content: `+------+${"-".repeat(nameColWidth + 2)}+`, className: "text-white/20" });
-    lines.push({ type: "text", content: "// [TIPS] tapez directement le numéro d'ID au lieu du nom complet après votre commande", className: "text-white/20" });
+    lines.push({ type: "text", content: "// [TIPS] tapez directement le numéro d'ID au lieu du nom complet après votre commande", className: "text-orange" });
 
     return lines;
   },
