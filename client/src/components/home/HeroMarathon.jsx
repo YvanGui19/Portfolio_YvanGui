@@ -44,7 +44,7 @@ function HeroMarathon() {
             </h1>
 
             {/* Description - Style VerrouPass avec coins coupés et glow */}
-            <div className="relative max-w-[400px] lg:mt-[clamp(77px,11.5vw,172px)]">
+            <div className="relative max-w-[400px] lg:mt-[clamp(40px,6vw,95px)]">
               {/* Container principal */}
               <div
                 className="bg-lime/10 backdrop-blur-md p-6 sm:p-8 shadow-[0_0_30px_rgba(194,254,11,0.3)]"
@@ -62,8 +62,6 @@ function HeroMarathon() {
                   Ancien expert technique dans l'aéronautique, j'ai choisi de mettre mes compétences d'analyse, de rigueur et de résolution de problèmes au service du développement web.
                 </p>
               </div>
-              {/* Artefact décoratif */}
-              <div className="absolute -bottom-4 -right-4 w-8 h-8 border border-lime/30 hidden sm:block" />
             </div>
           </div>
         </div>

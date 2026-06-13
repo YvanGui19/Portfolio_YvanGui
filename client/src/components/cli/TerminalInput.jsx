@@ -95,20 +95,14 @@ function TerminalInput({
         </div>
       ) : (
         <>
-          <div className="flex items-center gap-0.5 mr-2">
+          <div className="flex items-center">
             <span className="text-lime font-bold">yvan</span>
-            <span className="text-grey/40">@</span>
+            <span className="text-white">@</span>
             <span className="text-cyan font-bold">portfolio</span>
-          </div>
-
-          {/* Path */}
-          <div className="flex items-center mr-2">
-            <span className="text-grey/40">:</span>
+            <span className="text-white">:</span>
             <span className="text-violet font-bold">{displayPath}</span>
+            <span className="text-lime mx-1">$</span>
           </div>
-
-          {/* Prompt symbol */}
-          <span className="text-lime mr-2">$</span>
         </>
       )}
 

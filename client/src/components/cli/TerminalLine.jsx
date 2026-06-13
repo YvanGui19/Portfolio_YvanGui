@@ -2,17 +2,15 @@ function TerminalLine({ line }) {
   if (line.type === "prompt") {
     return (
       <div className="flex flex-wrap items-center text-[0.75rem] sm:text-[0.85rem]">
-        {/* User@host */}
+        {/* User@host:path$ */}
         <span className="text-lime font-bold">{line.user}</span>
-        <span className="text-grey/40">@</span>
+        <span className="text-white">@</span>
         <span className="text-cyan font-bold">{line.host}</span>
-        {/* Path */}
-        <span className="text-grey/40">:</span>
+        <span className="text-white">:</span>
         <span className="text-violet font-bold">{line.path}</span>
-        {/* Prompt symbol */}
         <span className="text-lime mx-1">$</span>
         {/* Command */}
-        <span className="text-off-white break-all">{line.command}</span>
+        <span className="text-white break-all">{line.command}</span>
       </div>
     );
   }
@@ -67,7 +65,7 @@ function TerminalLine({ line }) {
 
   // Default text line
   return (
-    <div className={`${line.className || "text-grey"} whitespace-pre-wrap`}>
+    <div className={`${line.className || "text-white"} whitespace-pre-wrap`}>
       {line.content}
     </div>
   );

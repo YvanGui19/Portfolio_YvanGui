@@ -61,10 +61,10 @@ const CLI_ASCII = [
 // Footer desktop (large) - lignes horizontales uniquement
 const WelcomeFooterDesktop = () => (
   <div className="my-4 font-mono whitespace-pre">
-    <div className="text-white/20">  ════════════════════════════════════════════════════════════════════════</div>
-    <div className="text-cyan/60">    YVAN.GUI TERMINAL v2.0.0                           [PORTFOLIO_SYSTEM]</div>
-    <div className="text-grey/60">    Type 'help' for available commands                Status: OPERATIONAL</div>
-    <div className="text-white/20">  ════════════════════════════════════════════════════════════════════════</div>
+    <div className="text-white/50">  ════════════════════════════════════════════════════════════════════════</div>
+    <div className="text-cyan">    YVAN.GUI TERMINAL v2.0.0                           [PORTFOLIO_SYSTEM]</div>
+    <div className="text-white">    Type 'help' for available commands                Status: OPERATIONAL</div>
+    <div className="text-white/50">  ════════════════════════════════════════════════════════════════════════</div>
   </div>
 );
 
@@ -74,22 +74,22 @@ const WELCOME_FOOTER_MOBILE = [
   {
     type: "text",
     content: "┌───────────────────────────┐",
-    className: "text-white/20",
+    className: "text-white/50",
   },
   {
     type: "text",
     content: "│ YVAN.GUI TERMINAL v2.0.0 │",
-    className: "text-cyan/60",
+    className: "text-cyan",
   },
   {
     type: "text",
     content: "│ Type 'help' for commands │",
-    className: "text-grey/60",
+    className: "text-white",
   },
   {
     type: "text",
     content: "└───────────────────────────┘",
-    className: "text-white/20",
+    className: "text-white/50",
   },
   { type: "text", content: "" },
 ];
