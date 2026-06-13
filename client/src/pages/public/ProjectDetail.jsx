@@ -152,7 +152,7 @@ function ProjectDetail() {
             {/* Description */}
             <div className="bg-lime/10 backdrop-blur-md p-6">
               <h2 className="text-editorial-label text-[#C2FE0B] mb-4">DESCRIPTION</h2>
-              <p className="text-[#f0f0ec] leading-relaxed">
+              <p className="text-white leading-relaxed">
                 {project.longDescription || project.description}
               </p>
             </div>
@@ -167,8 +167,8 @@ function ProjectDetail() {
                 <div className="space-y-4">
                   {project.challenges.map((c, i) => (
                     <div key={i} className="grid grid-cols-2 gap-8">
-                      <p className="text-[#f0f0ec]">{c}</p>
-                      <p className="text-[#f0f0ec]">{project.solutions?.[i] || "—"}</p>
+                      <p className="text-white">{c}</p>
+                      <p className="text-white">{project.solutions?.[i] || "—"}</p>
                     </div>
                   ))}
                 </div>

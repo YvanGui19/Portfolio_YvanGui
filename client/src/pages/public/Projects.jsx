@@ -64,8 +64,7 @@ function Projects() {
           <div className="absolute -bottom-px -left-px w-3 h-3 border-b-2 border-l-2 border-cyan" />
           <div className="absolute -bottom-px -right-px w-3 h-3 border-b-2 border-r-2 border-cyan" />
 
-          <div className="flex items-center gap-2 mb-3">
-            <span className="text-cyan font-mono text-[10px]">▸</span>
+          <div className="mb-3">
             <span className="font-mono text-[10px] tracking-[0.2em] text-[#f0f0ec]/60 uppercase">
               Filtrer par catégorie
             </span>

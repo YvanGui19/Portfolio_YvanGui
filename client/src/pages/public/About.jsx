@@ -125,7 +125,7 @@ function About() {
             <div className="grid md:grid-cols-2 gap-12 sm:gap-16">
               {/* Experiences */}
               <div>
-                <h3 className="font-heading text-[24px] text-[#C2FE0B] mb-8 uppercase">
+                <h3 className="font-heading text-[24px] text-[#C2FE0B] mb-8 uppercase bg-lime/10 backdrop-blur-md px-4 py-2 inline-block">
                   EXPÉRIENCES
                 </h3>
                 <div className="space-y-6">
@@ -134,10 +134,10 @@ function About() {
                       key={exp._id}
                       className="bg-lime/10 backdrop-blur-md p-4 hover:bg-lime/20 transition-colors"
                     >
-                      <span className="text-micro text-[#f0f0ec]">0{i + 1}</span>
-                      <div className="flex justify-between items-start mt-1 mb-2">
+                      <span className="text-micro text-[#f0f0ec]">{String(professionalExperiences.length - i).padStart(2, "0")}</span>
+                      <div className="flex justify-between items-start gap-3 mt-1 mb-2">
                         <h4 className="text-white font-medium text-base">{exp.title}</h4>
-                        <span className="text-editorial-label text-[#C2FE0B]">
+                        <span className="text-editorial-label text-[#C2FE0B] whitespace-nowrap">
                           {exp.startDate && new Date(exp.startDate).getFullYear()}
                           {exp.endDate ? ` - ${new Date(exp.endDate).getFullYear()}` : " - PRÉSENT"}
                         </span>
@@ -162,7 +162,7 @@ function About() {
 
               {/* Formations */}
               <div>
-                <h3 className="font-heading text-[24px] text-[#C2FE0B] mb-8 uppercase">
+                <h3 className="font-heading text-[24px] text-[#C2FE0B] mb-8 uppercase bg-lime/10 backdrop-blur-md px-4 py-2 inline-block">
                   FORMATIONS
                 </h3>
                 <div className="space-y-6">
@@ -171,10 +171,10 @@ function About() {
                       key={exp._id}
                       className="bg-lime/10 backdrop-blur-md p-4 hover:bg-lime/20 transition-colors"
                     >
-                      <span className="text-micro text-[#f0f0ec]">0{i + 1}</span>
-                      <div className="flex justify-between items-start mt-1 mb-2">
+                      <span className="text-micro text-[#f0f0ec]">{String(educationExperiences.length - i).padStart(2, "0")}</span>
+                      <div className="flex justify-between items-start gap-3 mt-1 mb-2">
                         <h4 className="text-white font-medium text-base">{exp.title}</h4>
-                        <span className="text-editorial-label text-[#C2FE0B]">
+                        <span className="text-editorial-label text-[#C2FE0B] whitespace-nowrap">
                           {exp.startDate && new Date(exp.startDate).getFullYear()}
                           {exp.endDate ? ` - ${new Date(exp.endDate).getFullYear()}` : " - PRÉSENT"}
                         </span>
@@ -214,10 +214,9 @@ function About() {
             <span className="text-editorial-label text-[#f0f0ec]">CHARGEMENT...</span>
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
-              {Object.entries(skillsByCategory).map(([category, categorySkills], index) => (
+              {Object.entries(skillsByCategory).map(([category, categorySkills]) => (
                 <div key={category} className="bg-lime/10 backdrop-blur-md p-5">
-                  <span className="text-micro text-[#f0f0ec]">0{index + 1}</span>
-                  <h3 className="font-heading text-[20px] text-white mt-1 mb-4 uppercase">
+                  <h3 className="font-heading text-[20px] text-white mb-4 uppercase">
                     {category}
                   </h3>
                   <ul className="space-y-2">
