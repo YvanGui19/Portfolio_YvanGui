@@ -185,7 +185,7 @@ function ProjectDetail() {
               <div className="absolute -top-px -right-px w-3 h-3 border-t-2 border-r-2 border-lime" />
 
               <div className="flex items-center gap-2 mb-4 pb-3 border-b border-lime/20">
-                <h3 className="font-mono text-[10px] tracking-[0.2em] text-lime uppercase">Tech Stack</h3>
+                <h3 className="font-mono text-[10px] tracking-[0.2em] text-lime uppercase">Stack technique</h3>
               </div>
               <div className="flex flex-wrap gap-2">
                 {project.technologies?.map((tech) => (

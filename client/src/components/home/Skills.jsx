@@ -1,5 +1,5 @@
-import { useCallback } from "react";
-import { motion } from "framer-motion";
+import { useState, useEffect, useMemo } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import skillService from "../../services/skillService";
 import useFetch from "../../hooks/useFetch";
 import {
@@ -28,12 +28,13 @@ import {
   SiPhp,
   SiLaravel,
   SiSymfony,
+  SiAdobephotoshop,
 } from "react-icons/si";
 import { BiCodeAlt, BiServer, BiWrench, BiLayer } from "react-icons/bi";
-import { FaCss3Alt, FaAws } from "react-icons/fa";
+import { FaCss3Alt, FaAws, FaVideo } from "react-icons/fa";
 import { BsWindow } from "react-icons/bs";
 
-// Icônes par défaut selon la catégorie
+// Icône représentant chaque catégorie (au centre de la grosse bulle)
 const categoryIcons = {
   Frontend: BsWindow,
   Backend: BiServer,
@@ -41,30 +42,27 @@ const categoryIcons = {
   Other: BiLayer,
 };
 
-// Couleurs par catégorie - Style Marathon
-const categoryColors = {
-  Frontend: {
-    text: "group-hover:text-[#C2FE0B]",
-    glow: "0 0 20px 3px rgba(194, 254, 11, 0.4)",
-  },
-  Backend: {
-    text: "group-hover:text-[#C2FE0B]",
-    glow: "0 0 20px 3px rgba(194, 254, 11, 0.4)",
-  },
-  Tools: {
-    text: "group-hover:text-[#C2FE0B]",
-    glow: "0 0 20px 3px rgba(194, 254, 11, 0.4)",
-  },
-  Other: {
-    text: "group-hover:text-[#C2FE0B]",
-    glow: "0 0 20px 3px rgba(194, 254, 11, 0.4)",
-  },
+// Libellé affiché sous la grosse bulle
+const categoryLabels = {
+  Frontend: "FRONTEND",
+  Backend: "BACKEND",
+  Tools: "OUTILS",
+  Other: "AUTRES",
 };
 
-// Mapping des noms de skills vers les icônes officielles
+// Thème (couleur principale) par catégorie
+const categoryTheme = {
+  Frontend: { hex: "#01FFFF", glow: "rgba(1,255,255,0.45)" },
+  Backend: { hex: "#C2FE0B", glow: "rgba(194,254,11,0.45)" },
+  Tools: { hex: "#E8763A", glow: "rgba(232,118,58,0.45)" },
+  Other: { hex: "#3601FB", glow: "rgba(54,1,251,0.45)" },
+};
+
+// Mapping nom de skill → icône
 const skillIcons = {
   HTML5: SiHtml5,
   HTML: SiHtml5,
+  "HTML/CSS": SiHtml5,
   CSS3: FaCss3Alt,
   CSS: FaCss3Alt,
   JavaScript: SiJavascript,
@@ -86,6 +84,7 @@ const skillIcons = {
   Tailwind: SiTailwindcss,
   TailwindCSS: SiTailwindcss,
   "Tailwind CSS": SiTailwindcss,
+  Vite: BiCodeAlt,
   Vue: SiVuedotjs,
   "Vue.js": SiVuedotjs,
   VueJS: SiVuedotjs,
@@ -104,36 +103,150 @@ const skillIcons = {
   PHP: SiPhp,
   Laravel: SiLaravel,
   Symfony: SiSymfony,
+  Photoshop: SiAdobephotoshop,
+  Filmora: FaVideo,
 };
+
+function CategoryBubble({ category, skills, isActive, onToggle, floatDelay }) {
+  const [isHovered, setIsHovered] = useState(false);
+  const isOpen = isHovered || isActive;
+  const CategoryIcon = categoryIcons[category] || BiLayer;
+  const theme = categoryTheme[category] || categoryTheme.Other;
+  const label = categoryLabels[category] || category.toUpperCase();
+
+  // Distance des petites bulles depuis le centre
+  const radius = 130;
+
+  const resolveSkillIcon = (skill) =>
+    skillIcons[skill.name] || categoryIcons[skill.category] || BiCodeAlt;
+
+  return (
+    <div
+      data-bubble
+      className="relative w-32 h-32 sm:w-40 sm:h-40 flex-shrink-0 m-20 sm:m-24"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {/* Grosse bulle (catégorie) */}
+      <motion.button
+        type="button"
+        onClick={(e) => {
+          e.stopPropagation();
+          onToggle();
+        }}
+        animate={{ y: [0, -10, 0] }}
+        transition={{
+          y: {
+            duration: 3.5,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: floatDelay,
+          },
+        }}
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        className="absolute inset-0 rounded-full backdrop-blur-md border-2 flex flex-col items-center justify-center cursor-pointer transition-shadow"
+        style={{
+          backgroundColor: `${theme.hex}1A`,
+          borderColor: `${theme.hex}66`,
+          color: theme.hex,
+          boxShadow: isOpen ? `0 0 35px ${theme.glow}` : undefined,
+        }}
+        aria-expanded={isOpen}
+        aria-label={`Catégorie ${label}`}
+      >
+        <CategoryIcon className="w-10 h-10 sm:w-12 sm:h-12" />
+        <span className="mt-1.5 text-[10px] sm:text-xs uppercase font-mono font-bold tracking-wider">
+          {label}
+        </span>
+      </motion.button>
+
+      {/* Petites bulles (skills) en orbite */}
+      <AnimatePresence>
+        {isOpen &&
+          skills.map((skill, i) => {
+            const angle = (i / skills.length) * 2 * Math.PI - Math.PI / 2;
+            const x = Math.cos(angle) * radius;
+            const y = Math.sin(angle) * radius;
+            const SkillIcon = resolveSkillIcon(skill);
+
+            return (
+              <motion.div
+                key={skill._id || skill.name}
+                initial={{ x: 0, y: 0, scale: 0, opacity: 0 }}
+                animate={{ x, y, scale: 1, opacity: 1 }}
+                exit={{
+                  x: x * 1.7,
+                  y: y * 1.7,
+                  scale: 1.3,
+                  opacity: 0,
+                  transition: { duration: 0.25, ease: "easeOut" },
+                }}
+                transition={{
+                  duration: 0.4,
+                  delay: i * 0.04,
+                  ease: "backOut",
+                }}
+                className="absolute top-1/2 left-1/2 w-16 h-16 sm:w-20 sm:h-20 -mt-8 -ml-8 sm:-mt-10 sm:-ml-10 rounded-full backdrop-blur-md border flex flex-col items-center justify-center pointer-events-none"
+                style={{
+                  backgroundColor: `${theme.hex}26`,
+                  borderColor: `${theme.hex}80`,
+                  color: theme.hex,
+                }}
+              >
+                <SkillIcon className="w-5 h-5 sm:w-6 sm:h-6" />
+                <span className="mt-0.5 text-[8px] sm:text-[9px] uppercase font-mono truncate max-w-full px-1">
+                  {skill.name}
+                </span>
+              </motion.div>
+            );
+          })}
+      </AnimatePresence>
+    </div>
+  );
+}
 
 function Skills() {
   const { data: skills, loading } = useFetch(() => skillService.getAll());
+  const [activeCategory, setActiveCategory] = useState(null);
 
-  const getIcon = useCallback((skill) => {
-    const IconComponent = skillIcons[skill.name];
-    if (IconComponent) {
-      return <IconComponent className="w-8 h-8 sm:w-10 sm:h-10" />;
-    }
-    // Fallback selon la catégorie
-    const CategoryIcon = categoryIcons[skill.category] || BiCodeAlt;
-    return <CategoryIcon className="w-8 h-8 sm:w-10 sm:h-10" />;
+  const groupedSkills = useMemo(() => {
+    if (!skills) return [];
+    const grouped = {};
+    skills.forEach((s) => {
+      const cat = s.category || "Other";
+      if (!grouped[cat]) grouped[cat] = [];
+      grouped[cat].push(s);
+    });
+    const order = ["Frontend", "Backend", "Tools", "Other"];
+    return order
+      .filter((c) => grouped[c]?.length > 0)
+      .map((c) => [c, grouped[c]]);
+  }, [skills]);
+
+  // Tap en dehors d'une bulle ferme la bulle active (utile sur mobile)
+  useEffect(() => {
+    const handleOutside = (e) => {
+      if (!e.target.closest("[data-bubble]")) {
+        setActiveCategory(null);
+      }
+    };
+    document.addEventListener("click", handleOutside);
+    return () => document.removeEventListener("click", handleOutside);
   }, []);
 
   return (
-    <section className="relative overflow-hidden">
-      {/* Header de section */}
+    <section className="relative">
       <div className="py-24 sm:py-28 px-8 sm:px-12 lg:px-14 relative">
-        {/* Numéro de section */}
-<h2
+        <h2
           style={{ fontFamily: '"Big Shoulders Display", sans-serif' }}
           className="font-black text-[clamp(50px,7vw,96px)] uppercase leading-[0.9]"
         >
-          <span className="text-[#f0f0ec]">TECH </span>
-          <span className="text-[#f0f0ec]">STACK</span>
+          <span className="text-[#f0f0ec]">COMPÉTENCES</span>
         </h2>
       </div>
 
-      <div className="px-8 sm:px-12 lg:px-14 pb-24 sm:pb-28">
+      <div className="px-4 sm:px-12 lg:px-14 pb-24 sm:pb-28">
         {loading ? (
           <div className="flex justify-center items-center py-20">
             <span className="font-mono text-[12px] tracking-[0.2em] text-[#f0f0ec] uppercase">
@@ -141,38 +254,21 @@ function Skills() {
             </span>
           </div>
         ) : (
-          <div className="relative">
-            <div className="flex flex-wrap justify-center gap-4 sm:gap-5 py-2">
-              {(skills || []).map((skill, index) => {
-                const colors = categoryColors[skill.category] || categoryColors.Other;
-                return (
-                  <motion.div
-                    key={skill._id || skill.name}
-                    initial={{ opacity: 1, scale: 1 }}
-                    whileHover={{
-                      boxShadow: colors.glow,
-                    }}
-                    transition={{
-                      duration: 0.3,
-                    }}
-                    className="group bg-[#0f100c] border border-[#1c1d14] transition-all duration-300 hover:border-[#C2FE0B]/50 w-20 h-20 sm:w-24 sm:h-24 relative"
-                    style={{
-                      clipPath: 'polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px))'
-                    }}
-                  >
-                    <span className={`absolute inset-0 flex items-center justify-center transition-all duration-300 group-hover:-translate-y-4 text-[#f0f0ec] ${colors.text}`}>
-                      {getIcon(skill)}
-                    </span>
-                    <span
-                      aria-hidden="true"
-                      className="text-[10px] sm:text-[11px] font-mono text-[#f0f0ec] absolute inset-0 flex items-center justify-center opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-6 truncate px-1"
-                    >
-                      {skill.name}
-                    </span>
-                  </motion.div>
-                );
-              })}
-            </div>
+          <div className="flex flex-wrap justify-center items-center py-10 sm:py-16">
+            {groupedSkills.map(([category, items], idx) => (
+              <CategoryBubble
+                key={category}
+                category={category}
+                skills={items}
+                isActive={activeCategory === category}
+                onToggle={() =>
+                  setActiveCategory((prev) =>
+                    prev === category ? null : category
+                  )
+                }
+                floatDelay={idx * 0.7}
+              />
+            ))}
           </div>
         )}
       </div>
