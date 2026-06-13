@@ -132,7 +132,7 @@ function About() {
                   {(showAllExperiences ? professionalExperiences : professionalExperiences.slice(0, 3)).map((exp, i) => (
                     <div
                       key={exp._id}
-                      className="border-l border-white/10 pl-6 hover:border-[#C2FE0B] transition-colors"
+                      className="bg-lime/10 backdrop-blur-md p-4 hover:bg-lime/20 transition-colors"
                     >
                       <span className="text-micro text-[#f0f0ec]">0{i + 1}</span>
                       <div className="flex justify-between items-start mt-1 mb-2">
@@ -150,7 +150,7 @@ function About() {
                   <div className="text-right mt-6">
                     <button
                       onClick={() => setShowAllExperiences(!showAllExperiences)}
-                      className="px-3 py-1.5 text-[10px] font-mono tracking-wider uppercase border border-cyan text-cyan hover:bg-cyan hover:text-[#000000] transition-all cursor-pointer"
+                      className="px-3 py-1.5 text-[10px] font-mono tracking-wider uppercase bg-cyan/10 backdrop-blur-md text-cyan hover:bg-cyan/30 transition-all cursor-pointer"
                       aria-expanded={showAllExperiences}
                       aria-label={showAllExperiences ? "Réduire la liste des expériences" : "Voir toutes les expériences"}
                     >
@@ -169,7 +169,7 @@ function About() {
                   {(showAllEducation ? educationExperiences : educationExperiences.slice(0, 3)).map((exp, i) => (
                     <div
                       key={exp._id}
-                      className="border-l border-white/10 pl-6 hover:border-[#C2FE0B] transition-colors"
+                      className="bg-lime/10 backdrop-blur-md p-4 hover:bg-lime/20 transition-colors"
                     >
                       <span className="text-micro text-[#f0f0ec]">0{i + 1}</span>
                       <div className="flex justify-between items-start mt-1 mb-2">
@@ -187,7 +187,7 @@ function About() {
                   <div className="text-right mt-6">
                     <button
                       onClick={() => setShowAllEducation(!showAllEducation)}
-                      className="px-3 py-1.5 text-[10px] font-mono tracking-wider uppercase border border-cyan text-cyan hover:bg-cyan hover:text-[#000000] transition-all cursor-pointer"
+                      className="px-3 py-1.5 text-[10px] font-mono tracking-wider uppercase bg-cyan/10 backdrop-blur-md text-cyan hover:bg-cyan/30 transition-all cursor-pointer"
                       aria-expanded={showAllEducation}
                       aria-label={showAllEducation ? "Réduire la liste des formations" : "Voir toutes les formations"}
                     >
@@ -215,7 +215,7 @@ function About() {
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
               {Object.entries(skillsByCategory).map(([category, categorySkills], index) => (
-                <div key={category} className="border-l-2 border-[#C2FE0B] pl-6">
+                <div key={category} className="bg-lime/10 backdrop-blur-md p-5">
                   <span className="text-micro text-[#f0f0ec]">0{index + 1}</span>
                   <h3 className="font-heading text-[20px] text-white mt-1 mb-4 uppercase">
                     {category}

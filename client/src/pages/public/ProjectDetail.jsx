@@ -59,27 +59,11 @@ function ProjectDetail() {
       </Helmet>
 
       <div className="max-w-[1200px] mx-auto px-6 sm:px-8">
-        {/* Header avec artefacts Marathon */}
+        {/* Header */}
         <div className="mb-12 relative">
-          {/* Artefacts décoratifs */}
-          <div className="marathon-diagonal-stripes-lime absolute -left-4 top-0 w-2 h-32 opacity-60" />
-
-          {/* Catégorie avec style terminal */}
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-2 h-2 bg-lime animate-pulse" />
-            <span className="font-mono text-[10px] tracking-[0.3em] text-lime uppercase">
-              {project.category}
-            </span>
-            <div className="h-[1px] w-12 bg-lime/40" />
-          </div>
-
-          <h1 className="text-editorial-display text-white mb-6">
+          <h1 className="text-editorial-display text-white">
             {project.title}
           </h1>
-
-          <p className="text-[#f0f0ec] text-lg max-w-2xl leading-relaxed border-l-2 border-lime/40 pl-4">
-            {project.description}
-          </p>
         </div>
 
         {/* Gallery - Style Marathon */}
@@ -166,7 +150,7 @@ function ProjectDetail() {
           {/* Main content */}
           <div className="md:col-span-2 space-y-10">
             {/* Description */}
-            <div className="border-l-2 border-[#C2FE0B] pl-6">
+            <div className="bg-lime/10 backdrop-blur-md p-6">
               <h2 className="text-editorial-label text-[#C2FE0B] mb-4">DESCRIPTION</h2>
               <p className="text-[#f0f0ec] leading-relaxed">
                 {project.longDescription || project.description}
@@ -175,7 +159,7 @@ function ProjectDetail() {
 
             {/* Challenges & Solutions */}
             {project.challenges?.length > 0 && (
-              <div>
+              <div className="bg-lime/10 backdrop-blur-md p-6">
                 <div className="grid grid-cols-2 gap-8 mb-6">
                   <h3 className="text-editorial-label text-[#C2FE0B]">CHALLENGES</h3>
                   <h3 className="text-editorial-label text-[#C2FE0B]">SOLUTIONS</h3>
@@ -183,8 +167,8 @@ function ProjectDetail() {
                 <div className="space-y-4">
                   {project.challenges.map((c, i) => (
                     <div key={i} className="grid grid-cols-2 gap-8">
-                      <p className="text-[#d0d0cc]">{c}</p>
-                      <p className="text-[#d0d0cc]">{project.solutions?.[i] || "—"}</p>
+                      <p className="text-[#f0f0ec]">{c}</p>
+                      <p className="text-[#f0f0ec]">{project.solutions?.[i] || "—"}</p>
                     </div>
                   ))}
                 </div>
@@ -201,7 +185,6 @@ function ProjectDetail() {
               <div className="absolute -top-px -right-px w-3 h-3 border-t-2 border-r-2 border-lime" />
 
               <div className="flex items-center gap-2 mb-4 pb-3 border-b border-lime/20">
-                <div className="w-2 h-2 bg-lime animate-pulse" />
                 <h3 className="font-mono text-[10px] tracking-[0.2em] text-lime uppercase">Tech Stack</h3>
               </div>
               <div className="flex flex-wrap gap-2">
@@ -223,7 +206,6 @@ function ProjectDetail() {
               <div className="absolute -top-px -right-px w-3 h-3 border-t-2 border-r-2 border-cyan" />
 
               <div className="flex items-center gap-2 mb-4 pb-3 border-b border-cyan/20">
-                <div className="w-2 h-2 bg-cyan animate-pulse" />
                 <h3 className="font-mono text-[10px] tracking-[0.2em] text-cyan uppercase">Liens</h3>
               </div>
               <div className="space-y-3">
@@ -236,7 +218,6 @@ function ProjectDetail() {
                   >
                     <FaGithub className="w-5 h-5 group-hover:animate-pulse" />
                     <span className="text-xs font-mono tracking-wider uppercase">GitHub</span>
-                    <span className="text-lime opacity-0 group-hover:opacity-100 transition-opacity ml-auto">→</span>
                   </a>
                 )}
                 {project.liveUrl && (
@@ -248,7 +229,6 @@ function ProjectDetail() {
                   >
                     <HiGlobeAlt className="w-5 h-5 group-hover:animate-pulse" />
                     <span className="text-xs font-mono tracking-wider uppercase">Live Demo</span>
-                    <span className="text-cyan opacity-0 group-hover:opacity-100 transition-opacity ml-auto">→</span>
                   </a>
                 )}
                 {!project.githubUrl && !project.liveUrl && (
@@ -270,11 +250,11 @@ function ProjectDetail() {
             {prevProject ? (
               <Link
                 to={`/projects/${prevProject._id}`}
-                className="group flex items-center gap-3 px-4 py-2 bg-lime/10 backdrop-blur-md hover:bg-lime/20 hover:shadow-[0_0_15px_rgba(194,254,11,0.2)] transition-all"
+                className="group flex items-center gap-3 px-5 py-3 bg-lime/25 backdrop-blur-md hover:bg-lime/40 hover:shadow-[0_0_20px_rgba(194,254,11,0.3)] transition-all"
               >
                 <span className="text-lime group-hover:-translate-x-1 transition-transform">←</span>
-                <span className="font-mono text-[10px] tracking-[0.15em] text-[#f0f0ec] group-hover:text-lime hidden sm:inline uppercase">{prevProject.title}</span>
-                <span className="font-mono text-[10px] tracking-[0.15em] text-[#f0f0ec] group-hover:text-lime sm:hidden uppercase">PREV</span>
+                <span className="font-mono text-[12px] tracking-[0.15em] text-lime hidden sm:inline uppercase">{prevProject.title}</span>
+                <span className="font-mono text-[12px] tracking-[0.15em] text-lime sm:hidden uppercase">PREV</span>
               </Link>
             ) : (
               <span />
@@ -282,7 +262,7 @@ function ProjectDetail() {
 
             <Link
               to="/projects"
-              className="font-mono text-[10px] tracking-[0.2em] text-lime uppercase px-4 py-2 bg-lime/10 backdrop-blur-md hover:bg-lime/20 hover:shadow-[0_0_15px_rgba(194,254,11,0.2)] transition-all"
+              className="font-mono text-[12px] tracking-[0.2em] text-lime uppercase px-5 py-3 bg-lime/25 backdrop-blur-md hover:bg-lime/40 hover:shadow-[0_0_20px_rgba(194,254,11,0.3)] transition-all"
             >
               [ Tous les projets ]
             </Link>
@@ -290,10 +270,10 @@ function ProjectDetail() {
             {nextProject ? (
               <Link
                 to={`/projects/${nextProject._id}`}
-                className="group flex items-center gap-3 px-4 py-2 bg-lime/10 backdrop-blur-md hover:bg-lime/20 hover:shadow-[0_0_20px_rgba(194,254,11,0.3)] transition-all"
+                className="group flex items-center gap-3 px-5 py-3 bg-lime/25 backdrop-blur-md hover:bg-lime/40 hover:shadow-[0_0_20px_rgba(194,254,11,0.3)] transition-all"
               >
-                <span className="font-mono text-[10px] tracking-[0.15em] text-lime hidden sm:inline uppercase">{nextProject.title}</span>
-                <span className="font-mono text-[10px] tracking-[0.15em] text-lime sm:hidden uppercase">NEXT</span>
+                <span className="font-mono text-[12px] tracking-[0.15em] text-lime hidden sm:inline uppercase">{nextProject.title}</span>
+                <span className="font-mono text-[12px] tracking-[0.15em] text-lime sm:hidden uppercase">NEXT</span>
                 <span className="text-lime group-hover:translate-x-1 transition-all">→</span>
               </Link>
             ) : (

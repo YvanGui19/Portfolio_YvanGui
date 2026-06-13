@@ -77,13 +77,10 @@ function FeaturedProjects() {
       <div className="absolute bottom-0 right-0 w-5 h-5 border-b-2 border-r-2 border-lime/30 group-hover:border-lime transition-colors z-[4]" />
 
       {/* Catégorie indicator */}
-      <div className="absolute top-4 left-4 z-[4] opacity-60 group-hover:opacity-100 transition-opacity">
-        <div className="flex items-center gap-2">
-          <div className="w-2 h-2 bg-cyan" />
-          <span className="font-mono text-[8px] tracking-[0.3em] text-cyan/80 uppercase">
-            {project.category || "Project"}
-          </span>
-        </div>
+      <div className="absolute top-4 left-4 z-[4] opacity-80 group-hover:opacity-100 transition-opacity">
+        <span className="font-mono text-[12px] tracking-[0.25em] text-cyan/90 uppercase">
+          {project.category || "Project"}
+        </span>
       </div>
 
       {/* Contenu */}
@@ -114,11 +111,6 @@ function FeaturedProjects() {
             ))}
           </div>
         </div>
-
-        {/* Flèche indicative */}
-        <div className="absolute bottom-6 right-6 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0">
-          <span className="font-mono text-lime text-lg">→</span>
-        </div>
       </div>
     </article>
   );
@@ -128,11 +120,7 @@ function FeaturedProjects() {
       {/* Header de section */}
       <div className="pt-24 pb-8 sm:pt-28 sm:pb-10 px-8 sm:px-12 lg:px-14 relative">
         {/* Numéro de section */}
-        <span className="font-mono text-[12px] tracking-[0.2em] text-lime/80 font-semibold block mb-4">
-          [ 02 / RÉALISATIONS ]
-        </span>
-
-        <div className="flex justify-between items-end">
+<div className="flex justify-between items-end">
           <h2
             style={{ fontFamily: '"Big Shoulders Display", sans-serif' }}
             className="font-black text-[clamp(50px,7vw,96px)] uppercase leading-[0.9]"

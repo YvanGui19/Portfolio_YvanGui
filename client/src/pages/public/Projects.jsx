@@ -142,14 +142,11 @@ function Projects() {
                 <div className="absolute bottom-0 left-0 w-6 h-6 border-b-2 border-l-2 border-lime/40 group-hover:border-lime transition-colors z-[4]" />
                 <div className="absolute bottom-0 right-0 w-6 h-6 border-b-2 border-r-2 border-lime/40 group-hover:border-lime transition-colors z-[4]" />
 
-                {/* Data strip décorative */}
-                <div className="absolute top-4 left-4 z-[4] opacity-60 group-hover:opacity-100 transition-opacity">
-                  <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-cyan" />
-                    <span className="font-mono text-[8px] tracking-[0.3em] text-cyan/80 uppercase">
-                      {project.category || "Project"}
-                    </span>
-                  </div>
+                {/* Label catégorie */}
+                <div className="absolute top-4 left-4 z-[4] opacity-80 group-hover:opacity-100 transition-opacity">
+                  <span className="font-mono text-[12px] tracking-[0.25em] text-cyan/90 uppercase">
+                    {project.category || "Project"}
+                  </span>
                 </div>
 
                 {/* Contenu */}
@@ -167,7 +164,7 @@ function Projects() {
                     <div className="w-12 h-[2px] bg-lime/40 group-hover:bg-lime group-hover:w-24 transition-all duration-300 mt-3" />
 
                     {/* Description */}
-                    <p className="font-mono text-[11px] text-[#f0f0ec]/80 mt-3 max-w-md line-clamp-2 leading-[1.8]">
+                    <p className="font-mono text-[14px] text-[#f0f0ec] mt-3 max-w-md line-clamp-2 leading-[1.6]">
                       {project.description}
                     </p>
 
@@ -185,18 +182,7 @@ function Projects() {
                   </div>
                 </div>
 
-                {/* Numero decoratif - style Marathon */}
-                <span
-                  style={{ fontFamily: '"Big Shoulders Display", sans-serif' }}
-                  className="absolute top-6 right-6 font-black text-[80px] text-lime/5 group-hover:text-lime/10 leading-none pointer-events-none z-[4] transition-colors"
-                >
-                  {String(index + 1).padStart(2, "0")}
-                </span>
 
-                {/* Flèche indicative au hover */}
-                <div className="absolute bottom-8 right-8 z-[5] opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0">
-                  <span className="font-mono text-lime text-lg">→</span>
-                </div>
               </article>
             ))}
           </div>
