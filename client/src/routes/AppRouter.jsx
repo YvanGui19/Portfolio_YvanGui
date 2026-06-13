@@ -8,7 +8,6 @@ import Header from '../components/layout/Header'
 import Footer from '../components/layout/Footer'
 import GlitchCursor from '../components/GlitchCursor'
 import { HeroBackground } from '../components/canvas'
-import FlowingSymbols from '../components/canvas/FlowingSymbols'
 
 // Page d'accueil (chargement immédiat pour LCP)
 import Home from '../pages/public/Home'
@@ -78,7 +77,6 @@ function AppRouter() {
                   {/* Voile uniforme par-dessus le canvas */}
                   <div className="fixed inset-0 z-[1] bg-black/65 pointer-events-none" />
 
-                  <FlowingSymbols />
                   <SkipLink />
                   <Header />
                   <main id="main-content" className="flex-1 relative z-[10]">
