@@ -186,17 +186,28 @@ function CategoryBubble({ category, skills, isActive, onToggle, floatDelay }) {
                   delay: i * 0.04,
                   ease: "backOut",
                 }}
-                className="absolute top-1/2 left-1/2 w-16 h-16 sm:w-20 sm:h-20 -mt-8 -ml-8 sm:-mt-10 sm:-ml-10 rounded-full backdrop-blur-md border flex flex-col items-center justify-center pointer-events-none"
-                style={{
-                  backgroundColor: `${theme.hex}26`,
-                  borderColor: `${theme.hex}80`,
-                  color: theme.hex,
-                }}
+                className="absolute top-1/2 left-1/2 w-16 h-16 sm:w-20 sm:h-20 -mt-8 -ml-8 sm:-mt-10 sm:-ml-10 pointer-events-none"
               >
-                <SkillIcon className="w-5 h-5 sm:w-6 sm:h-6" />
-                <span className="mt-0.5 text-[8px] sm:text-[9px] uppercase font-mono truncate max-w-full px-1">
-                  {skill.name}
-                </span>
+                <motion.div
+                  animate={{ y: [0, -6, 0] }}
+                  transition={{
+                    duration: 2.5 + (i % 3) * 0.4,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: i * 0.15,
+                  }}
+                  className="w-full h-full rounded-full backdrop-blur-md border flex flex-col items-center justify-center"
+                  style={{
+                    backgroundColor: `${theme.hex}26`,
+                    borderColor: `${theme.hex}80`,
+                    color: theme.hex,
+                  }}
+                >
+                  <SkillIcon className="w-5 h-5 sm:w-6 sm:h-6" />
+                  <span className="mt-0.5 text-[8px] sm:text-[9px] uppercase font-mono truncate max-w-full px-1">
+                    {skill.name}
+                  </span>
+                </motion.div>
               </motion.div>
             );
           })}
@@ -236,7 +247,7 @@ function Skills() {
 
   return (
     <section className="relative">
-      <div className="py-24 sm:py-28 px-8 sm:px-12 lg:px-14 relative">
+      <div className="pt-16 sm:pt-20 pb-4 px-8 sm:px-12 lg:px-14 relative">
         <h2
           style={{ fontFamily: '"Big Shoulders Display", sans-serif' }}
           className="font-black text-[clamp(50px,7vw,96px)] uppercase leading-[0.9]"
@@ -245,15 +256,15 @@ function Skills() {
         </h2>
       </div>
 
-      <div className="px-4 sm:px-12 lg:px-14 pb-24 sm:pb-28">
+      <div className="px-4 sm:px-12 lg:px-14 pb-12 sm:pb-16">
         {loading ? (
-          <div className="flex justify-center items-center py-20">
+          <div className="flex justify-center items-center py-10">
             <span className="font-mono text-[12px] tracking-[0.2em] text-[#f0f0ec] uppercase">
               Chargement...
             </span>
           </div>
         ) : (
-          <div className="flex flex-wrap justify-center items-center py-10 sm:py-16">
+          <div className="flex flex-wrap justify-center items-center">
             {groupedSkills.map(([category, items], idx) => (
               <CategoryBubble
                 key={category}
