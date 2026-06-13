@@ -28,10 +28,9 @@ import {
   SiPhp,
   SiLaravel,
   SiSymfony,
-  SiAdobephotoshop,
 } from "react-icons/si";
 import { BiCodeAlt, BiServer, BiWrench, BiLayer } from "react-icons/bi";
-import { FaCss3Alt, FaAws, FaVideo } from "react-icons/fa";
+import { FaCss3Alt, FaAws, FaVideo, FaPaintBrush } from "react-icons/fa";
 import { BsWindow } from "react-icons/bs";
 
 // Icône représentant chaque catégorie (au centre de la grosse bulle)
@@ -103,7 +102,7 @@ const skillIcons = {
   PHP: SiPhp,
   Laravel: SiLaravel,
   Symfony: SiSymfony,
-  Photoshop: SiAdobephotoshop,
+  Photoshop: FaPaintBrush,
   Filmora: FaVideo,
 };
 
