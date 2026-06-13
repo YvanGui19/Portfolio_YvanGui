@@ -40,7 +40,7 @@ function FeaturedProjects() {
           <img
             src={getImageUrl(project.images[0])}
             alt={project.title}
-            className="w-full h-full object-cover opacity-60 transition-all duration-500 group-hover:opacity-80 group-hover:scale-[1.02]"
+            className="w-full h-full object-contain opacity-70 transition-all duration-500 group-hover:opacity-90"
             loading="lazy"
           />
         </div>

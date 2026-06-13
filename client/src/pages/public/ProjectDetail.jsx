@@ -84,8 +84,8 @@ function ProjectDetail() {
 
         {/* Gallery - Style Marathon */}
         <div className="mb-12 relative">
-          {/* Container avec bordures Marathon */}
-          <div className="relative border border-lime/20 bg-[#000000]">
+          {/* Container glace */}
+          <div className="relative bg-lime/10 backdrop-blur-md">
             {/* Coins décoratifs */}
             <div className="absolute -top-px -left-px w-6 h-6 border-t-2 border-l-2 border-lime z-10" />
             <div className="absolute -top-px -right-px w-6 h-6 border-t-2 border-r-2 border-lime z-10" />
@@ -103,7 +103,7 @@ function ProjectDetail() {
                     transition={{ duration: 0.3 }}
                     src={getImageUrl(project.images[activeImageIndex])}
                     alt={project.title}
-                    className="w-full aspect-video object-cover"
+                    className="w-full aspect-video object-contain bg-black/40"
                   />
                 </AnimatePresence>
               ) : (
@@ -116,19 +116,19 @@ function ProjectDetail() {
                 <>
                   <button
                     onClick={() => setActiveImageIndex((prev) => (prev === 0 ? project.images.length - 1 : prev - 1))}
-                    className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 border border-cyan/40 bg-[#000000]/90 text-cyan flex items-center justify-center cursor-pointer hover:bg-cyan hover:text-[#000000] hover:shadow-[0_0_20px_rgba(1,255,255,0.4)] transition-all"
+                    className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-cyan/10 backdrop-blur-md text-cyan flex items-center justify-center cursor-pointer hover:bg-cyan/30 hover:shadow-[0_0_20px_rgba(1,255,255,0.4)] transition-all"
                     aria-label="Image précédente"
                   >
                     ←
                   </button>
                   <button
                     onClick={() => setActiveImageIndex((prev) => (prev === project.images.length - 1 ? 0 : prev + 1))}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 border border-cyan/40 bg-[#000000]/90 text-cyan flex items-center justify-center cursor-pointer hover:bg-cyan hover:text-[#000000] hover:shadow-[0_0_20px_rgba(1,255,255,0.4)] transition-all"
+                    className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-cyan/10 backdrop-blur-md text-cyan flex items-center justify-center cursor-pointer hover:bg-cyan/30 hover:shadow-[0_0_20px_rgba(1,255,255,0.4)] transition-all"
                     aria-label="Image suivante"
                   >
                     →
                   </button>
-                  <div className="absolute bottom-4 right-4 font-mono text-[10px] tracking-[0.2em] text-cyan bg-[#000000]/90 border border-cyan/40 px-4 py-2 uppercase">
+                  <div className="absolute bottom-4 right-4 font-mono text-[10px] tracking-[0.2em] text-cyan bg-cyan/10 backdrop-blur-md px-4 py-2 uppercase">
                     {String(activeImageIndex + 1).padStart(2, "0")} / {String(project.images.length).padStart(2, "0")}
                   </div>
                 </>
@@ -195,7 +195,7 @@ function ProjectDetail() {
           {/* Sidebar - Style terminal Marathon */}
           <div className="space-y-8">
             {/* Technologies */}
-            <div className="relative border border-lime/20 bg-[#000000]/60 p-5">
+            <div className="relative bg-lime/10 backdrop-blur-md p-5">
               {/* Coins */}
               <div className="absolute -top-px -left-px w-3 h-3 border-t-2 border-l-2 border-lime" />
               <div className="absolute -top-px -right-px w-3 h-3 border-t-2 border-r-2 border-lime" />
@@ -217,7 +217,7 @@ function ProjectDetail() {
             </div>
 
             {/* Links */}
-            <div className="relative border border-cyan/20 bg-[#000000]/60 p-5">
+            <div className="relative bg-cyan/10 backdrop-blur-md p-5">
               {/* Coins */}
               <div className="absolute -top-px -left-px w-3 h-3 border-t-2 border-l-2 border-cyan" />
               <div className="absolute -top-px -right-px w-3 h-3 border-t-2 border-r-2 border-cyan" />
@@ -270,7 +270,7 @@ function ProjectDetail() {
             {prevProject ? (
               <Link
                 to={`/projects/${prevProject._id}`}
-                className="group flex items-center gap-3 px-4 py-2 border border-lime/20 hover:border-lime hover:shadow-[0_0_15px_rgba(194,254,11,0.2)] transition-all"
+                className="group flex items-center gap-3 px-4 py-2 bg-lime/10 backdrop-blur-md hover:bg-lime/20 hover:shadow-[0_0_15px_rgba(194,254,11,0.2)] transition-all"
               >
                 <span className="text-lime group-hover:-translate-x-1 transition-transform">←</span>
                 <span className="font-mono text-[10px] tracking-[0.15em] text-[#f0f0ec] group-hover:text-lime hidden sm:inline uppercase">{prevProject.title}</span>
@@ -282,7 +282,7 @@ function ProjectDetail() {
 
             <Link
               to="/projects"
-              className="font-mono text-[10px] tracking-[0.2em] text-[#f0f0ec]/60 hover:text-lime transition-colors uppercase"
+              className="font-mono text-[10px] tracking-[0.2em] text-lime uppercase px-4 py-2 bg-lime/10 backdrop-blur-md hover:bg-lime/20 hover:shadow-[0_0_15px_rgba(194,254,11,0.2)] transition-all"
             >
               [ Tous les projets ]
             </Link>
@@ -290,11 +290,11 @@ function ProjectDetail() {
             {nextProject ? (
               <Link
                 to={`/projects/${nextProject._id}`}
-                className="group flex items-center gap-3 px-4 py-2 border border-lime/40 bg-lime/5 hover:bg-lime hover:text-[#000000] hover:shadow-[0_0_20px_rgba(194,254,11,0.4)] transition-all"
+                className="group flex items-center gap-3 px-4 py-2 bg-lime/10 backdrop-blur-md hover:bg-lime/20 hover:shadow-[0_0_20px_rgba(194,254,11,0.3)] transition-all"
               >
-                <span className="font-mono text-[10px] tracking-[0.15em] text-lime group-hover:text-[#000000] hidden sm:inline uppercase">{nextProject.title}</span>
-                <span className="font-mono text-[10px] tracking-[0.15em] text-lime group-hover:text-[#000000] sm:hidden uppercase">NEXT</span>
-                <span className="text-lime group-hover:text-[#000000] group-hover:translate-x-1 transition-all">→</span>
+                <span className="font-mono text-[10px] tracking-[0.15em] text-lime hidden sm:inline uppercase">{nextProject.title}</span>
+                <span className="font-mono text-[10px] tracking-[0.15em] text-lime sm:hidden uppercase">NEXT</span>
+                <span className="text-lime group-hover:translate-x-1 transition-all">→</span>
               </Link>
             ) : (
               <span />

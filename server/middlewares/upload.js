@@ -54,11 +54,11 @@ const processImage = async (req, res, next) => {
 
     // Optimiser avec Sharp et sauvegarder
     await sharp(req.file.buffer)
-      .resize(1200, 800, {
+      .resize(1920, 1280, {
         fit: 'inside',
         withoutEnlargement: true,
       })
-      .webp({ quality: 80 })
+      .webp({ quality: 90 })
       .toFile(filepath);
 
     // Ajouter le chemin relatif à la requête (pour stockage en BDD)

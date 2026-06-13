@@ -117,7 +117,7 @@ function Projects() {
                     <img
                       src={getImageUrl(project.images[0])}
                       alt={project.title}
-                      className="w-full h-full object-cover opacity-30 transition-all duration-500 group-hover:opacity-50 group-hover:scale-[1.02]"
+                      className="w-full h-full object-contain opacity-50 transition-all duration-500 group-hover:opacity-80"
                       loading="lazy"
                     />
                   </div>
