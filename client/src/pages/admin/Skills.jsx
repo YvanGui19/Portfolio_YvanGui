@@ -46,14 +46,28 @@ function Skills() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.name.trim()) return;
+    if (!formData.name.trim() || !formData.category.trim()) return;
 
     setSaving(true);
     try {
       if (editingId) {
         await skillService.update(editingId, formData);
       } else {
-        await skillService.create(formData);
+        // Mode création : permettre la saisie de plusieurs compétences séparées par des virgules
+        const names = Array.from(
+          new Set(
+            formData.name
+              .split(",")
+              .map((n) => n.trim())
+              .filter(Boolean)
+          )
+        );
+        if (names.length === 0) return;
+        await Promise.all(
+          names.map((name) =>
+            skillService.create({ name, category: formData.category })
+          )
+        );
       }
       setFormData(emptyForm);
       setShowForm(false);
@@ -211,7 +225,7 @@ function Skills() {
             >
               <div className="space-y-2">
                 <label className="block font-mono text-[0.75rem] text-off-white tracking-wide uppercase">
-                  Nom
+                  {editingId ? "Nom" : "Nom(s)"}
                 </label>
                 <input
                   type="text"
@@ -219,9 +233,14 @@ function Skills() {
                   onChange={(e) =>
                     setFormData({ ...formData, name: e.target.value })
                   }
-                  placeholder="React, Node.js..."
+                  placeholder={editingId ? "React" : "React, Node.js, Express…"}
                   className="w-full bg-black/30 border border-white/10 px-4 py-3 font-mono text-[0.85rem] text-off-white placeholder:text-grey/50 focus:border-violet/50 focus:outline-none transition-colors"
                 />
+                {!editingId && (
+                  <p className="font-mono text-[0.65rem] text-grey/70">
+                    // Astuce : sépare par des virgules pour créer plusieurs compétences d&apos;un coup.
+                  </p>
+                )}
               </div>
 
               <div className="space-y-2">
