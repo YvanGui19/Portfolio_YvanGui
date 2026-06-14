@@ -5,13 +5,28 @@ import skillService from "../../services/skillService";
 import useFetch from "../../hooks/useFetch";
 import ConfirmModal from "../../components/common/ConfirmModal";
 
-const emptyForm = { name: "", category: "Frontend" };
+const emptyForm = { name: "", category: "" };
+
+const CATEGORY_SUGGESTIONS = [
+  "Sécurité",
+  "Systèmes & Réseaux",
+  "DevOps",
+  "Bases & Web",
+  "Frontend",
+  "Backend",
+  "Tools",
+  "Other",
+];
 
 const categoryColors = {
   Frontend: "lime",
   Backend: "cyan",
   Tools: "violet",
   Other: "grey",
+  Sécurité: "lime",
+  "Systèmes & Réseaux": "cyan",
+  DevOps: "violet",
+  "Bases & Web": "orange",
 };
 
 function Skills() {
@@ -213,18 +228,26 @@ function Skills() {
                 <label className="block font-mono text-[0.75rem] text-off-white tracking-wide uppercase">
                   Catégorie
                 </label>
-                <select
+                <input
+                  type="text"
+                  list="skill-categories"
                   value={formData.category}
                   onChange={(e) =>
                     setFormData({ ...formData, category: e.target.value })
                   }
-                  className="w-full bg-black/30 border border-white/10 px-4 py-3 font-mono text-[0.85rem] text-off-white focus:border-violet/50 focus:outline-none transition-colors cursor-pointer"
-                >
-                  <option>Frontend</option>
-                  <option>Backend</option>
-                  <option>Tools</option>
-                  <option>Other</option>
-                </select>
+                  placeholder="Sécurité, DevOps, Frontend…"
+                  className="w-full bg-black/30 border border-white/10 px-4 py-3 font-mono text-[0.85rem] text-off-white placeholder:text-grey/50 focus:border-violet/50 focus:outline-none transition-colors"
+                />
+                <datalist id="skill-categories">
+                  {Array.from(
+                    new Set([
+                      ...CATEGORY_SUGGESTIONS,
+                      ...(skills?.map((s) => s.category).filter(Boolean) || []),
+                    ])
+                  ).map((cat) => (
+                    <option key={cat} value={cat} />
+                  ))}
+                </datalist>
               </div>
 
               <button

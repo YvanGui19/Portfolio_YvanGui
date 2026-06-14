@@ -25,16 +25,31 @@ function About() {
     [experiences]
   );
 
-  const skillsByCategory = useMemo(
-    () =>
+  const SKILLS_PRIORITY = [
+    "Sécurité",
+    "Systèmes & Réseaux",
+    "DevOps",
+    "Bases & Web",
+    "Frontend",
+    "Backend",
+    "Tools",
+    "Other",
+  ];
+
+  const orderedSkillsByCategory = useMemo(() => {
+    const grouped =
       skills?.reduce((acc, skill) => {
         const category = skill.category || "Autres";
         if (!acc[category]) acc[category] = [];
         acc[category].push(skill);
         return acc;
-      }, {}) || {},
-    [skills]
-  );
+      }, {}) || {};
+    const known = SKILLS_PRIORITY.filter((c) => grouped[c]);
+    const unknown = Object.keys(grouped)
+      .filter((c) => !SKILLS_PRIORITY.includes(c))
+      .sort((a, b) => a.localeCompare(b));
+    return [...known, ...unknown].map((c) => [c, grouped[c]]);
+  }, [skills]);
 
   return (
     <div className="pt-20 pb-24 min-h-screen relative">
@@ -214,7 +229,7 @@ function About() {
             <span className="text-editorial-label text-[#f0f0ec]">CHARGEMENT...</span>
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
-              {Object.entries(skillsByCategory).map(([category, categorySkills]) => (
+              {orderedSkillsByCategory.map(([category, categorySkills]) => (
                 <div key={category} className="bg-lime/10 backdrop-blur-md p-5">
                   <h3 className="font-heading text-[20px] text-white mb-4 uppercase">
                     {category}

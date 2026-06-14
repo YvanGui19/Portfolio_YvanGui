@@ -10,7 +10,7 @@ trim: true,
 category: {
 type: String,
 required: [true, 'La catégorie est requise'],
-enum: ['Frontend', 'Backend', 'Tools', 'Other'],
+trim: true,
 },
 level: {
 type: Number,

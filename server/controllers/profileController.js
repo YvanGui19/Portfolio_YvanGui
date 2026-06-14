@@ -3,13 +3,13 @@ const Profile = require('../models/Profile');
 const DEFAULT_PROFILE = {
   firstName: 'YVAN',
   lastName: 'GUI',
-  heroTitle: 'Développeur Web Full Stack',
+  heroTitle: 'Infrastructure & Sécurité — Étudiant Mastère ERIS',
   heroBio:
-    "Ancien expert technique dans l'aéronautique, j'ai choisi de mettre mes compétences d'analyse, de rigueur et de résolution de problèmes au service du développement web.",
+    "Ancien expert technique en aéronautique, je mets mes compétences d'analyse, de rigueur et de résolution de problèmes au service de l'infrastructure et de la cybersécurité — avec un solide bagage en développement web.",
   bioParagraphs: [
-    "Passionné par la technologie depuis toujours, j'ai d'abord construit ma carrière dans l'aéronautique. Pendant plus de dix ans, j'ai travaillé sur des hélicoptères et des avions.",
-    "Ces expériences m'ont appris la précision, la rigueur et la fiabilité opérationnelle dans des environnements exigeants.",
-    "Aujourd'hui, je conçois des solutions web fiables et orientées utilisateur, avec la même rigueur qui m'a guidé dans l'aéronautique.",
+    "Passionné par la technologie depuis toujours, j'ai d'abord construit ma carrière dans l'aéronautique. Pendant plus de dix ans, de la maintenance d'hélicoptères militaires à la coordination de projets en défense, j'ai évolué dans des environnements exigeant rigueur, précision et fiabilité opérationnelle.",
+    "Diplômé Développeur Web (RNCP), je conçois aujourd'hui des applications full-stack que je déploie et opère moi-même : ce portfolio React, un gestionnaire de mots de passe zero-knowledge, un générateur d'entropie cryptographique.",
+    "Étudiant en Mastère ERIS (Expert Réseaux, Infrastructures & Sécurité), j'administre un VPS souverain sous Linux qui héberge mes services en production — visioconférence, VPN maillé, accès distant chiffré. Ce double profil dev + infra constitue mon socle DevSecOps : développer, durcir et exploiter en gardant la sécurité au cœur de chaque décision.",
   ],
   email: 'yvan.gui19@gmail.com',
   location: 'Toulouse, France',

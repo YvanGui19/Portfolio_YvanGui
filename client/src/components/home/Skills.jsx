@@ -29,25 +29,68 @@ import {
   SiLaravel,
   SiSymfony,
 } from "react-icons/si";
-import { BiCodeAlt, BiServer, BiWrench, BiLayer } from "react-icons/bi";
+import {
+  BiCodeAlt,
+  BiServer,
+  BiWrench,
+  BiLayer,
+  BiShield,
+  BiInfinite,
+  BiData,
+  BiNetworkChart,
+} from "react-icons/bi";
 import { FaCss3Alt, FaAws, FaVideo, FaPaintBrush } from "react-icons/fa";
 import { BsWindow } from "react-icons/bs";
 
-// Icône représentant chaque catégorie (au centre de la grosse bulle)
+// Icône par catégorie connue (au centre de la grosse bulle)
 const categoryIcons = {
   Frontend: BsWindow,
   Backend: BiServer,
   Tools: BiWrench,
   Other: BiLayer,
+  Sécurité: BiShield,
+  "Systèmes & Réseaux": BiNetworkChart,
+  DevOps: BiInfinite,
+  "Bases & Web": BiData,
 };
 
-// Libellé affiché sous la grosse bulle
+// Fallback par mots-clés (gère les catégories libres saisies depuis l'admin)
+function resolveCategoryIcon(category) {
+  if (categoryIcons[category]) return categoryIcons[category];
+  const lc = (category || "").toLowerCase();
+  if (lc.includes("sécu") || lc.includes("secu") || lc.includes("security")) return BiShield;
+  if (lc.includes("réseau") || lc.includes("reseau") || lc.includes("network") || lc.includes("système") || lc.includes("systeme")) return BiNetworkChart;
+  if (lc.includes("devops") || lc.includes("dev ops") || lc.includes("ci/cd")) return BiInfinite;
+  if (lc.includes("base") || lc.includes("data") || lc.includes("db") || lc.includes("sql")) return BiData;
+  if (lc.includes("front")) return BsWindow;
+  if (lc.includes("back")) return BiServer;
+  if (lc.includes("tool") || lc.includes("outil")) return BiWrench;
+  return BiLayer;
+}
+
+// Libellés courts pour les catégories courantes (sinon on uppercase le nom)
 const categoryLabels = {
   Frontend: "FRONTEND",
   Backend: "BACKEND",
   Tools: "OUTILS",
   Other: "AUTRES",
+  Sécurité: "SÉCURITÉ",
+  "Systèmes & Réseaux": "RÉSEAUX",
+  DevOps: "DEVOPS",
+  "Bases & Web": "DEV & DATA",
 };
+
+// Ordre de priorité d'affichage — infra/sécu d'abord, dev ensuite, inconnus à la fin
+const CATEGORY_PRIORITY = [
+  "Sécurité",
+  "Systèmes & Réseaux",
+  "DevOps",
+  "Bases & Web",
+  "Frontend",
+  "Backend",
+  "Tools",
+  "Other",
+];
 
 // Thème (couleur principale) par catégorie
 const categoryTheme = {
@@ -109,7 +152,7 @@ const skillIcons = {
 function CategoryBubble({ category, skills, isActive, onToggle, floatDelay }) {
   const [isHovered, setIsHovered] = useState(false);
   const isOpen = isHovered || isActive;
-  const CategoryIcon = categoryIcons[category] || BiLayer;
+  const CategoryIcon = resolveCategoryIcon(category);
   const theme = categoryTheme[category] || categoryTheme.Other;
   const label = categoryLabels[category] || category.toUpperCase();
 
@@ -117,7 +160,7 @@ function CategoryBubble({ category, skills, isActive, onToggle, floatDelay }) {
   const radius = 130;
 
   const resolveSkillIcon = (skill) =>
-    skillIcons[skill.name] || categoryIcons[skill.category] || BiCodeAlt;
+    skillIcons[skill.name] || resolveCategoryIcon(skill.category) || BiCodeAlt;
 
   return (
     <div
@@ -226,10 +269,12 @@ function Skills() {
       if (!grouped[cat]) grouped[cat] = [];
       grouped[cat].push(s);
     });
-    const order = ["Frontend", "Backend", "Tools", "Other"];
-    return order
-      .filter((c) => grouped[c]?.length > 0)
-      .map((c) => [c, grouped[c]]);
+    const present = Object.keys(grouped);
+    const known = CATEGORY_PRIORITY.filter((c) => grouped[c]);
+    const unknown = present
+      .filter((c) => !CATEGORY_PRIORITY.includes(c))
+      .sort((a, b) => a.localeCompare(b));
+    return [...known, ...unknown].map((c) => [c, grouped[c]]);
   }, [skills]);
 
   // Tap en dehors d'une bulle ferme la bulle active (utile sur mobile)
