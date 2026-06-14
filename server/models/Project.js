@@ -18,7 +18,7 @@ trim: true,
 },
 category: {
 type: String,
-enum: ['Full Stack', 'Frontend', 'Backend'],
+trim: true,
 default: 'Full Stack',
 },
 technologies: {

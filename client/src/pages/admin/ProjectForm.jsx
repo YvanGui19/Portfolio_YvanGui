@@ -3,9 +3,20 @@ import { useParams, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { BiChevronLeft, BiChevronRight, BiX } from "react-icons/bi";
 import projectService from "../../services/projectService";
+import useFetch from "../../hooks/useFetch";
 import { getImageUrl } from "../../utils/imageUrl";
 
+const CATEGORY_SUGGESTIONS = [
+  "Infrastructure",
+  "DevSecOps",
+  "Sécurité",
+  "Full Stack",
+  "Frontend",
+  "Backend",
+];
+
 function ProjectForm() {
+  const { data: existingProjects } = useFetch(() => projectService.getAll());
   const { id } = useParams();
   const navigate = useNavigate();
   const isEdit = Boolean(id);
@@ -223,16 +234,15 @@ function ProjectForm() {
                 <label className="block font-mono text-[0.75rem] text-off-white tracking-wide uppercase">
                   Catégorie
                 </label>
-                <select
+                <input
+                  type="text"
                   name="category"
+                  list="project-categories"
                   value={formData.category}
                   onChange={handleChange}
-                  className="w-full bg-black/30 border border-white/10 px-4 py-3 font-mono text-[0.85rem] text-off-white focus:border-lime/50 focus:outline-none transition-colors cursor-pointer"
-                >
-                  <option value="Full Stack">Full Stack</option>
-                  <option value="Frontend">Frontend</option>
-                  <option value="Backend">Backend</option>
-                </select>
+                  placeholder="Infrastructure, DevSecOps, Full Stack…"
+                  className="w-full bg-black/30 border border-white/10 px-4 py-3 font-mono text-[0.85rem] text-off-white placeholder:text-grey/50 focus:border-lime/50 focus:outline-none transition-colors"
+                />
               </div>
 
               <div className="space-y-2">
@@ -464,6 +474,17 @@ function ProjectForm() {
             </div>
           </form>
         </div>
+
+        <datalist id="project-categories">
+          {Array.from(
+            new Set([
+              ...CATEGORY_SUGGESTIONS,
+              ...(existingProjects?.map((p) => p.category).filter(Boolean) || []),
+            ])
+          ).map((cat) => (
+            <option key={cat} value={cat} />
+          ))}
+        </datalist>
       </motion.div>
     </div>
   );
