@@ -235,19 +235,9 @@ function Skills() {
                   onChange={(e) =>
                     setFormData({ ...formData, category: e.target.value })
                   }
-                  placeholder="Sécurité, DevOps, Frontend…"
+                  placeholder="Sécurité, DevOps…"
                   className="w-full bg-black/30 border border-white/10 px-4 py-3 font-mono text-[0.85rem] text-off-white placeholder:text-grey/50 focus:border-violet/50 focus:outline-none transition-colors"
                 />
-                <datalist id="skill-categories">
-                  {Array.from(
-                    new Set([
-                      ...CATEGORY_SUGGESTIONS,
-                      ...(skills?.map((s) => s.category).filter(Boolean) || []),
-                    ])
-                  ).map((cat) => (
-                    <option key={cat} value={cat} />
-                  ))}
-                </datalist>
               </div>
 
               <button
@@ -258,6 +248,17 @@ function Skills() {
                 {saving ? "..." : editingId ? "Modifier" : "Ajouter"}
               </button>
             </form>
+
+            <datalist id="skill-categories">
+              {Array.from(
+                new Set([
+                  ...CATEGORY_SUGGESTIONS,
+                  ...(skills?.map((s) => s.category).filter(Boolean) || []),
+                ])
+              ).map((cat) => (
+                <option key={cat} value={cat} />
+              ))}
+            </datalist>
           </div>
         </motion.div>
       )}
