@@ -51,10 +51,10 @@ const categoryLabels = {
 
 // Thème (couleur principale) par catégorie
 const categoryTheme = {
-  Frontend: { hex: "#01FFFF", glow: "rgba(1,255,255,0.45)" },
+  Frontend: { hex: "#C2FE0B", glow: "rgba(194,254,11,0.45)" },
   Backend: { hex: "#C2FE0B", glow: "rgba(194,254,11,0.45)" },
-  Tools: { hex: "#E8763A", glow: "rgba(232,118,58,0.45)" },
-  Other: { hex: "#3601FB", glow: "rgba(54,1,251,0.45)" },
+  Tools: { hex: "#C2FE0B", glow: "rgba(194,254,11,0.45)" },
+  Other: { hex: "#C2FE0B", glow: "rgba(194,254,11,0.45)" },
 };
 
 // Mapping nom de skill → icône
@@ -144,10 +144,9 @@ function CategoryBubble({ category, skills, isActive, onToggle, floatDelay }) {
         }}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        className="absolute inset-0 rounded-full backdrop-blur-md border-2 flex flex-col items-center justify-center cursor-pointer transition-shadow"
+        className="absolute inset-0 rounded-full backdrop-blur-md flex flex-col items-center justify-center cursor-pointer transition-shadow"
         style={{
           backgroundColor: `${theme.hex}1A`,
-          borderColor: `${theme.hex}66`,
           color: theme.hex,
           boxShadow: isOpen ? `0 0 35px ${theme.glow}` : undefined,
         }}
@@ -196,10 +195,9 @@ function CategoryBubble({ category, skills, isActive, onToggle, floatDelay }) {
                     ease: "easeInOut",
                     delay: i * 0.15,
                   }}
-                  className="w-full h-full rounded-full backdrop-blur-md border flex flex-col items-center justify-center"
+                  className="w-full h-full rounded-full backdrop-blur-md flex flex-col items-center justify-center"
                   style={{
                     backgroundColor: `${theme.hex}26`,
-                    borderColor: `${theme.hex}80`,
                     color: theme.hex,
                   }}
                 >
