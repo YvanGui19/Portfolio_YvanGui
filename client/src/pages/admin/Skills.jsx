@@ -86,6 +86,8 @@ function Skills() {
       category: skill.category,
     });
     setEditingId(skill._id);
+    setShowEditTable(false);
+    setSelectedSkills([]);
     setShowForm(true);
     // Scroll vers le haut après le rendu du formulaire
     setTimeout(() => {
@@ -357,14 +359,23 @@ function Skills() {
                             className="w-4 h-4 bg-black/30 border border-white/20 checked:bg-violet checked:border-violet focus:ring-0 cursor-pointer"
                           />
                         </td>
-                        <td className="px-5 py-3 text-center">
-                          <button
-                            onClick={() => openDeleteModal(skill._id)}
-                            className="p-2 text-grey hover:text-red hover:bg-red/10 transition-colors cursor-pointer"
-                            title="Supprimer"
-                          >
-                            <HiTrash className="w-4 h-4" />
-                          </button>
+                        <td className="px-5 py-3">
+                          <div className="flex items-center justify-center gap-1">
+                            <button
+                              onClick={() => handleEdit(skill)}
+                              className="p-2 text-grey hover:text-cyan hover:bg-cyan/10 transition-colors cursor-pointer"
+                              title="Modifier"
+                            >
+                              <HiPencil className="w-4 h-4" />
+                            </button>
+                            <button
+                              onClick={() => openDeleteModal(skill._id)}
+                              className="p-2 text-grey hover:text-red hover:bg-red/10 transition-colors cursor-pointer"
+                              title="Supprimer"
+                            >
+                              <HiTrash className="w-4 h-4" />
+                            </button>
+                          </div>
                         </td>
                       </tr>
                     );
