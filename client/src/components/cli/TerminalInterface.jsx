@@ -27,6 +27,7 @@ import { useAppMode } from "../../context/AppModeContext";
 import projectService from "../../services/projectService";
 import skillService from "../../services/skillService";
 import experienceService from "../../services/experienceService";
+import profileService from "../../services/profileService";
 
 // ASCII art pour YVAN. (2 espaces entre chaque lettre)
 const YVAN_ASCII = [
@@ -369,15 +370,17 @@ function TerminalInterface() {
   useEffect(() => {
     async function loadData() {
       try {
-        const [projectsRes, skillsRes, experiencesRes] = await Promise.all([
+        const [projectsRes, skillsRes, experiencesRes, profileRes] = await Promise.all([
           projectService.getAll(),
           skillService.getAll(),
           experienceService.getAll(),
+          profileService.get(),
         ]);
 
         const projects = extractArray(projectsRes);
         const skills = extractArray(skillsRes);
         const experiences = extractArray(experiencesRes);
+        const profile = profileRes?.data || profileRes || null;
 
         setStats({
           projects: projects.length,
@@ -389,10 +392,7 @@ function TerminalInterface() {
           projects,
           skills,
           experiences,
-          about: {
-            description:
-              "Développeur Web Full-Stack passionné par les technologies modernes.",
-          },
+          profile,
         });
       } catch (error) {
         console.error("Error loading data for CLI:", error);

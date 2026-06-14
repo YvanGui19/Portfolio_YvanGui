@@ -5,12 +5,17 @@ import projectService from "../../services/projectService";
 import useFetch from "../../hooks/useFetch";
 import { getImageUrl } from "../../utils/imageUrl";
 
-const categories = ["Tous", "Full Stack", "Frontend", "Backend"];
-
 function Projects() {
   const navigate = useNavigate();
   const [activeFilter, setActiveFilter] = useState("Tous");
   const { data: projects, loading, error } = useFetch(() => projectService.getAll());
+
+  const categories = useMemo(() => {
+    const fromProjects = Array.from(
+      new Set((projects || []).map((p) => p.category).filter(Boolean))
+    );
+    return ["Tous", ...fromProjects];
+  }, [projects]);
 
   const filteredProjects = useMemo(() => {
     if (!projects) return [];

@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import { NavLink, useNavigate, Link } from "react-router-dom";
-import { HiHome, HiFolder, HiLightningBolt, HiBriefcase, HiMail } from "react-icons/hi";
+import { HiHome, HiFolder, HiLightningBolt, HiBriefcase, HiMail, HiUser } from "react-icons/hi";
 import { BiTerminal } from "react-icons/bi";
 import { useAuth } from "../../context/AuthContext";
 import { useMessages } from "../../context/MessagesContext";
 
 const navItems = [
   { to: "/admin/dashboard", label: "Dashboard", icon: HiHome, code: "DSH" },
+  { to: "/admin/profile", label: "Profil", icon: HiUser, code: "PRF" },
   { to: "/admin/projects", label: "Projets", icon: HiFolder, code: "PRJ" },
   { to: "/admin/skills", label: "Compétences", icon: HiLightningBolt, code: "SKL" },
   { to: "/admin/experiences", label: "Expériences", icon: HiBriefcase, code: "EXP" },

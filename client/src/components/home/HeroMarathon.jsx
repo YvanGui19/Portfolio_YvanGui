@@ -1,8 +1,18 @@
+import profileService from "../../services/profileService";
+import useFetch from "../../hooks/useFetch";
+
 /**
  * HeroMarathon - Style MARATHON V2 (le fond Canvas est rendu en fixed au niveau Home)
  */
 
 function HeroMarathon() {
+  const { data: profile } = useFetch(() => profileService.get());
+
+  const firstName = profile?.firstName || "YVAN";
+  const lastName = profile?.lastName || "GUI";
+  const heroTitle = profile?.heroTitle || "Développeur Web Full Stack";
+  const heroBio = profile?.heroBio || "";
+
   return (
     <section className="min-h-screen relative overflow-hidden flex flex-col">
       {/* Artefacts Marathon décoratifs */}
@@ -29,7 +39,7 @@ function HeroMarathon() {
                   fontWeight: 900,
                 }}
               >
-                YVAN
+                {firstName}
               </span>
               <span
                 className="block text-[clamp(54px,16vw,90px)] sm:text-[clamp(88px,13vw,196px)] uppercase text-[#C2FE0B]"
@@ -39,7 +49,7 @@ function HeroMarathon() {
                   textShadow: '0 4px 30px rgba(0, 0, 0, 0.6)',
                 }}
               >
-                GUI
+                {lastName}
               </span>
             </h1>
 
@@ -56,10 +66,10 @@ function HeroMarathon() {
                   style={{ fontFamily: '"Big Shoulders Display", sans-serif' }}
                   className="text-white text-[20px] sm:text-[24px] font-bold uppercase leading-[1.1] mb-3"
                 >
-                  Développeur Web Full Stack
+                  {heroTitle}
                 </p>
                 <p className="font-mono text-[13px] sm:text-[14px] leading-[1.7] text-white/80">
-                  Ancien expert technique dans l'aéronautique, j'ai choisi de mettre mes compétences d'analyse, de rigueur et de résolution de problèmes au service du développement web.
+                  {heroBio}
                 </p>
               </div>
             </div>

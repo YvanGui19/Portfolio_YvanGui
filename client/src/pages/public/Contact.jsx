@@ -2,8 +2,11 @@ import { useState, useCallback } from "react";
 import { Helmet } from "react-helmet-async";
 import { HiMail, HiLocationMarker } from "react-icons/hi";
 import contactService from "../../services/contactService";
+import profileService from "../../services/profileService";
+import useFetch from "../../hooks/useFetch";
 
 function Contact() {
+  const { data: profile } = useFetch(() => profileService.get());
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -86,7 +89,7 @@ function Contact() {
                   <HiMail className="w-5 h-5 text-cyan mt-0.5 group-hover:animate-pulse" />
                   <div>
                     <span className="font-mono text-[10px] tracking-[0.2em] text-[#f0f0ec]/60 block mb-1 uppercase">EMAIL</span>
-                    <span className="text-white text-sm font-mono">yvan.gui19@gmail.com</span>
+                    <span className="text-white text-sm font-mono">{profile?.email || ""}</span>
                   </div>
                 </div>
 
@@ -95,7 +98,7 @@ function Contact() {
                   <HiLocationMarker className="w-5 h-5 text-cyan mt-0.5 group-hover:animate-pulse" />
                   <div>
                     <span className="font-mono text-[10px] tracking-[0.2em] text-[#f0f0ec]/60 block mb-1 uppercase">LOCALISATION</span>
-                    <span className="text-white text-sm font-mono">Toulouse, France</span>
+                    <span className="text-white text-sm font-mono">{profile?.location || ""}</span>
                   </div>
                 </div>
 

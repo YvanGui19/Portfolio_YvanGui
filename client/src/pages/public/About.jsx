@@ -3,12 +3,15 @@ import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import skillService from "../../services/skillService";
 import experienceService from "../../services/experienceService";
+import profileService from "../../services/profileService";
 import useFetch from "../../hooks/useFetch";
 import { SymbolPortrait } from "../../components/canvas";
 
 function About() {
   const { data: skills, loading: loadingSkills } = useFetch(() => skillService.getAll());
   const { data: experiences, loading: loadingExp } = useFetch(() => experienceService.getAll());
+  const { data: profile } = useFetch(() => profileService.get());
+  const bioParagraphs = profile?.bioParagraphs?.length ? profile.bioParagraphs : [];
   const [showAllExperiences, setShowAllExperiences] = useState(false);
   const [showAllEducation, setShowAllEducation] = useState(false);
 
@@ -69,19 +72,16 @@ function About() {
                 </div>
 
                 <div className="border-l-2 border-lime pl-6">
-                  <p className="text-[#f0f0ec] text-lg sm:text-xl leading-relaxed mb-6">
-                    Passionné par la technologie depuis toujours, j&apos;ai d&apos;abord construit ma carrière
-                    dans l&apos;aéronautique. Pendant plus de dix ans, j&apos;ai travaillé sur des hélicoptères
-                    et des avions.
-                  </p>
-                  <p className="text-[#f0f0ec] text-lg sm:text-xl leading-relaxed mb-6">
-                    Ces expériences m&apos;ont appris la précision, la rigueur et la fiabilité opérationnelle
-                    dans des environnements exigeants.
-                  </p>
-                  <p className="text-[#f0f0ec] text-lg sm:text-xl leading-relaxed">
-                    Aujourd&apos;hui, je conçois des solutions web fiables et orientées utilisateur, avec la
-                    même rigueur qui m&apos;a guidé dans l&apos;aéronautique.
-                  </p>
+                  {bioParagraphs.map((para, i) => (
+                    <p
+                      key={i}
+                      className={`text-[#f0f0ec] text-lg sm:text-xl leading-relaxed ${
+                        i < bioParagraphs.length - 1 ? "mb-6" : ""
+                      }`}
+                    >
+                      {para}
+                    </p>
+                  ))}
                 </div>
 
                 {/* Artefact data strip */}

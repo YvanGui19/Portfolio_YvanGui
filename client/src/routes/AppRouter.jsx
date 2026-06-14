@@ -28,6 +28,7 @@ const Skills = lazy(() => import(/* webpackChunkName: "admin" */ '../pages/admin
 const Experiences = lazy(() => import(/* webpackChunkName: "admin" */ '../pages/admin/Experiences'))
 const Messages = lazy(() => import(/* webpackChunkName: "admin" */ '../pages/admin/Messages'))
 const ProjectForm = lazy(() => import(/* webpackChunkName: "admin" */ '../pages/admin/ProjectForm'))
+const Profile = lazy(() => import(/* webpackChunkName: "admin" */ '../pages/admin/Profile'))
 
 // Protection des routes
 import PrivateRoute from './PrivateRoute'
@@ -108,6 +109,7 @@ function AppRouter() {
             <Route path="/admin/skills" element={<PrivateRoute><Skills /></PrivateRoute>} />
             <Route path="/admin/experiences" element={<PrivateRoute><Experiences /></PrivateRoute>} />
             <Route path="/admin/messages" element={<PrivateRoute><Messages /></PrivateRoute>} />
+            <Route path="/admin/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
 
             {/* 404 pour routes admin */}
             <Route path="/admin/*" element={<NotFound />} />

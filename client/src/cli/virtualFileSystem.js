@@ -10,6 +10,7 @@ class VirtualFileSystem {
   constructor() {
     this.root = this.createEmptyFS();
     this.currentPath = "/home/yvan";
+    this.profile = null;
   }
 
   createEmptyFS() {
@@ -33,8 +34,7 @@ class VirtualFileSystem {
                 "contact.txt": {
                   type: FILE_TYPE.FILE,
                   name: "contact.txt",
-                  content:
-                    "Email: yvan.gui19@gmail.com\nLinkedIn: www.linkedin.com/in/yvangui",
+                  content: "Chargement...",
                 },
                 projects: {
                   type: FILE_TYPE.DIRECTORY,
@@ -72,12 +72,14 @@ class VirtualFileSystem {
 
   // Remplir le système de fichiers avec les données du portfolio
   populate(data) {
-    const { projects, skills, experiences, about } = data;
+    const { projects, skills, experiences, profile } = data;
     const homeDir = this.root.children.home.children.yvan;
 
-    // Mettre à jour about.txt
-    if (about) {
-      homeDir.children["about.txt"].content = this.formatAbout(about);
+    // Mettre à jour le profil (utilisé par about.txt, contact.txt, neofetch…)
+    if (profile) {
+      this.profile = profile;
+      homeDir.children["about.txt"].content = this.formatAbout(profile);
+      homeDir.children["contact.txt"].content = this.formatContact(profile);
     }
 
     // Ajouter les projets
@@ -272,17 +274,30 @@ class VirtualFileSystem {
   }
 
   // Formateurs pour le contenu des fichiers
-  formatAbout(about) {
-    return `=== À propos de Yvan Gui ===
+  formatAbout(profile) {
+    const fullName = [profile?.firstName, profile?.lastName]
+      .filter(Boolean)
+      .join(" ")
+      .trim() || "Yvan Gui";
+    const title = profile?.heroTitle || "Développeur Web Full-Stack";
+    const paragraphs = profile?.bioParagraphs?.length
+      ? profile.bioParagraphs
+      : [profile?.heroBio].filter(Boolean);
 
-${about.description || "Développeur Web Full-Stack"}
+    let content = `=== À propos de ${fullName} ===\n\n${title}\n\n`;
+    paragraphs.forEach((p) => {
+      content += `${p}\n\n`;
+    });
+    return content;
+  }
 
-Passionné par la technologie depuis toujours, j'ai d'abord construit ma carrière dans l'aéronautique. Pendant plus de dix ans, j'ai travaillé sur des hélicoptères et des avions, avant d'évoluer vers le support et l'expertise technique.
-
-Ces expériences m'ont appris la précision, la rigueur et la fiabilité opérationnelle dans des environnements exigeants.
-
-Aujourd'hui, je conçois des solutions web fiables et orientées utilisateur, avec la même rigueur et le même sens du service qui m'ont guidé dans l'aéronautique.
-`;
+  formatContact(profile) {
+    const lines = [];
+    if (profile?.email) lines.push(`Email: ${profile.email}`);
+    if (profile?.location) lines.push(`Localisation: ${profile.location}`);
+    if (profile?.linkedinUrl) lines.push(`LinkedIn: ${profile.linkedinUrl}`);
+    if (profile?.githubUrl) lines.push(`GitHub: ${profile.githubUrl}`);
+    return lines.length ? lines.join("\n") : "Aucune information de contact disponible.";
   }
 
   formatProjectReadme(project) {

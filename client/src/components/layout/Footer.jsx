@@ -1,6 +1,10 @@
 import { FaGithub, FaLinkedin } from "react-icons/fa";
+import profileService from "../../services/profileService";
+import useFetch from "../../hooks/useFetch";
 
 function Footer() {
+  const { data: profile } = useFetch(() => profileService.get());
+
   return (
     <footer
       className="relative z-[2] py-3 sm:py-4"
@@ -21,24 +25,28 @@ function Footer() {
           </span>
 
           <div className="flex items-center gap-4">
-            <a
-              href="https://github.com/YvanGui19"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-lime/10 backdrop-blur-md text-lime hover:bg-lime/30 transition-all p-2"
-              aria-label="GitHub"
-            >
-              <FaGithub className="w-5 h-5" />
-            </a>
-            <a
-              href="https://www.linkedin.com/in/yvangui"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-lime/10 backdrop-blur-md text-lime hover:bg-lime/30 transition-all p-2"
-              aria-label="LinkedIn"
-            >
-              <FaLinkedin className="w-5 h-5" />
-            </a>
+            {profile?.githubUrl && (
+              <a
+                href={profile.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-lime/10 backdrop-blur-md text-lime hover:bg-lime/30 transition-all p-2"
+                aria-label="GitHub"
+              >
+                <FaGithub className="w-5 h-5" />
+              </a>
+            )}
+            {profile?.linkedinUrl && (
+              <a
+                href={profile.linkedinUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-lime/10 backdrop-blur-md text-lime hover:bg-lime/30 transition-all p-2"
+                aria-label="LinkedIn"
+              >
+                <FaLinkedin className="w-5 h-5" />
+              </a>
+            )}
           </div>
         </div>
       </div>

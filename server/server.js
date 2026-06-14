@@ -82,6 +82,7 @@ app.use('/api/projects', require('./routes/projects'));
 app.use('/api/skills', require('./routes/skills'));
 app.use('/api/experiences', require('./routes/experiences'));
 app.use('/api/contact', require('./routes/contact'));
+app.use('/api/profile', require('./routes/profile'));
 app.use('/api/upload', require('./routes/upload'));
 
 // Middleware de gestion des erreurs (toujours en dernier)
