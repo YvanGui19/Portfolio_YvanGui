@@ -238,11 +238,6 @@ function Skills() {
                   placeholder={editingId ? "React" : "React, Node.js, Express…"}
                   className="w-full bg-black/30 border border-white/10 px-4 py-3 font-mono text-[0.85rem] text-off-white placeholder:text-grey/50 focus:border-violet/50 focus:outline-none transition-colors"
                 />
-                {!editingId && (
-                  <p className="font-mono text-[0.65rem] text-grey/70">
-                    // Astuce : sépare par des virgules pour créer plusieurs compétences d&apos;un coup.
-                  </p>
-                )}
               </div>
 
               <div className="space-y-2">
