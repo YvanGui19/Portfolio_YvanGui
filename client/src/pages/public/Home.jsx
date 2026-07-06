@@ -8,7 +8,7 @@ function Home() {
     <>
       <Helmet>
         <title>Yvan Gui | Infrastructure & Sécurité — Étudiant Mastère ERIS</title>
-        <meta name="description" content="Portfolio de Yvan Gui, en reconversion vers l'infrastructure et la cybersécurité (Mastère ERIS, ORT France). VPS souverain en production : hardening Linux, VPN Headscale, Docker, CI/CD. Ex-aéronautique et défense, anciennement habilité Confidentiel Défense." />
+        <meta name="description" content="Portfolio de Yvan Gui, en reconversion vers l'infrastructure et la cybersécurité (Mastère ERIS, ORT France). VPS souverain en production : hardening Linux, VPN Headscale, Docker, CI/CD. Parcours antérieur en aéronautique civile et militaire." />
         <meta property="og:title" content="Yvan Gui | Infrastructure & Sécurité" />
         <meta property="og:description" content="Portfolio d'un professionnel en reconversion vers l'infrastructure et la cybersécurité. Ex-aéronautique/défense, Mastère ERIS, VPS souverain en production." />
         <meta property="og:type" content="website" />
