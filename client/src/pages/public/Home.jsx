@@ -13,10 +13,9 @@ function Home() {
         <meta property="og:description" content="Portfolio d'un professionnel en reconversion vers l'infrastructure et la cybersécurité. Ex-aéronautique/défense, Mastère ERIS, VPS souverain en production." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://yvangui.fr/" />
-        <meta property="og:image" content="https://yvangui.fr/uploads/projects/ve8qft3jnbzz1bonocvv.webp" />
         <meta property="og:site_name" content="Yvan Gui - Portfolio" />
         <meta property="og:locale" content="fr_FR" />
-        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content="Yvan Gui | Infrastructure & Sécurité" />
         <meta name="twitter:description" content="Portfolio d'un professionnel en reconversion vers l'infrastructure et la cybersécurité. Ex-aéronautique/défense, Mastère ERIS." />
         <link rel="canonical" href="https://yvangui.fr/" />

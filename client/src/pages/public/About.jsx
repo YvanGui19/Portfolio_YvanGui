@@ -5,7 +5,7 @@ import skillService from "../../services/skillService";
 import experienceService from "../../services/experienceService";
 import profileService from "../../services/profileService";
 import useFetch from "../../hooks/useFetch";
-import { SymbolPortrait } from "../../components/canvas";
+import MarathonSymbolGrid from "../../components/MarathonSymbolGrid";
 
 function About() {
   const { data: skills, loading: loadingSkills } = useFetch(() => skillService.getAll());
@@ -113,13 +113,9 @@ function About() {
                 <div className="absolute -top-3 -right-3 w-4 h-4 border-t-2 border-r-2 border-lime" />
                 <div className="absolute -bottom-3 -left-3 w-4 h-4 border-b-2 border-l-2 border-lime" />
                 <div className="absolute -bottom-3 -right-3 w-4 h-4 border-b-2 border-r-2 border-lime" />
-                <SymbolPortrait
-                  src="/images/profile.png"
-                  width={300}
-                  height={300}
-                  gridStep={3}
-                  colorLight="#01FFFF"
-                />
+                <div className="w-[300px] h-[300px] flex items-center justify-center bg-black/30">
+                  <MarathonSymbolGrid rows={12} cols={12} color="cyan" size="lg" />
+                </div>
               </div>
             </div>
           </div>
