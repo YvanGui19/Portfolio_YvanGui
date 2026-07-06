@@ -4,7 +4,8 @@
   "private": true,
   "description": "Scripts utilitaires pour le portfolio",
   "scripts": {
-    "generate-avatar": "node generate-dithered-avatar.js"
+    "generate-avatar": "node generate-dithered-avatar.js",
+    "generate-mosaic": "node generate-portrait-mosaic.js"
   },
   "dependencies": {
     "jimp": "^1.6.0"
