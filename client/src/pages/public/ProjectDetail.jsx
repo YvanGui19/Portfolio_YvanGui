@@ -168,7 +168,7 @@ function ProjectDetail() {
                   {project.challenges.map((c, i) => (
                     <div key={i} className="grid grid-cols-2 gap-8">
                       <p className="text-white">{c}</p>
-                      <p className="text-white">{project.solutions?.[i] || "—"}</p>
+                      <p className="text-white">{project.solutions?.[i] || "-"}</p>
                     </div>
                   ))}
                 </div>

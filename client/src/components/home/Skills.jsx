@@ -80,7 +80,7 @@ const categoryLabels = {
   "Bases & Web": "DEV & DATA",
 };
 
-// Ordre de priorité d'affichage — infra/sécu d'abord, dev ensuite, inconnus à la fin
+// Ordre de priorité d'affichage - infra/sécu d'abord, dev ensuite, inconnus à la fin
 const CATEGORY_PRIORITY = [
   "Sécurité",
   "Systèmes & Réseaux",

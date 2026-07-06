@@ -14,6 +14,11 @@ connectDB();
 
 const app = express();
 
+// Le serveur tourne derrière Nginx local (reverse-proxy). On lui fait confiance
+// pour propager la vraie IP client dans X-Forwarded-For, indispensable pour que
+// express-rate-limit compte les requêtes par IP réelle (et non par 127.0.0.1).
+app.set('trust proxy', 1);
+
 // Middlewares de sécurité
 app.use(helmet({
   // Permet le chargement cross-origin des ressources

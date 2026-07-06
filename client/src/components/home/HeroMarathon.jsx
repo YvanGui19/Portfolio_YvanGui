@@ -10,7 +10,7 @@ function HeroMarathon() {
 
   const firstName = profile?.firstName || "YVAN";
   const lastName = profile?.lastName || "GUI";
-  const heroTitle = profile?.heroTitle || "Développeur Web Full Stack";
+  const heroTitle = profile?.heroTitle || "Infrastructure & Sécurité";
   const heroBio = profile?.heroBio || "";
 
   return (
@@ -25,7 +25,7 @@ function HeroMarathon() {
         <div className="hero-crt-lines absolute inset-0 opacity-[0.03]" />
       </div>
 
-      {/* Zone de contenu — le voile est appliqué globalement au niveau layout */}
+      {/* Zone de contenu - le voile est appliqué globalement au niveau layout */}
       <div className="flex-1 flex items-center relative z-10 w-full">
         <div className="w-full px-4 sm:px-12 lg:px-[190px] pb-12 sm:pb-20 pt-12 sm:pt-16">
           <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6 sm:gap-8">

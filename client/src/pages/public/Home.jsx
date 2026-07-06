@@ -7,18 +7,18 @@ function Home() {
   return (
     <>
       <Helmet>
-        <title>Yvan Gui | Développeur Web Full Stack</title>
-        <meta name="description" content="Portfolio de Yvan Gui, développeur web full stack basé à Toulouse. Création de sites web et applications modernes avec React, Node.js et MongoDB." />
-        <meta property="og:title" content="Yvan Gui | Développeur Web Full Stack" />
-        <meta property="og:description" content="Portfolio de Yvan Gui, développeur web full stack basé à Toulouse. Création de sites web et applications modernes." />
+        <title>Yvan Gui | Infrastructure & Sécurité — Étudiant Mastère ERIS</title>
+        <meta name="description" content="Portfolio de Yvan Gui, en reconversion vers l'infrastructure et la cybersécurité (Mastère ERIS, ORT France). VPS souverain en production : hardening Linux, VPN Headscale, Docker, CI/CD. Ex-aéronautique et défense, anciennement habilité Confidentiel Défense." />
+        <meta property="og:title" content="Yvan Gui | Infrastructure & Sécurité" />
+        <meta property="og:description" content="Portfolio d'un professionnel en reconversion vers l'infrastructure et la cybersécurité. Ex-aéronautique/défense, Mastère ERIS, VPS souverain en production." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://yvangui.fr/" />
         <meta property="og:image" content="https://yvangui.fr/uploads/projects/ve8qft3jnbzz1bonocvv.webp" />
         <meta property="og:site_name" content="Yvan Gui - Portfolio" />
         <meta property="og:locale" content="fr_FR" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Yvan Gui | Développeur Web Full Stack" />
-        <meta name="twitter:description" content="Portfolio de Yvan Gui, développeur web full stack basé à Toulouse." />
+        <meta name="twitter:title" content="Yvan Gui | Infrastructure & Sécurité" />
+        <meta name="twitter:description" content="Portfolio d'un professionnel en reconversion vers l'infrastructure et la cybersécurité. Ex-aéronautique/défense, Mastère ERIS." />
         <link rel="canonical" href="https://yvangui.fr/" />
       </Helmet>
 

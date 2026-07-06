@@ -175,7 +175,7 @@ export const TechLabel = memo(function TechLabel({
 
   return (
     <span className={`font-mono tracking-[0.2em] uppercase ${sizes[size]} ${colors[color]} ${className}`}>
-      {prefix}.{number}{text && ` — ${text}`}
+      {prefix}.{number}{text && ` - ${text}`}
     </span>
   );
 });

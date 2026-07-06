@@ -71,7 +71,7 @@ function AppRouter() {
                 <div className="min-h-screen bg-[#000000] text-text flex flex-col relative">
                   <GlitchCursor />
 
-                  {/* Fond Canvas global — visible derrière toutes les pages */}
+                  {/* Fond Canvas global - visible derrière toutes les pages */}
                   <div className="fixed inset-0 z-0 pointer-events-none">
                     <HeroBackground className="opacity-90 w-full h-full" />
                   </div>

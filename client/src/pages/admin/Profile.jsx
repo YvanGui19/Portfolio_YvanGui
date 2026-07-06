@@ -172,7 +172,7 @@ function Profile() {
       </motion.div>
 
       <form onSubmit={handleSubmit}>
-        <Section tag="HERO" title="Accueil — bandeau principal">
+        <Section tag="HERO" title="Accueil - bandeau principal">
           <div className="grid sm:grid-cols-2 gap-5">
             <div>
               <FieldLabel>Prénom (affiché en blanc)</FieldLabel>
@@ -210,7 +210,7 @@ function Profile() {
           </div>
         </Section>
 
-        <Section tag="BIO" title="À propos — biographie longue">
+        <Section tag="BIO" title="À propos - biographie longue">
           <div className="space-y-3">
             {profile.bioParagraphs.map((para, i) => (
               <div key={i} className="flex gap-2 items-start">
@@ -247,7 +247,7 @@ function Profile() {
           </div>
         </Section>
 
-        <Section tag="CONTACT" title="Contact — email & localisation">
+        <Section tag="CONTACT" title="Contact - email & localisation">
           <div className="grid sm:grid-cols-2 gap-5">
             <div>
               <FieldLabel>Email</FieldLabel>
@@ -268,7 +268,7 @@ function Profile() {
           </div>
         </Section>
 
-        <Section tag="SOCIALS" title="Réseaux — footer & CLI">
+        <Section tag="SOCIALS" title="Réseaux - footer & CLI">
           <div className="grid sm:grid-cols-2 gap-5">
             <div>
               <FieldLabel>URL LinkedIn</FieldLabel>
@@ -289,7 +289,7 @@ function Profile() {
           </div>
         </Section>
 
-        <Section tag="NEOFETCH" title="CLI — commande neofetch">
+        <Section tag="NEOFETCH" title="CLI - commande neofetch">
           <div className="grid sm:grid-cols-2 gap-5">
             <div>
               <FieldLabel>OS</FieldLabel>

@@ -54,8 +54,8 @@ function About() {
   return (
     <div className="pt-20 pb-24 min-h-screen relative">
       <Helmet>
-        <title>À propos | Yvan Gui</title>
-        <meta name="description" content="Découvrez le parcours de Yvan Gui, développeur web full stack." />
+        <title>À propos | Yvan Gui — Infrastructure & Sécurité</title>
+        <meta name="description" content="Parcours de Yvan Gui : dix ans en aéronautique civile et militaire, reconversion vers l'infrastructure et la cybersécurité (Mastère ERIS, ORT France)." />
       </Helmet>
 
       <div className="max-w-[1200px] mx-auto px-6 sm:px-8">
