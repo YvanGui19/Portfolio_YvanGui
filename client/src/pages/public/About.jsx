@@ -53,7 +53,7 @@ function About() {
   return (
     <div className="pt-20 pb-24 min-h-screen relative">
       <Helmet>
-        <title>À propos | Yvan Gui — Infrastructure & Sécurité</title>
+        <title>À propos | Yvan Gui - Infrastructure & Sécurité</title>
         <meta name="description" content="Parcours de Yvan Gui : dix ans en aéronautique civile et militaire, reconversion vers l'infrastructure et la cybersécurité (Mastère ERIS, ORT France)." />
       </Helmet>
 

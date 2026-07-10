@@ -54,7 +54,7 @@ function Contact() {
   return (
     <div className="pt-20 pb-24 min-h-screen relative">
       <Helmet>
-        <title>Contact | Yvan Gui — Infrastructure & Sécurité</title>
+        <title>Contact | Yvan Gui - Infrastructure & Sécurité</title>
         <meta name="description" content="Contactez Yvan Gui pour un stage, une alternance ou une opportunité en infrastructure et cybersécurité (Mastère ERIS, disponible fin 2026)." />
       </Helmet>
 

@@ -46,7 +46,7 @@ function Projects() {
   return (
     <div className="pt-20 pb-24 min-h-screen relative">
       <Helmet>
-        <title>Projets | Yvan Gui — Infrastructure & Sécurité</title>
+        <title>Projets | Yvan Gui - Infrastructure & Sécurité</title>
         <meta name="description" content="Projets d'infrastructure, de sécurité et de développement de Yvan Gui : VPS souverain, gestionnaire de mots de passe zero-knowledge, VPN maillé Headscale, e-commerce et applications full-stack." />
       </Helmet>
 
