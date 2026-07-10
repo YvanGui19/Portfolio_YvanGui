@@ -19,7 +19,10 @@
     "react-router-dom": "^7.18.1"
   },
   "overrides": {
-    "form-data": "^4.0.6"
+    "form-data": "^4.0.6",
+    "js-yaml": "^4.2.0",
+    "@babel/core": "^7.29.6",
+    "esbuild": "^0.28.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
