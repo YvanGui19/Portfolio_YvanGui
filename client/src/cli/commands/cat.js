@@ -52,7 +52,7 @@ const catCommand = {
     const filename = path.split("/").pop();
     const lines = [
       { type: "text", content: `// ${filename}`, className: "text-lime/60" },
-      { type: "text", content: "", className: "text-grey" },
+      { type: "text", content: "", className: "text-off-white" },
     ];
 
     // Contenu du fichier
@@ -61,7 +61,7 @@ const catCommand = {
       lines.push({
         type: "text",
         content: line,
-        className: "text-grey",
+        className: "text-off-white",
       });
     });
 
