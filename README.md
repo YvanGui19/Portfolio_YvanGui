@@ -1,37 +1,77 @@
-# Portfolio - Yvan Gui
+# yvangui.fr - Infrastructure VPS souveraine et portfolio applicatif
 
-Portfolio professionnel de développeur web full stack, présentant mes projets, compétences et parcours.
+Infrastructure VPS Linux souveraine (Debian, Nginx, PM2, hardening HTTP) hébergeant un portfolio applicatif full-stack (React 19 + Node/Express 5 + MongoDB). Déploiement automatisé via GitHub Actions.
 
 [![Live Demo](https://img.shields.io/badge/demo-live-green)](https://yvangui.fr)
-[![React](https://img.shields.io/badge/React-19-blue)](https://react.dev/)
-[![Node.js](https://img.shields.io/badge/Node.js-Express-green)](https://nodejs.org/)
-[![MongoDB](https://img.shields.io/badge/MongoDB-Local-green)](https://www.mongodb.com/)
+[![Debian](https://img.shields.io/badge/VPS-Debian-orange)](https://www.debian.org/)
+[![Nginx](https://img.shields.io/badge/Nginx-reverse--proxy-green)](https://nginx.org/)
+[![PM2](https://img.shields.io/badge/PM2-process--manager-blue)](https://pm2.keymetrics.io/)
+[![GitHub Actions](https://img.shields.io/badge/CI/CD-GitHub_Actions-black)](https://github.com/features/actions)
 
 ## Démo
 
-- **Site** : [https://yvangui.fr](https://yvangui.fr)
+- **Site en production** : [https://yvangui.fr](https://yvangui.fr)
 
-## Fonctionnalités
+## Infrastructure
 
-### Public
+Le VPS Debian héberge l’ensemble de la stack en autonomie, sans dépendance cloud provider.
 
-- Page d'accueil avec présentation et compétences
+### Composants
+
+| Rôle                  | Techno                              |
+| --------------------- | ----------------------------------- |
+| OS                    | Debian                              |
+| Reverse proxy + TLS   | Nginx + Let’s Encrypt (certbot)     |
+| Process manager Node  | PM2 (ecosystem.config.js)           |
+| Base de données       | MongoDB en local sur VPS            |
+| Firewall              | UFW                                 |
+| Accès distant         | SSH clé publique uniquement         |
+| CI/CD                 | GitHub Actions (push main → deploy) |
+
+### Sécurité HTTP applicative
+
+- Helmet.js (CSP, HSTS, X-Frame-Options, referrer policy)
+- Rate limiting sur endpoints publics
+- JWT en HttpOnly cookies (pas de token en localStorage)
+- CORS restrictif
+- Validation serveur des entrées
+- Sharp pour l’optimisation des images (contre le stockage brut)
+
+### Fichiers infrastructure
+
+Voir `deploy/` :
+
+- `setup-vps.sh` - script d’installation initial du VPS (packages, users, permissions)
+- `nginx.conf` - configuration reverse proxy avec TLS
+- `ecosystem.config.js` - configuration PM2 pour Node en production
+- `update.sh` - script de mise à jour à chaud
+- `.github/workflows/deploy.yml` - pipeline CI/CD (build + SSH deploy)
+
+### Documentation infrastructure
+
+Voir [deploy/README.md](deploy/README.md) pour la procédure complète de déploiement.
+
+## Application hébergée
+
+L’application est un portfolio full-stack construit en React + Node.
+
+### Fonctionnalités publiques
+
+- Page d’accueil avec présentation et compétences
 - Portfolio de projets avec filtres par catégorie
-- Page détail projet avec galerie d'images
+- Page détail projet avec galerie d’images
 - Formulaire de contact
 - Mode CLI interactif
 
-### Admin
+### Fonctionnalités admin
 
-- Authentification JWT sécurisée
-- Gestion des projets (CRUD)
-- Gestion des compétences
-- Gestion des expériences
+- Authentification JWT
+- CRUD projets / compétences / expériences
 - Messagerie de contact
 
-## Technologies
+### Stack applicative
 
-### Frontend
+#### Frontend
 
 | Technologie   | Version | Usage         |
 | ------------- | ------- | ------------- |
@@ -43,7 +83,7 @@ Portfolio professionnel de développeur web full stack, présentant mes projets,
 | Axios         | 1.13    | Requêtes HTTP |
 | React Helmet  | 2       | SEO           |
 
-### Backend
+#### Backend
 
 | Technologie | Version | Usage               |
 | ----------- | ------- | ------------------- |
@@ -59,34 +99,34 @@ Portfolio professionnel de développeur web full stack, présentant mes projets,
 
 ```
 Portfolio/
-├── client/                 # Frontend React
-│   ├── src/
-│   │   ├── components/     # Composants réutilisables
-│   │   ├── pages/          # Pages (public & admin)
-│   │   ├── context/        # Contextes React
-│   │   ├── hooks/          # Hooks personnalisés
-│   │   ├── services/       # Services API
-│   │   └── routes/         # Configuration routing
-│   ├── public/             # Assets statiques
-│   └── vite.config.js      # Configuration Vite
+├── deploy/                 # Infrastructure VPS
+│   ├── setup-vps.sh        # Installation VPS
+│   ├── update.sh           # Mise à jour à chaud
+│   ├── nginx.conf          # Reverse proxy + TLS
+│   └── ecosystem.config.js # PM2
+│
+├── .github/workflows/      # CI/CD
+│   └── deploy.yml          # Pipeline déploiement
 │
 ├── server/                 # Backend Express
 │   ├── config/             # Configuration (DB)
 │   ├── controllers/        # Logique métier
-│   ├── middlewares/        # Middlewares (auth, upload)
+│   ├── middlewares/        # Auth, upload
 │   ├── models/             # Modèles Mongoose
 │   ├── routes/             # Routes API
 │   ├── uploads/            # Images uploadées
-│   └── server.js           # Point d'entrée
+│   └── server.js           # Point d’entrée
 │
-├── deploy/                 # Configuration déploiement VPS
-│   ├── setup-vps.sh        # Script installation VPS
-│   ├── update.sh           # Script mise à jour
-│   ├── nginx.conf          # Configuration Nginx
-│   └── ecosystem.config.js # Configuration PM2
-│
-└── .github/workflows/      # CI/CD GitHub Actions
-    └── deploy.yml          # Déploiement automatique
+└── client/                 # Frontend React
+    ├── src/
+    │   ├── components/     # Composants
+    │   ├── pages/          # Pages
+    │   ├── context/        # Contextes
+    │   ├── hooks/          # Hooks perso
+    │   ├── services/       # Services API
+    │   └── routes/         # Routing
+    ├── public/             # Assets
+    └── vite.config.js      # Config Vite
 ```
 
 ## Installation locale
@@ -104,32 +144,31 @@ git clone https://github.com/YvanGui19/Portfolio_YvanGui
 cd Portfolio_YvanGui
 ```
 
-### 2. Installer le backend
+### 2. Backend
 
 ```bash
 cd server
 npm install
 cp .env.example .env
-# Configurer les variables d'environnement dans .env
+# Configurer les variables d’environnement dans .env
 npm run dev
 ```
 
-### 3. Installer le frontend
+### 3. Frontend
 
 ```bash
 cd client
 npm install
 cp .env.example .env
-# Configurer les variables d'environnement dans .env
 npm run dev
 ```
 
-### 4. Accéder à l'application
+### 4. Accéder
 
 - Frontend : http://localhost:5173
 - Backend : http://localhost:5000
 
-## Variables d'environnement
+## Variables d’environnement
 
 ### Client (.env)
 
@@ -142,8 +181,6 @@ VITE_UPLOADS_URL=http://localhost:5000
 
 ```env
 # MongoDB
-# Local: mongodb://localhost:27017/portfolio
-# VPS: mongodb://portfolio_user:PASSWORD@127.0.0.1:27017/portfolio
 MONGO_URI=mongodb://localhost:27017/portfolio
 
 # JWT
@@ -164,22 +201,28 @@ PORT=5000
 NODE_ENV=development
 ```
 
-## Déploiement VPS
+## Déploiement VPS (CI/CD)
 
-Le projet utilise GitHub Actions pour le déploiement automatique sur VPS.
+Le projet utilise GitHub Actions pour un déploiement automatique sur VPS Debian.
 
-### Configuration
+### Pipeline
 
-1. Configurer les secrets GitHub (Settings > Secrets > Actions) :
-   - `VPS_HOST` : IP du VPS
-   - `VPS_USER` : Utilisateur SSH
-   - `VPS_SSH_KEY` : Clé privée SSH
+Push sur `main` déclenche :
 
-2. Push sur `main` déclenche le déploiement automatique
+1. Checkout du code
+2. Build du client (Vite)
+3. Copie SSH vers le VPS
+4. Reload PM2 sur le VPS
 
-### Documentation complète
+### Configuration GitHub Actions
 
-Voir [deploy/README.md](deploy/README.md) pour les instructions détaillées.
+Secrets requis (Settings > Secrets > Actions) :
+
+- `VPS_HOST` - IP du VPS
+- `VPS_USER` - utilisateur SSH
+- `VPS_SSH_KEY` - clé privée SSH
+
+Voir [deploy/README.md](deploy/README.md) pour la procédure complète.
 
 ## Optimisations
 
@@ -193,26 +236,18 @@ Voir [deploy/README.md](deploy/README.md) pour les instructions détaillées.
 ### SEO
 
 - Meta tags dynamiques (React Helmet)
-- Open Graph complet
+- Open Graph
 - Canonical URLs
 - Structure sémantique HTML5
 
 ### Accessibilité (WCAG)
 
-- Skip link "Aller au contenu principal"
+- Skip link « Aller au contenu principal »
 - Navigation clavier complète
 - Attributs ARIA (aria-label, aria-pressed, aria-expanded)
 - Focus visible sur tous les éléments interactifs
 - Alt text descriptifs sur les images
 - Structure de headings logique
-
-### Sécurité
-
-- Helmet.js (CSP, HSTS, X-Frame-Options)
-- Rate limiting
-- Validation des entrées
-- JWT HttpOnly cookies
-- CORS configuré
 
 ## Scripts disponibles
 
@@ -236,29 +271,29 @@ npm start        # Production
 
 ### Public
 
-- `GET /api/projects` - Liste des projets
-- `GET /api/projects/:id` - Détail projet
-- `GET /api/skills` - Liste des compétences
-- `GET /api/experiences` - Liste des expériences
-- `POST /api/contact` - Envoyer un message
+- `GET /api/projects` - liste des projets
+- `GET /api/projects/:id` - détail projet
+- `GET /api/skills` - liste des compétences
+- `GET /api/experiences` - liste des expériences
+- `POST /api/contact` - envoyer un message
 
 ### Admin (authentifié)
 
-- `POST /api/auth/login` - Connexion
-- `POST /api/auth/logout` - Déconnexion
-- `CRUD /api/projects` - Gestion projets
-- `CRUD /api/skills` - Gestion compétences
-- `CRUD /api/experiences` - Gestion expériences
-- `GET /api/messages` - Messages reçus
+- `POST /api/auth/login` - connexion
+- `POST /api/auth/logout` - déconnexion
+- `CRUD /api/projects` - gestion projets
+- `CRUD /api/skills` - gestion compétences
+- `CRUD /api/experiences` - gestion expériences
+- `GET /api/messages` - messages reçus
 
 ## Auteur
 
-**Yvan Gui** - Développeur Web Full Stack
+**Yvan Gui**, en reconversion vers l’infrastructure et la cybersécurité (Mastère ERIS, ORT France).
 
-- Portfolio : [yvangui.fr](https://yvangui.fr)
+- Site : [yvangui.fr](https://yvangui.fr)
 - Email : yvan.gui19@gmail.com
 - GitHub : [YvanGui19](https://github.com/YvanGui19)
 
 ## Licence
 
-Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de détails.
+MIT. Voir [LICENSE](LICENSE).
